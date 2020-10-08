@@ -39,12 +39,19 @@
             this.btneliminar = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tbl_product_ventas = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tbl1 = new System.Windows.Forms.DataGridView();
+            this.tb_ventas_codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tb_ventas_product = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tb_ventas_quant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tb_ventas_precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbl_product_ventas)).BeginInit();
+            this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbl1)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -126,16 +133,43 @@
             // 
             // tabPage1
             // 
+            // 
+            // tbl_product_ventas
+            // 
+            this.tbl_product_ventas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tbl_product_ventas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.tb_ventas_codigo,
+            this.tb_ventas_product,
+            this.tb_ventas_quant,
+            this.tb_ventas_precio});
+            this.tbl_product_ventas.Location = new System.Drawing.Point(67, 89);
+            this.tbl_product_ventas.Name = "tbl_product_ventas";
+            this.tbl_product_ventas.Size = new System.Drawing.Size(500, 150);
+            this.tbl_product_ventas.TabIndex = 0;
+            this.tbl_product_ventas.Text = "dataGridView3";
+            this.tabPage1.Controls.Add(this.tbl_product_ventas);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(457, 216);
+            this.tabPage1.Size = new System.Drawing.Size(1466, 621);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Ventas";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.tbl1);
+            this.tabPage2.Controls.Add(this.btneliminar);
+            this.tabPage2.Controls.Add(this.textBox1);
+            this.tabPage2.Controls.Add(this.btnagregar);
+            this.tabPage2.Controls.Add(this.btnbusca);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1466, 621);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tbl1
             // 
@@ -151,33 +185,43 @@
             this.tbl1.TabIndex = 4;
             this.tbl1.Text = "dataGridView3";
             this.tbl1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tbl1_CellContentClick);
-            this.tabPage2.Controls.Add(this.tbl1);
-            this.tabPage2.Controls.Add(this.btneliminar);
-            this.tabPage2.Controls.Add(this.textBox1);
-            this.tabPage2.Controls.Add(this.btnagregar);
-            this.tabPage2.Controls.Add(this.btnbusca);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1466, 621);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tb_ventas_codigo
+            // 
+            this.tb_ventas_codigo.HeaderText = "Codigo";
+            this.tb_ventas_codigo.Name = "tb_ventas_codigo";
+            // 
+            // tb_ventas_product
+            // 
+            this.tb_ventas_product.HeaderText = "Producto";
+            this.tb_ventas_product.Name = "tb_ventas_product";
+            // 
+            // tb_ventas_quant
+            // 
+            this.tb_ventas_quant.HeaderText = "Cantidad";
+            this.tb_ventas_quant.Name = "tb_ventas_quant";
+            // 
+            // tb_ventas_precio
+            // 
+            this.tb_ventas_precio.HeaderText = "Precio";
+            this.tb_ventas_precio.Name = "tb_ventas_precio";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1473, 653);
+            this.ClientSize = new System.Drawing.Size(873, 653);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tabControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tbl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbl_product_ventas)).EndInit();
+            this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbl1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -199,6 +243,11 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.DataGridView tbl_product_ventas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_product;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_quant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_precio;
     }
 }
 

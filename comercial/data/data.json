@@ -1,0 +1,20 @@
+{ "products":[
+  {
+    "id": 0,
+    "name": "nuevo nombre",
+    "quant": 79,
+    "price": 8.0
+  },
+  {
+    "id": 1,
+    "name": "prueba 2",
+    "quant": 2,
+    "price": 233.0
+  },
+  {
+    "id": 2,
+    "name": "name codigo",
+    "quant": 5,
+    "price": 3.0
+  }
+]}

@@ -1,25 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\oleyda\\Desktop\\comercial\\comercial\\comercial.csproj": {}
+    "C:\\Users\\raenu\\Documents\\Proyectos\\comercial\\comercial\\comercial.csproj": {}
   },
   "projects": {
-    "C:\\Users\\oleyda\\Desktop\\comercial\\comercial\\comercial.csproj": {
+    "C:\\Users\\raenu\\Documents\\Proyectos\\comercial\\comercial\\comercial.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\oleyda\\Desktop\\comercial\\comercial\\comercial.csproj",
+        "projectUniqueName": "C:\\Users\\raenu\\Documents\\Proyectos\\comercial\\comercial\\comercial.csproj",
         "projectName": "comercial",
-        "projectPath": "C:\\Users\\oleyda\\Desktop\\comercial\\comercial\\comercial.csproj",
-        "packagesPath": "C:\\Users\\oleyda\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\oleyda\\Desktop\\comercial\\comercial\\obj\\",
+        "projectPath": "C:\\Users\\raenu\\Documents\\Proyectos\\comercial\\comercial\\comercial.csproj",
+        "packagesPath": "C:\\Users\\raenu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\raenu\\Documents\\Proyectos\\comercial\\comercial\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\oleyda\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\raenu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -41,6 +37,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

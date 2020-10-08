@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\raenu\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\raenu\\.nuget\\packages"
+    ]
+  }
+}
