@@ -52,7 +52,7 @@ namespace comercial
         private void getProduct()
         {
             //buscar producto en base al id
-            int id = 0;
+            string id = "0";
             Product producto = controller.getProduct(id);
             //Mostrar los atributos del producto
             MessageBox.Show("informacion del producto id 0:" + producto.id +
@@ -62,7 +62,7 @@ namespace comercial
         //Agrega un producto
         private void setProduct()
         {
-            int id = 2;
+            string id = "2";
             string name = "name codigo";
             int quant = 5;
             float price = 3;
@@ -78,7 +78,7 @@ namespace comercial
         //Actualiza el producto
         private void updateProduct()
         {
-            int id = 0;
+            string id = "0";
             string name = "nuevo nombre";
             int quant = 79 ;
             float price = 8;
@@ -94,7 +94,7 @@ namespace comercial
         //Elimina un producto
         private void deleteProduct()
         {
-            int id = 0;
+            string id = "0";
             bool exito = controller.deleteProduct(id);
             if (exito)
             {

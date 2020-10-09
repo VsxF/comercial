@@ -27,7 +27,6 @@ namespace comercial
                 productss = product.ToObject<Product>();
                 products.Add(productss);
             }
-
         }
 
         public IList<Product> getProducts()
@@ -35,7 +34,7 @@ namespace comercial
             return products;
         }
 
-        public Product getProduct(int id)
+        public Product getProduct(string id)
         {
             foreach (Product product in products)
             {
@@ -48,7 +47,7 @@ namespace comercial
             return null;
         }
 
-        public bool setProduct(int id, string name, int quant, float price)
+        public bool setProduct(string id, string name, int quant, float price)
         {
             Product nw = new Product();
             nw.id = id;
@@ -60,12 +59,12 @@ namespace comercial
             {
                 if (product.id == id)
                 {
-                    MessageBox.Show("El id ya existe", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //MessageBox.Show("El id ya existe", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
                 else if (product.name.Equals(name))
                 {
-                    MessageBox.Show("El nombre ya existe", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //MessageBox.Show("El nombre ya existe", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -75,7 +74,7 @@ namespace comercial
             return write();
         }
 
-        public bool updateProduct(int id, string name, int quant, float price)
+        public bool updateProduct(string id, string name, int quant, float price)
         {
             foreach (Product product in products)
             {
@@ -90,7 +89,7 @@ namespace comercial
             return false;
         }
 
-        public bool deleteProduct(int id)
+        public bool deleteProduct(string id)
         {
             foreach (Product product in products)
             {
@@ -103,7 +102,7 @@ namespace comercial
             return false;
         }
 
-        public bool setQuant(int id, int quant)
+        public bool setQuant(string id, int quant)
         {
             foreach (Product product in products)
             {
@@ -129,7 +128,7 @@ namespace comercial
     //Cosas que llevara producto
     public class Product
     {
-        public int id { get; set; }
+        public string id { get; set; }
         public string name { get; set; }
         public int quant { get; set; }
         public float price { get; set; }
