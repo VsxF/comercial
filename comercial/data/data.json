@@ -1,19 +1,25 @@
 { "products":[
   {
-    "id": "0",
-    "name": "nuevo nombre",
+    "id": "10 generico",
+    "name": "nombre generico",
+    "desc": "descripcion generica",
+    "brand": "generica",
     "quant": 79,
     "price": 8.0
   },
   {
-    "id": "1",
+    "id": "11",
     "name": "prueba 2",
+    "desc": "descripcion generica2",
+    "brand": "marca0",
     "quant": 2,
     "price": 233.0
   },
   {
-    "id": "2",
+    "id": "1112",
     "name": "name codigo",
+    "desc": "descripcion generica3",
+    "brand": "marca1",
     "quant": 5,
     "price": 3.0
   }
