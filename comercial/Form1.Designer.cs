@@ -40,23 +40,23 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.lbl_brand = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.lbl_branch_pos = new System.Windows.Forms.Label();
             this.lbl_desc = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lbl_des_pos = new System.Windows.Forms.Label();
             this.lbl_exito = new System.Windows.Forms.Label();
             this.btn_end = new System.Windows.Forms.Button();
             this.lbl_total = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lbl_total_pos = new System.Windows.Forms.Label();
             this.lbl_agregado = new System.Windows.Forms.Label();
             this.lbl_precio = new System.Windows.Forms.Label();
             this.lbl_cantidad = new System.Windows.Forms.Label();
             this.lbl_codigo = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lbl_price_pos = new System.Windows.Forms.Label();
+            this.lbl_quant_pos = new System.Windows.Forms.Label();
             this.lbl_producto = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lbl_prod_pos = new System.Windows.Forms.Label();
+            this.lbl_cod_pos = new System.Windows.Forms.Label();
+            this.lbl_info_pos = new System.Windows.Forms.Label();
             this.tbl_ventas_cobro = new System.Windows.Forms.DataGridView();
             this.tb_ventas_cobro_codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tb_ventas_cobro_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,9 +64,9 @@
             this.tb_ventas_cobro_brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tb_ventas_cobro_cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tb_ventas_cobro_precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbl_prods_pos = new System.Windows.Forms.Label();
             this.txt_cantidad = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_cant_pos = new System.Windows.Forms.Label();
             this.btn_agregar = new System.Windows.Forms.Button();
             this.txt_id = new System.Windows.Forms.TextBox();
             this.tbl_product_ventas = new System.Windows.Forms.DataGridView();
@@ -166,28 +166,29 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.Color.LightCyan;
             this.tabPage1.Controls.Add(this.lbl_brand);
-            this.tabPage1.Controls.Add(this.label11);
+            this.tabPage1.Controls.Add(this.lbl_branch_pos);
             this.tabPage1.Controls.Add(this.lbl_desc);
-            this.tabPage1.Controls.Add(this.label9);
+            this.tabPage1.Controls.Add(this.lbl_des_pos);
             this.tabPage1.Controls.Add(this.lbl_exito);
             this.tabPage1.Controls.Add(this.btn_end);
             this.tabPage1.Controls.Add(this.lbl_total);
-            this.tabPage1.Controls.Add(this.label6);
+            this.tabPage1.Controls.Add(this.lbl_total_pos);
             this.tabPage1.Controls.Add(this.lbl_agregado);
             this.tabPage1.Controls.Add(this.lbl_precio);
             this.tabPage1.Controls.Add(this.lbl_cantidad);
             this.tabPage1.Controls.Add(this.lbl_codigo);
-            this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this.label7);
+            this.tabPage1.Controls.Add(this.lbl_price_pos);
+            this.tabPage1.Controls.Add(this.lbl_quant_pos);
             this.tabPage1.Controls.Add(this.lbl_producto);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.lbl_prod_pos);
+            this.tabPage1.Controls.Add(this.lbl_cod_pos);
+            this.tabPage1.Controls.Add(this.lbl_info_pos);
             this.tabPage1.Controls.Add(this.tbl_ventas_cobro);
-            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.lbl_prods_pos);
             this.tabPage1.Controls.Add(this.txt_cantidad);
-            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.lbl_cant_pos);
             this.tabPage1.Controls.Add(this.btn_agregar);
             this.tabPage1.Controls.Add(this.txt_id);
             this.tabPage1.Controls.Add(this.tbl_product_ventas);
@@ -197,7 +198,6 @@
             this.tabPage1.Size = new System.Drawing.Size(820, 621);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Ventas";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // lbl_brand
             // 
@@ -208,14 +208,14 @@
             this.lbl_brand.TabIndex = 16;
             this.lbl_brand.Text = "default";
             // 
-            // label11
+            // lbl_branch_pos
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(611, 165);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(43, 15);
-            this.label11.TabIndex = 12;
-            this.label11.Text = "Marca:";
+            this.lbl_branch_pos.AutoSize = true;
+            this.lbl_branch_pos.Location = new System.Drawing.Point(611, 165);
+            this.lbl_branch_pos.Name = "lbl_branch_pos";
+            this.lbl_branch_pos.Size = new System.Drawing.Size(43, 15);
+            this.lbl_branch_pos.TabIndex = 12;
+            this.lbl_branch_pos.Text = "Marca:";
             // 
             // lbl_desc
             // 
@@ -226,14 +226,14 @@
             this.lbl_desc.TabIndex = 15;
             this.lbl_desc.Text = "default";
             // 
-            // label9
+            // lbl_des_pos
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(582, 136);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(72, 15);
-            this.label9.TabIndex = 11;
-            this.label9.Text = "Descripcion:";
+            this.lbl_des_pos.AutoSize = true;
+            this.lbl_des_pos.Location = new System.Drawing.Point(582, 136);
+            this.lbl_des_pos.Name = "lbl_des_pos";
+            this.lbl_des_pos.Size = new System.Drawing.Size(72, 15);
+            this.lbl_des_pos.TabIndex = 11;
+            this.lbl_des_pos.Text = "Descripcion:";
             // 
             // lbl_exito
             // 
@@ -264,14 +264,14 @@
             this.lbl_total.TabIndex = 101;
             this.lbl_total.Text = "0.00";
             // 
-            // label6
+            // lbl_total_pos
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(541, 483);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 15);
-            this.label6.TabIndex = 100;
-            this.label6.Text = "Total:";
+            this.lbl_total_pos.AutoSize = true;
+            this.lbl_total_pos.Location = new System.Drawing.Point(541, 483);
+            this.lbl_total_pos.Name = "lbl_total_pos";
+            this.lbl_total_pos.Size = new System.Drawing.Size(35, 15);
+            this.lbl_total_pos.TabIndex = 100;
+            this.lbl_total_pos.Text = "Total:";
             // 
             // lbl_agregado
             // 
@@ -312,23 +312,23 @@
             this.lbl_codigo.TabIndex = 13;
             this.lbl_codigo.Text = "default";
             // 
-            // label8
+            // lbl_price_pos
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(611, 231);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(43, 15);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "Precio:";
+            this.lbl_price_pos.AutoSize = true;
+            this.lbl_price_pos.Location = new System.Drawing.Point(611, 231);
+            this.lbl_price_pos.Name = "lbl_price_pos";
+            this.lbl_price_pos.Size = new System.Drawing.Size(43, 15);
+            this.lbl_price_pos.TabIndex = 12;
+            this.lbl_price_pos.Text = "Precio:";
             // 
-            // label7
+            // lbl_quant_pos
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(596, 198);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(58, 15);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Cantidad:";
+            this.lbl_quant_pos.AutoSize = true;
+            this.lbl_quant_pos.Location = new System.Drawing.Point(596, 198);
+            this.lbl_quant_pos.Name = "lbl_quant_pos";
+            this.lbl_quant_pos.Size = new System.Drawing.Size(58, 15);
+            this.lbl_quant_pos.TabIndex = 11;
+            this.lbl_quant_pos.Text = "Cantidad:";
             // 
             // lbl_producto
             // 
@@ -339,32 +339,32 @@
             this.lbl_producto.TabIndex = 10;
             this.lbl_producto.Text = "default";
             // 
-            // label5
+            // lbl_prod_pos
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(595, 109);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 15);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Producto:";
+            this.lbl_prod_pos.AutoSize = true;
+            this.lbl_prod_pos.Location = new System.Drawing.Point(595, 109);
+            this.lbl_prod_pos.Name = "lbl_prod_pos";
+            this.lbl_prod_pos.Size = new System.Drawing.Size(59, 15);
+            this.lbl_prod_pos.TabIndex = 9;
+            this.lbl_prod_pos.Text = "Producto:";
             // 
-            // label4
+            // lbl_cod_pos
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(605, 78);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 15);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Codigo:";
+            this.lbl_cod_pos.AutoSize = true;
+            this.lbl_cod_pos.Location = new System.Drawing.Point(605, 78);
+            this.lbl_cod_pos.Name = "lbl_cod_pos";
+            this.lbl_cod_pos.Size = new System.Drawing.Size(49, 15);
+            this.lbl_cod_pos.TabIndex = 8;
+            this.lbl_cod_pos.Text = "Codigo:";
             // 
-            // label3
+            // lbl_info_pos
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(576, 50);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(143, 15);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Informacion del producto";
+            this.lbl_info_pos.AutoSize = true;
+            this.lbl_info_pos.Location = new System.Drawing.Point(576, 50);
+            this.lbl_info_pos.Name = "lbl_info_pos";
+            this.lbl_info_pos.Size = new System.Drawing.Size(143, 15);
+            this.lbl_info_pos.TabIndex = 7;
+            this.lbl_info_pos.Text = "Informacion del producto";
             // 
             // tbl_ventas_cobro
             // 
@@ -429,14 +429,14 @@
             this.tb_ventas_cobro_precio.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.tb_ventas_cobro_precio.Width = 50;
             // 
-            // label2
+            // lbl_prods_pos
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(126, 287);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 15);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Productos a cobrar";
+            this.lbl_prods_pos.AutoSize = true;
+            this.lbl_prods_pos.Location = new System.Drawing.Point(126, 287);
+            this.lbl_prods_pos.Name = "lbl_prods_pos";
+            this.lbl_prods_pos.Size = new System.Drawing.Size(107, 15);
+            this.lbl_prods_pos.TabIndex = 5;
+            this.lbl_prods_pos.Text = "Productos a cobrar";
             // 
             // txt_cantidad
             // 
@@ -448,14 +448,14 @@
             this.txt_cantidad.TextChanged += new System.EventHandler(this.txt_cantidad_TextChanged);
             this.txt_cantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cantidad_KeyPress);
             // 
-            // label1
+            // lbl_cant_pos
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(351, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Cant.";
+            this.lbl_cant_pos.AutoSize = true;
+            this.lbl_cant_pos.Location = new System.Drawing.Point(351, 35);
+            this.lbl_cant_pos.Name = "lbl_cant_pos";
+            this.lbl_cant_pos.Size = new System.Drawing.Size(35, 15);
+            this.lbl_cant_pos.TabIndex = 3;
+            this.lbl_cant_pos.Text = "Cant.";
             // 
             // btn_agregar
             // 
@@ -469,6 +469,8 @@
             // 
             // txt_id
             // 
+            this.txt_id.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txt_id.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_id.Location = new System.Drawing.Point(70, 49);
             this.txt_id.Name = "txt_id";
             this.txt_id.Size = new System.Drawing.Size(193, 23);
@@ -574,6 +576,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Comercial";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -606,22 +609,22 @@
         private System.Windows.Forms.DataGridView tbl_product_ventas;
         private System.Windows.Forms.TextBox txt_id;
         private System.Windows.Forms.TextBox txt_cantidad;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_cant_pos;
         private System.Windows.Forms.Button btn_agregar;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_prods_pos;
         private System.Windows.Forms.DataGridView tbl_ventas_cobro;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbl_info_pos;
         private System.Windows.Forms.Label lbl_precio;
         private System.Windows.Forms.Label lbl_cantidad;
         private System.Windows.Forms.Label lbl_codigo;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lbl_price_pos;
+        private System.Windows.Forms.Label lbl_quant_pos;
         private System.Windows.Forms.Label lbl_producto;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbl_prod_pos;
+        private System.Windows.Forms.Label lbl_cod_pos;
         private System.Windows.Forms.Label lbl_agregado;
         private System.Windows.Forms.Label lbl_total;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lbl_total_pos;
         private System.Windows.Forms.Button btn_end;
         private System.Windows.Forms.Label lbl_exito;
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_codigo;
@@ -637,9 +640,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_quant;
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_precio;
         private System.Windows.Forms.Label lbl_brand;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lbl_branch_pos;
         private System.Windows.Forms.Label lbl_desc;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lbl_des_pos;
     }
 }
 

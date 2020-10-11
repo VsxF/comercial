@@ -17,16 +17,26 @@ namespace comercial
     {
         //Instancia la clase controller
         Controller controller = new Controller();
+        int w;
+        int h;
 
         public Form1()
         {
             InitializeComponent();
         
             this.MaximizeBox = true;
-            this.WindowState = FormWindowState.Maximized;
-           
-            //this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            //w = Screen.PrimaryScreen.Bounds.Width;
+            //h = Screen.PrimaryScreen.Bounds.Height;
+            //this.Width = w;
+            //this.Height = h;
+            //this.WindowState = FormWindowState.Maximized;
 
+            w = this.Width;
+            h = this.Height;
+
+            tabControl1.Width = w;
+            tabControl1.Height = h;
+            RelativePositions();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -192,9 +202,53 @@ namespace comercial
             Add();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Form1_ResizeEnd(object sender, EventArgs e)
         {
-            Application.Exit();
+            ResizeVentas();
+        }
+
+        private void ResizeVentas()
+        {
+            w = this.Width;
+            h = this.Height;
+            tabControl1.Width = w;
+            tabControl1.Height = h;
+            RelativePositions();
+        }
+
+        private void RelativePositions()
+        {
+            int tw = getPerc(22.5);
+
+            int raw1 = getPerc(5);
+            txt_id.Location = new Point(getPerc(9), raw1);
+            btn_agregar.Location = new Point(getPerc(32), raw1);
+            txt_cantidad.Location = new Point(getPerc(41), raw1);
+            lbl_cant_pos.Location = new Point(getPerc(40), getPerc(3.2));
+
+            tbl_product_ventas.Location = new Point(getPerc(5.3), getPerc(11));
+
+            lbl_info_pos.Location = new Point(getPerc(65), raw1);
+            lbl_cod_pos.Location = new Point(getPerc(71), getPerc(9));
+            lbl_prod_pos.Location = new Point(getPerc(69.8), getPerc(12));
+            //lbl_
+
+            txt_id.Width = tw;
+            //txt_cantidad.Width = tw;
+
+            //Extra styles
+            txt_id.BorderStyle = BorderStyle.None;
+
+            var dc = GetWindow
+            using (Graphics g = Graphics.FromHdc())) ;
+
+            Pen p = new Pen(Color.SteelBlue);
+            
+        }
+
+        private int getPerc(double percentage)
+        {
+            return Convert.ToInt32(w * percentage* 0.01);
         }
     }
 }
