@@ -9,33 +9,44 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.Linq.Expressions;
+using System.Drawing.Drawing2D;
 
 namespace comercial
 {
 
     public partial class Form1 : Form
     {
-        //Instancia la clase controller
-        Controller controller = new Controller();
-        int w;
-        int h;
+        Controller controller; //Instancia la clase controller
+        Rectangle panel; // Panel fondo lbls
+        Color panelcol; //Color del panel
+        Panel ventas;
+        int w; //with form
+        int h; //height form
 
         public Form1()
         {
             InitializeComponent();
-        
-            this.MaximizeBox = true;
-            //w = Screen.PrimaryScreen.Bounds.Width;
-            //h = Screen.PrimaryScreen.Bounds.Height;
-            //this.Width = w;
-            //this.Height = h;
-            //this.WindowState = FormWindowState.Maximized;
 
-            w = this.Width;
-            h = this.Height;
+            panelcol = Color.FromArgb(46, 134, 193);
+            panel = new Rectangle();
+            controller = new Controller();
 
-            tabControl1.Width = w;
-            tabControl1.Height = h;
+            //ventas = new Ventas(this.Width, this.Height);
+            
+            //foreach( Control ctrl in this.Controls)
+            //{
+            //    if (tabPage1.Contains(ctrl))
+            //    {
+            //        string a = ctrl.Name;
+            //    }
+            //}
+
+            //ventas.Parent = tabPage1;
+
+
+            
+
+            Design();
             RelativePositions();
         }
 
@@ -45,7 +56,7 @@ namespace comercial
             txt_id.TabIndex = 1;
             txt_id.TabStop = true;
             FullProductsData();
-           
+            Design();
         }
 
         private void txt_id_TextChanged(object sender, EventArgs e)
@@ -57,7 +68,7 @@ namespace comercial
                     tbl_product_ventas.Rows.Add(item);
                     aux++;
                 }
-                //tbl_product_ventas.RowCount = controller.RowCheck(aux);
+                tbl_product_ventas.RowCount = controller.RowCheck(aux);
             setSelectedProduct();
         }
 
@@ -117,21 +128,58 @@ namespace comercial
         //Muestra el producto seleccionado
         private void setSelectedProduct()
         {
-            if (tbl_product_ventas.Rows[0].Cells[0].Value != null)
+            if (tbl_product_ventas.Rows[0].Cells[0].Value != null && txt_id.Text.Length != 0)
             {
                 try
                 {
-                    lbl_codigo.Text = tbl_product_ventas.Rows[0].Cells[0].Value.ToString();
-                    lbl_producto.Text = tbl_product_ventas.Rows[0].Cells[1].Value.ToString();
-                    lbl_desc.Text = tbl_product_ventas.Rows[0].Cells[2].Value.ToString();
-                    lbl_brand.Text = tbl_product_ventas.Rows[0].Cells[3].Value.ToString();
+                    lbl_codigo.Text = cutString(0);
+                    lbl_producto.Text = cutString(1);
+                    lbl_desc.Text = cutString(2);
+                    lbl_brand.Text = cutString(3);
                     lbl_cantidad.Text = txt_cantidad.Text;
-                    lbl_precio.Text = tbl_product_ventas.Rows[0].Cells[5].Value.ToString();
+                    lbl_precio.Text = cutString(5);
                 }
                 catch (System.NullReferenceException e)
                 {
                 }
             }
+            else
+            {
+                lbl_codigo.Text = "";
+                lbl_producto.Text = "";
+                lbl_desc.Text = "";
+                lbl_brand.Text = "";
+                lbl_cantidad.Text = "";
+                lbl_precio.Text = "";
+            }
+        }
+
+        //Si hay mas de 40 caracteres corta el string para la interfaz
+        private string cutString(int cell)
+        {
+            string res = "";
+            int a = tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Length;
+            if (tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Length > 20)
+            {
+                res = tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Substring(0, 19)
+                    + "\r\n";
+            }
+
+            if (tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Length <= 20)
+            {
+                res = tbl_product_ventas.Rows[0].Cells[cell].Value.ToString();
+            }
+            else if (tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Length >= 40)
+            {
+                res += tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Substring(20, 19);
+            }
+            else
+            {
+                res += tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Substring(19,
+                    tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Length-19);
+            }
+
+            return res;
         }
 
         //Agrega un producto al cobro
@@ -144,8 +192,8 @@ namespace comercial
 
             if (repit != 0)
             {
-                cant = cant + int.Parse(tbl_ventas_cobro.Rows[repit - 1].Cells[2].Value.ToString());
-                price = cant * float.Parse(tbl_product_ventas.Rows[0].Cells[3].Value.ToString());
+                cant += int.Parse(tbl_ventas_cobro.Rows[repit-1].Cells[4].Value.ToString());
+                price = cant * float.Parse(tbl_product_ventas.Rows[0].Cells[5].Value.ToString());
             }
 
             string[] product = { lbl_codigo.Text, lbl_producto.Text, lbl_desc.Text, lbl_brand.Text,
@@ -186,7 +234,8 @@ namespace comercial
                 lbl_agregado.Visible = false;
             });
         }
-
+        
+        //Hilo para quitar el aviso vendido
         private void successSell()
         {
             Thread.Sleep(3000);
@@ -206,7 +255,8 @@ namespace comercial
         {
             ResizeVentas();
         }
-
+        
+        //posicion y tamnhio responsive
         private void ResizeVentas()
         {
             w = this.Width;
@@ -216,39 +266,245 @@ namespace comercial
             RelativePositions();
         }
 
+        //Posiciones de los objetos (responsive)
         private void RelativePositions()
         {
-            int tw = getPerc(22.5);
 
-            int raw1 = getPerc(5);
-            txt_id.Location = new Point(getPerc(9), raw1);
-            btn_agregar.Location = new Point(getPerc(32), raw1);
-            txt_cantidad.Location = new Point(getPerc(41), raw1);
-            lbl_cant_pos.Location = new Point(getPerc(40), getPerc(3.2));
+            //Fila de textbox
+            int txtwith = getPerc(22.5, 'x');
+            int raw1 = getPerc(7.5, 'y');
+            txt_id.Location = new Point(getPerc(9, 'x'), raw1);
+            btn_border_id.Location = new Point(getPerc(9, 'x'), raw1);
+            btn_agregar.Location = new Point(getPerc(32, 'x'), raw1);
+            txt_cantidad.Location = new Point(getPerc(41, 'x'), raw1);
+            lbl_cant_pos.Location = new Point(getPerc(40.5, 'x'), getPerc(4.9, 'y'));
+            if (w  > 1100)
+            {
+                txt_cantidad.Location = new Point(getPerc(39, 'x'), raw1);
+                lbl_cant_pos.Location = new Point(getPerc(38.5, 'x'), getPerc(5.3, 'y'));
+            }
+            lbl_agregado.Location = new Point(getPerc(49, 'x'), raw1-10);
+            txt_id.Width = txtwith;
 
-            tbl_product_ventas.Location = new Point(getPerc(5.3), getPerc(11));
+            lbl_info_pos.Location = new Point(getPerc(80, 'x') - lbl_info_pos.Width / 2, raw1);
+            //Label colum1
+            int y_col1 = getPerc(75, 'x');
+            lbl_cod_pos.Location = new Point(AlignFromRight(y_col1, lbl_cod_pos.Width), getPerc(12.2, 'y'));
+            lbl_prod_pos.Location = new Point(AlignFromRight(y_col1, lbl_prod_pos.Width), getPerc(16.4, 'y'));
+            lbl_des_pos.Location = new Point(AlignFromRight(y_col1, lbl_des_pos.Width), getPerc(20.6, 'y'));
+            lbl_branch_pos.Location = new Point(AlignFromRight(y_col1, lbl_branch_pos.Width), getPerc(24.8, 'y'));
+            lbl_quant_pos.Location = new Point(AlignFromRight(y_col1, lbl_quant_pos.Width), getPerc(29, 'y'));
+            lbl_price_pos.Location = new Point(AlignFromRight(y_col1, lbl_price_pos.Width), getPerc(33.2, 'y'));
 
-            lbl_info_pos.Location = new Point(getPerc(65), raw1);
-            lbl_cod_pos.Location = new Point(getPerc(71), getPerc(9));
-            lbl_prod_pos.Location = new Point(getPerc(69.8), getPerc(12));
-            //lbl_
+            //Label colum2
+            int y_col2 = getPerc(80, 'x');
+            lbl_codigo.Location = new Point(y_col2, getPerc(12.2, 'y'));
+            lbl_producto.Location = new Point(y_col2, getPerc(16.4, 'y'));
+            lbl_desc.Location = new Point(y_col2, getPerc(20.6, 'y'));
+            lbl_brand.Location = new Point(y_col2, getPerc(24.8, 'y'));
+            lbl_cantidad.Location = new Point(y_col2, getPerc(29, 'y'));
+            lbl_precio.Location = new Point(y_col2, getPerc(33.2, 'y'));
 
-            txt_id.Width = tw;
-            //txt_cantidad.Width = tw;
+
+            //tabla1 - Productos/Ventas
+            int tbwith = getPerc(57.87, 'x');
+            tbl_product_ventas.Bounds = new Rectangle(getPerc(5.3, 'x'), getPerc(14.06, 'y'), tbwith, getPerc(21.7, 'y'));
+            tbl_product_ventas.Columns[0].Width = (int)(tbwith * 0.2041);
+            tbl_product_ventas.Columns[1].Width = (int)(tbwith * 0.2449);
+            tbl_product_ventas.Columns[3].Width = (int)(tbwith * 0.2449);
+            tbl_product_ventas.Columns[4].Width = (int)(tbwith * 0.1429);
+            tbl_product_ventas.Columns[5].Width = (int)(tbwith * 0.1632);
+
+            //tabla2 - Cobros -- y objetos
+            int tb2with = w - getPerc(12, 'x');
+            tbl_ventas_cobro.Bounds = new Rectangle(getPerc(4.3, 'x'), getPerc(48, 'y'), tb2with, getPerc(21.7, 'y'));
+            tbl_ventas_cobro.Columns[0].Width = (int)(tb2with * 0.1056);
+            tbl_ventas_cobro.Columns[1].Width = (int)(tb2with * 0.2113);
+            tbl_ventas_cobro.Columns[2].Width = (int)(tb2with * 0.3451);
+            tbl_ventas_cobro.Columns[3].Width = (int)(tb2with * 0.1411);
+            tbl_ventas_cobro.Columns[4].Width = (int)(tb2with * 0.0986);
+            tbl_ventas_cobro.Columns[5].Width = (int)(tb2with * 0.0986);
+
+            //Ultima Fila
+            int xtb = tbl_ventas_cobro.Location.X + tbl_ventas_cobro.Width;
+            int ytb = tbl_ventas_cobro.Location.Y + tbl_ventas_cobro.Height;
+            lbl_prods_pos.Location = new Point(getPerc(14, 'x'), getPerc(43, 'y'));
+            lbl_total_pos.Location = new Point(xtb - getPerc(10, 'x'), ytb + getPerc(1, 'y'));
+            lbl_total.Location = new Point(xtb - getPerc(5, 'x'), ytb + getPerc(1, 'y'));
+            btn_end.Location = new Point(xtb - getPerc(12, 'x')-btn_agregar.Width/2, ytb + getPerc(6, 'y'));
+            lbl_exito.Location = new Point(xtb - getPerc(7.5, 'x') - btn_agregar.Width - lbl_exito.Width,
+                                           ytb + getPerc(6, 'y') + lbl_exito.Height/2);
+            btn_quit.Location = new Point(getPerc(4.3, 'x') + getPerc(7.5, 'x') - btn_quit.Width / 2, ytb + getPerc(6, 'y'));
+
+            //Panel
+            if(w > 1250)
+            {
+                panel.X = lbl_des_pos.Location.X - getPerc(4, 'x');
+                panel.Y = lbl_info_pos.Location.Y - getPerc(2, 'y');
+                panel.Width = getPerc(28.23, 'x');
+                panel.Height = getPerc(35.94, 'y');
+            } 
+            else if (w > 925)
+            {
+                panel.X = (y_col2 - y_col1) / 2 + y_col1 - 120;
+                panel.Y = lbl_info_pos.Location.Y - getPerc(2, 'y');
+                panel.Width = 280;
+                panel.Height = getPerc(35.94, 'y');
+            }
+            else
+            {
+                panel.X = (y_col2 - y_col1) / 2 + y_col1 - 100;
+                panel.Y = lbl_info_pos.Location.Y - getPerc(2, 'y');
+                panel.Width = 260;
+                panel.Height = getPerc(35.94, 'y');
+            }
+}
+
+        //Disenhio
+        private void Design()
+        {
+
+            //Form -- General
+            Color back = Color.FromArgb(243, 240, 205);
+            this.ActiveControl = txt_id;
+            this.txt_id.Focus();
+            this.MaximizeBox = true;
+            //w = Screen.PrimaryScreen.Bounds.Width;
+            //h = Screen.PrimaryScreen.Bounds.Height;
+            //this.Width = w;
+            //this.Height = h;
+            //this.WindowState = FormWindowState.Maximized;
+
+            tabPage1.BackColor = back;
+            lbl_info_pos.ForeColor = back;
+
+            w = this.Width;
+            h = this.Height;
+
+            tabControl1.Width = w;
+            tabControl1.Height = h;
+
+            //Panel producto
+            props(new Label(), 0, Color.Transparent);
+            props(new Label(), 1, back);
+            props(new Label(), 2, 0);
+            
+            
+            //Tablas
+            tbl_product_ventas.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            tbl_ventas_cobro.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            tb_ventas_desc.Visible = false;
 
             //Extra styles
-            txt_id.BorderStyle = BorderStyle.None;
 
-            var dc = GetWindow
-            using (Graphics g = Graphics.FromHdc())) ;
+            Button bid = btn_border_id;
 
-            Pen p = new Pen(Color.SteelBlue);
-            
+            if (txt_id.Focused)
+            {
+                bid.SetBounds(bid.Location.X - 2, bid.Location.Y - 2, bid.Width + 4, bid.Height + 4);
+
+                //txt_id.BorderStyle = BorderStyle.None;
+            }
+            else
+            {
+                txt_id.BorderStyle = BorderStyle.FixedSingle;
+            }
         }
 
-        private int getPerc(double percentage)
+        //Obtener porcentajes para Respoinsive
+        private int getPerc(double percentage, char wh) // with: true; height: false
         {
-            return Convert.ToInt32(w * percentage* 0.01);
+            if (wh.Equals('x'))
+            {
+                return Convert.ToInt32(w * percentage * 0.01);
+            }
+            else if (wh.Equals('y'))
+            {
+                return Convert.ToInt32(h * percentage * 0.01);
+            } 
+            else
+            {
+                return -99;
+            }
         }
+
+        //Alinear objeto de derecha a izquierda
+        private int AlignFromRight(int x, int obj_with)
+        {
+            return x - obj_with;
+        }
+        
+        //Pintar el fondo de los lables, del color de fondo
+        private void props(Control control, int method , object value)
+        {
+            Color back = Color.FromArgb(243, 240, 205);
+            foreach (Control ctr in tabPage1.Controls)
+            {
+                if (ctr.GetType() == control.GetType())
+                {
+                    switch ( method )
+                    {
+                        case 0: //Color de fondo lbls
+                            ctr.BackColor = (Color)value;
+                            break;
+                        case 1: //Colo de letra, cualquiera
+                            ctr.ForeColor = (Color)value;
+                            break;
+                        case 2: //Estilo de letra default0
+                            ctr.Font = new System.Drawing.Font(ctr.Font, FontStyle.Bold);
+                            break;
+                           
+                    }
+                }
+            }
+        }
+
+        private void btn_quit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //Dibuja panel a los lbl
+        private void DrawPanel(PaintEventArgs e, Rectangle r)
+        {
+            Graphics g = e.Graphics;
+            Pen pen = new Pen(panelcol);
+            SolidBrush inn = new SolidBrush(Color.FromArgb(49, 168, 174));
+            GraphicsPath path = new GraphicsPath();
+            int x1 = r.X;
+            int y1 = r.Y;
+            int x2 = r.X + r.Width;
+            int y2 = r.Y + r.Height;
+
+            path.AddArc(x1, y1, 10, 10, 180, 90); //teta 1
+            path.AddLine(x1 + 5, y1, x2 - 5, y1); //Horizontal 1
+            path.AddArc(x2 - 10, y1, 10, 10, 270, 90); //teta 2
+            path.AddLine(x2, y1 + 5, x2, y2 - 5); //Vertical 2
+            path.AddArc(x2 - 10, y2 - 10, 10, 10, 0, 90); // teta 3
+            path.AddLine(x1 + 5, y2, x2 - 5, y2); //Horizontal 2
+            path.AddArc(x1, y2 - 10, 10, 10, 90, 90); //teta 4
+            path.AddLine(x1, y1 + 5, x1, y2 - 5);// Vertical 1
+
+            
+
+            //LinearGradientBrush lnBush = new LinearGradientBrush( new Point(x1, y1), new Point(x1,y2), Color.Blue, Color.Green);
+
+            //Se dibuja como un grafo que empieza en el angulo izq sup, haci la derecha
+
+            //g.FillPath(new SolidBrush(panelcol), path);
+            g.FillPath(inn, path);
+            g.DrawPath(pen, path);
+        }
+
+
+        
+
+        private void tabPage1_Paint(object sender, PaintEventArgs e)
+        {
+            DrawPanel(e, panel);
+            this.Invalidate();
+        }
+
+        
     }
 }

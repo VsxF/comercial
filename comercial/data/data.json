@@ -1,24 +1,24 @@
 { "products":[
   {
     "id": "10 generico",
-    "name": "nombre generico",
-    "desc": "descripcion generica",
+    "name": "Aceite",
+    "desc": "10 litros",
     "brand": "generica",
     "quant": 79,
     "price": 8.0
   },
   {
     "id": "11",
-    "name": "prueba 2",
-    "desc": "descripcion generica2",
+    "name": "otra cosa",
+    "desc": "2 litros",
     "brand": "marca0",
     "quant": 2,
     "price": 233.0
   },
   {
     "id": "1112",
-    "name": "name codigo",
-    "desc": "descripcion generica3",
+    "name": "tres",
+    "desc": "5 litros",
     "brand": "marca1",
     "quant": 5,
     "price": 3.0

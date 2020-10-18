@@ -39,6 +39,9 @@
             this.btneliminar = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btn_quit = new System.Windows.Forms.Button();
+            this.txt_id = new System.Windows.Forms.TextBox();
+            this.btn_border_id = new System.Windows.Forms.Button();
             this.lbl_brand = new System.Windows.Forms.Label();
             this.lbl_branch_pos = new System.Windows.Forms.Label();
             this.lbl_desc = new System.Windows.Forms.Label();
@@ -68,7 +71,6 @@
             this.txt_cantidad = new System.Windows.Forms.TextBox();
             this.lbl_cant_pos = new System.Windows.Forms.Label();
             this.btn_agregar = new System.Windows.Forms.Button();
-            this.txt_id = new System.Windows.Forms.TextBox();
             this.tbl_product_ventas = new System.Windows.Forms.DataGridView();
             this.tb_ventas_codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tb_ventas_product = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -166,7 +168,10 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.BackColor = System.Drawing.Color.LightCyan;
+            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.btn_quit);
+            this.tabPage1.Controls.Add(this.txt_id);
+            this.tabPage1.Controls.Add(this.btn_border_id);
             this.tabPage1.Controls.Add(this.lbl_brand);
             this.tabPage1.Controls.Add(this.lbl_branch_pos);
             this.tabPage1.Controls.Add(this.lbl_desc);
@@ -190,7 +195,6 @@
             this.tabPage1.Controls.Add(this.txt_cantidad);
             this.tabPage1.Controls.Add(this.lbl_cant_pos);
             this.tabPage1.Controls.Add(this.btn_agregar);
-            this.tabPage1.Controls.Add(this.txt_id);
             this.tabPage1.Controls.Add(this.tbl_product_ventas);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
@@ -198,10 +202,45 @@
             this.tabPage1.Size = new System.Drawing.Size(820, 621);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Ventas";
+            this.tabPage1.Paint += new System.Windows.Forms.PaintEventHandler(this.tabPage1_Paint);
+            // 
+            // btn_quit
+            // 
+            this.btn_quit.Location = new System.Drawing.Point(40, 527);
+            this.btn_quit.Name = "btn_quit";
+            this.btn_quit.Size = new System.Drawing.Size(107, 56);
+            this.btn_quit.TabIndex = 106;
+            this.btn_quit.Text = "Quitar";
+            this.btn_quit.UseVisualStyleBackColor = true;
+            this.btn_quit.Click += new System.EventHandler(this.btn_quit_Click);
+            // 
+            // txt_id
+            // 
+            this.txt_id.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txt_id.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_id.Location = new System.Drawing.Point(70, 49);
+            this.txt_id.Name = "txt_id";
+            this.txt_id.Size = new System.Drawing.Size(193, 23);
+            this.txt_id.TabIndex = 1;
+            this.txt_id.TextChanged += new System.EventHandler(this.txt_id_TextChanged);
+            this.txt_id.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_id_KeyPress);
+            // 
+            // btn_border_id
+            // 
+            this.btn_border_id.BackColor = System.Drawing.Color.SteelBlue;
+            this.btn_border_id.Enabled = false;
+            this.btn_border_id.FlatAppearance.BorderColor = System.Drawing.Color.SteelBlue;
+            this.btn_border_id.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_border_id.Location = new System.Drawing.Point(70, 49);
+            this.btn_border_id.Name = "btn_border_id";
+            this.btn_border_id.Size = new System.Drawing.Size(193, 23);
+            this.btn_border_id.TabIndex = 104;
+            this.btn_border_id.UseVisualStyleBackColor = false;
             // 
             // lbl_brand
             // 
             this.lbl_brand.AutoSize = true;
+            this.lbl_brand.BackColor = System.Drawing.SystemColors.Control;
             this.lbl_brand.Location = new System.Drawing.Point(660, 165);
             this.lbl_brand.Name = "lbl_brand";
             this.lbl_brand.Size = new System.Drawing.Size(44, 15);
@@ -211,6 +250,7 @@
             // lbl_branch_pos
             // 
             this.lbl_branch_pos.AutoSize = true;
+            this.lbl_branch_pos.BackColor = System.Drawing.SystemColors.Control;
             this.lbl_branch_pos.Location = new System.Drawing.Point(611, 165);
             this.lbl_branch_pos.Name = "lbl_branch_pos";
             this.lbl_branch_pos.Size = new System.Drawing.Size(43, 15);
@@ -220,6 +260,7 @@
             // lbl_desc
             // 
             this.lbl_desc.AutoSize = true;
+            this.lbl_desc.BackColor = System.Drawing.SystemColors.Control;
             this.lbl_desc.Location = new System.Drawing.Point(660, 136);
             this.lbl_desc.Name = "lbl_desc";
             this.lbl_desc.Size = new System.Drawing.Size(44, 15);
@@ -229,6 +270,7 @@
             // lbl_des_pos
             // 
             this.lbl_des_pos.AutoSize = true;
+            this.lbl_des_pos.BackColor = System.Drawing.SystemColors.Control;
             this.lbl_des_pos.Location = new System.Drawing.Point(582, 136);
             this.lbl_des_pos.Name = "lbl_des_pos";
             this.lbl_des_pos.Size = new System.Drawing.Size(72, 15);
@@ -238,16 +280,17 @@
             // lbl_exito
             // 
             this.lbl_exito.AutoSize = true;
-            this.lbl_exito.Location = new System.Drawing.Point(665, 528);
+            this.lbl_exito.Location = new System.Drawing.Point(515, 539);
             this.lbl_exito.Name = "lbl_exito";
-            this.lbl_exito.Size = new System.Drawing.Size(102, 30);
+            this.lbl_exito.Size = new System.Drawing.Size(101, 30);
             this.lbl_exito.TabIndex = 103;
             this.lbl_exito.Text = "La venta se \r\nregistro con exito!";
+            this.lbl_exito.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_exito.Visible = false;
             // 
             // btn_end
             // 
-            this.btn_end.Location = new System.Drawing.Point(531, 526);
+            this.btn_end.Location = new System.Drawing.Point(646, 527);
             this.btn_end.Name = "btn_end";
             this.btn_end.Size = new System.Drawing.Size(107, 56);
             this.btn_end.TabIndex = 102;
@@ -258,7 +301,7 @@
             // lbl_total
             // 
             this.lbl_total.AutoSize = true;
-            this.lbl_total.Location = new System.Drawing.Point(592, 483);
+            this.lbl_total.Location = new System.Drawing.Point(711, 483);
             this.lbl_total.Name = "lbl_total";
             this.lbl_total.Size = new System.Drawing.Size(28, 15);
             this.lbl_total.TabIndex = 101;
@@ -267,9 +310,9 @@
             // lbl_total_pos
             // 
             this.lbl_total_pos.AutoSize = true;
-            this.lbl_total_pos.Location = new System.Drawing.Point(541, 483);
+            this.lbl_total_pos.Location = new System.Drawing.Point(660, 483);
             this.lbl_total_pos.Name = "lbl_total_pos";
-            this.lbl_total_pos.Size = new System.Drawing.Size(35, 15);
+            this.lbl_total_pos.Size = new System.Drawing.Size(36, 15);
             this.lbl_total_pos.TabIndex = 100;
             this.lbl_total_pos.Text = "Total:";
             // 
@@ -288,6 +331,7 @@
             // lbl_precio
             // 
             this.lbl_precio.AutoSize = true;
+            this.lbl_precio.BackColor = System.Drawing.SystemColors.Control;
             this.lbl_precio.Location = new System.Drawing.Point(660, 231);
             this.lbl_precio.Name = "lbl_precio";
             this.lbl_precio.Size = new System.Drawing.Size(44, 15);
@@ -297,6 +341,7 @@
             // lbl_cantidad
             // 
             this.lbl_cantidad.AutoSize = true;
+            this.lbl_cantidad.BackColor = System.Drawing.SystemColors.Control;
             this.lbl_cantidad.Location = new System.Drawing.Point(660, 198);
             this.lbl_cantidad.Name = "lbl_cantidad";
             this.lbl_cantidad.Size = new System.Drawing.Size(44, 15);
@@ -306,6 +351,7 @@
             // lbl_codigo
             // 
             this.lbl_codigo.AutoSize = true;
+            this.lbl_codigo.BackColor = System.Drawing.SystemColors.Control;
             this.lbl_codigo.Location = new System.Drawing.Point(660, 78);
             this.lbl_codigo.Name = "lbl_codigo";
             this.lbl_codigo.Size = new System.Drawing.Size(44, 15);
@@ -315,6 +361,7 @@
             // lbl_price_pos
             // 
             this.lbl_price_pos.AutoSize = true;
+            this.lbl_price_pos.BackColor = System.Drawing.SystemColors.Control;
             this.lbl_price_pos.Location = new System.Drawing.Point(611, 231);
             this.lbl_price_pos.Name = "lbl_price_pos";
             this.lbl_price_pos.Size = new System.Drawing.Size(43, 15);
@@ -324,6 +371,7 @@
             // lbl_quant_pos
             // 
             this.lbl_quant_pos.AutoSize = true;
+            this.lbl_quant_pos.BackColor = System.Drawing.SystemColors.Control;
             this.lbl_quant_pos.Location = new System.Drawing.Point(596, 198);
             this.lbl_quant_pos.Name = "lbl_quant_pos";
             this.lbl_quant_pos.Size = new System.Drawing.Size(58, 15);
@@ -333,6 +381,7 @@
             // lbl_producto
             // 
             this.lbl_producto.AutoSize = true;
+            this.lbl_producto.BackColor = System.Drawing.SystemColors.Control;
             this.lbl_producto.Location = new System.Drawing.Point(660, 109);
             this.lbl_producto.Name = "lbl_producto";
             this.lbl_producto.Size = new System.Drawing.Size(44, 15);
@@ -342,6 +391,7 @@
             // lbl_prod_pos
             // 
             this.lbl_prod_pos.AutoSize = true;
+            this.lbl_prod_pos.BackColor = System.Drawing.SystemColors.Control;
             this.lbl_prod_pos.Location = new System.Drawing.Point(595, 109);
             this.lbl_prod_pos.Name = "lbl_prod_pos";
             this.lbl_prod_pos.Size = new System.Drawing.Size(59, 15);
@@ -351,6 +401,7 @@
             // lbl_cod_pos
             // 
             this.lbl_cod_pos.AutoSize = true;
+            this.lbl_cod_pos.BackColor = System.Drawing.SystemColors.Control;
             this.lbl_cod_pos.Location = new System.Drawing.Point(605, 78);
             this.lbl_cod_pos.Name = "lbl_cod_pos";
             this.lbl_cod_pos.Size = new System.Drawing.Size(49, 15);
@@ -360,6 +411,7 @@
             // lbl_info_pos
             // 
             this.lbl_info_pos.AutoSize = true;
+            this.lbl_info_pos.BackColor = System.Drawing.SystemColors.Control;
             this.lbl_info_pos.Location = new System.Drawing.Point(576, 50);
             this.lbl_info_pos.Name = "lbl_info_pos";
             this.lbl_info_pos.Size = new System.Drawing.Size(143, 15);
@@ -377,10 +429,12 @@
             this.tb_ventas_cobro_brand,
             this.tb_ventas_cobro_cantidad,
             this.tb_ventas_cobro_precio});
-            this.tbl_ventas_cobro.Location = new System.Drawing.Point(136, 318);
+            this.tbl_ventas_cobro.Location = new System.Drawing.Point(40, 318);
             this.tbl_ventas_cobro.Name = "tbl_ventas_cobro";
             this.tbl_ventas_cobro.ReadOnly = true;
-            this.tbl_ventas_cobro.Size = new System.Drawing.Size(493, 162);
+            this.tbl_ventas_cobro.RowHeadersVisible = false;
+            this.tbl_ventas_cobro.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbl_ventas_cobro.Size = new System.Drawing.Size(713, 162);
             this.tbl_ventas_cobro.TabIndex = 6;
             this.tbl_ventas_cobro.Text = "dataGridView3";
             // 
@@ -390,7 +444,7 @@
             this.tb_ventas_cobro_codigo.Name = "tb_ventas_cobro_codigo";
             this.tb_ventas_cobro_codigo.ReadOnly = true;
             this.tb_ventas_cobro_codigo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tb_ventas_cobro_codigo.Width = 50;
+            this.tb_ventas_cobro_codigo.Width = 75;
             // 
             // tb_ventas_cobro_producto
             // 
@@ -398,6 +452,7 @@
             this.tb_ventas_cobro_producto.Name = "tb_ventas_cobro_producto";
             this.tb_ventas_cobro_producto.ReadOnly = true;
             this.tb_ventas_cobro_producto.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tb_ventas_cobro_producto.Width = 150;
             // 
             // tb_ventas_cobro_desc
             // 
@@ -405,6 +460,7 @@
             this.tb_ventas_cobro_desc.Name = "tb_ventas_cobro_desc";
             this.tb_ventas_cobro_desc.ReadOnly = true;
             this.tb_ventas_cobro_desc.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tb_ventas_cobro_desc.Width = 245;
             // 
             // tb_ventas_cobro_brand
             // 
@@ -419,7 +475,7 @@
             this.tb_ventas_cobro_cantidad.Name = "tb_ventas_cobro_cantidad";
             this.tb_ventas_cobro_cantidad.ReadOnly = true;
             this.tb_ventas_cobro_cantidad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tb_ventas_cobro_cantidad.Width = 50;
+            this.tb_ventas_cobro_cantidad.Width = 70;
             // 
             // tb_ventas_cobro_precio
             // 
@@ -427,7 +483,7 @@
             this.tb_ventas_cobro_precio.Name = "tb_ventas_cobro_precio";
             this.tb_ventas_cobro_precio.ReadOnly = true;
             this.tb_ventas_cobro_precio.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tb_ventas_cobro_precio.Width = 50;
+            this.tb_ventas_cobro_precio.Width = 70;
             // 
             // lbl_prods_pos
             // 
@@ -467,21 +523,11 @@
             this.btn_agregar.UseVisualStyleBackColor = true;
             this.btn_agregar.Click += new System.EventHandler(this.btn_agregar_Click);
             // 
-            // txt_id
-            // 
-            this.txt_id.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txt_id.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_id.Location = new System.Drawing.Point(70, 49);
-            this.txt_id.Name = "txt_id";
-            this.txt_id.Size = new System.Drawing.Size(193, 23);
-            this.txt_id.TabIndex = 1;
-            this.txt_id.TextChanged += new System.EventHandler(this.txt_id_TextChanged);
-            this.txt_id.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_id_KeyPress);
-            // 
             // tbl_product_ventas
             // 
             this.tbl_product_ventas.AllowUserToAddRows = false;
             this.tbl_product_ventas.AllowUserToDeleteRows = false;
+            this.tbl_product_ventas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SunkenHorizontal;
             this.tbl_product_ventas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tbl_product_ventas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.tb_ventas_codigo,
@@ -490,8 +536,12 @@
             this.tb_ventas_brand,
             this.tb_ventas_quant,
             this.tb_ventas_precio});
-            this.tbl_product_ventas.Location = new System.Drawing.Point(40, 91);
+            this.tbl_product_ventas.Location = new System.Drawing.Point(40, 96);
             this.tbl_product_ventas.Name = "tbl_product_ventas";
+            this.tbl_product_ventas.ReadOnly = true;
+            this.tbl_product_ventas.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.tbl_product_ventas.RowHeadersVisible = false;
+            this.tbl_product_ventas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbl_product_ventas.Size = new System.Drawing.Size(493, 150);
             this.tbl_product_ventas.TabIndex = 99;
             this.tbl_product_ventas.Text = "dataGridView3";
@@ -500,40 +550,49 @@
             // 
             this.tb_ventas_codigo.HeaderText = "Codigo";
             this.tb_ventas_codigo.Name = "tb_ventas_codigo";
-            this.tb_ventas_codigo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tb_ventas_codigo.Width = 50;
+            this.tb_ventas_codigo.ReadOnly = true;
+            this.tb_ventas_codigo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // tb_ventas_product
             // 
             this.tb_ventas_product.HeaderText = "Producto";
             this.tb_ventas_product.Name = "tb_ventas_product";
+            this.tb_ventas_product.ReadOnly = true;
             this.tb_ventas_product.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tb_ventas_product.Width = 120;
             // 
             // tb_ventas_desc
             // 
             this.tb_ventas_desc.HeaderText = "Descripcion";
             this.tb_ventas_desc.Name = "tb_ventas_desc";
+            this.tb_ventas_desc.ReadOnly = true;
             this.tb_ventas_desc.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tb_ventas_desc.Visible = false;
+            this.tb_ventas_desc.Width = 125;
             // 
             // tb_ventas_brand
             // 
             this.tb_ventas_brand.HeaderText = "Marca";
             this.tb_ventas_brand.Name = "tb_ventas_brand";
+            this.tb_ventas_brand.ReadOnly = true;
             this.tb_ventas_brand.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tb_ventas_brand.Width = 120;
             // 
             // tb_ventas_quant
             // 
             this.tb_ventas_quant.HeaderText = "Cantidad";
             this.tb_ventas_quant.Name = "tb_ventas_quant";
+            this.tb_ventas_quant.ReadOnly = true;
             this.tb_ventas_quant.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tb_ventas_quant.Width = 50;
+            this.tb_ventas_quant.Width = 70;
             // 
             // tb_ventas_precio
             // 
             this.tb_ventas_precio.HeaderText = "Precio";
             this.tb_ventas_precio.Name = "tb_ventas_precio";
+            this.tb_ventas_precio.ReadOnly = true;
             this.tb_ventas_precio.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tb_ventas_precio.Width = 50;
+            this.tb_ventas_precio.Width = 80;
             // 
             // tabPage2
             // 
@@ -572,9 +631,10 @@
             this.Controls.Add(this.tabControl1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(851, 692);
             this.Name = "Form1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "Comercial";
+            this.Text = "Comercial Oliva";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
@@ -627,22 +687,24 @@
         private System.Windows.Forms.Label lbl_total_pos;
         private System.Windows.Forms.Button btn_end;
         private System.Windows.Forms.Label lbl_exito;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_codigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_desc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_brand;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_precio;
+        private System.Windows.Forms.Label lbl_brand;
+        private System.Windows.Forms.Label lbl_branch_pos;
+        private System.Windows.Forms.Label lbl_desc;
+        private System.Windows.Forms.Label lbl_des_pos;
+        private System.Windows.Forms.Button btn_border_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_product;
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_desc;
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_brand;
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_quant;
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_precio;
-        private System.Windows.Forms.Label lbl_brand;
-        private System.Windows.Forms.Label lbl_branch_pos;
-        private System.Windows.Forms.Label lbl_desc;
-        private System.Windows.Forms.Label lbl_des_pos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_desc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_brand;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_precio;
+        private System.Windows.Forms.Button btn_quit;
     }
 }
 
