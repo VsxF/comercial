@@ -53,13 +53,13 @@ namespace comercial
             return null;
         }
 
-        //Devuelve una lista de la busqueda en base al id
+        //Devuelve una lista de la busqueda en base al nombre
         public IList<string[]> getSearch(string id)
         {
             IList<string[]> pds = new List<string[]>();
             foreach (Product item in products)
             {
-                if (item.id.Contains(id))
+                if (item.name.Contains(id))
                 {
                     pds.Add(new string[] { item.id, item.name, item.desc, item.brand, item.quant.ToString(), item.price.ToString() });
                 }

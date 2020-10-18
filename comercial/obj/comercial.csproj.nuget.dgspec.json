@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\raenu\\Documents\\Proyectos\\comercial\\comercial\\comercial.csproj": {}
+    "C:\\Users\\xF\\Documents\\Proyectos\\comercial\\comercial\\comercial.csproj": {}
   },
   "projects": {
-    "C:\\Users\\raenu\\Documents\\Proyectos\\comercial\\comercial\\comercial.csproj": {
+    "C:\\Users\\xF\\Documents\\Proyectos\\comercial\\comercial\\comercial.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\raenu\\Documents\\Proyectos\\comercial\\comercial\\comercial.csproj",
+        "projectUniqueName": "C:\\Users\\xF\\Documents\\Proyectos\\comercial\\comercial\\comercial.csproj",
         "projectName": "comercial",
-        "projectPath": "C:\\Users\\raenu\\Documents\\Proyectos\\comercial\\comercial\\comercial.csproj",
-        "packagesPath": "C:\\Users\\raenu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\raenu\\Documents\\Proyectos\\comercial\\comercial\\obj\\",
+        "projectPath": "C:\\Users\\xF\\Documents\\Proyectos\\comercial\\comercial\\comercial.csproj",
+        "packagesPath": "C:\\Users\\xF\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\xF\\Documents\\Proyectos\\comercial\\comercial\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\raenu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\xF\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
