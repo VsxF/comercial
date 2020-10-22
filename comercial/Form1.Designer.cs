@@ -39,6 +39,17 @@
             this.btneliminar = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabVentas = new System.Windows.Forms.TabControl();
+            this.tabPageUnidad = new System.Windows.Forms.TabPage();
+            this.tbl_product_ventas = new System.Windows.Forms.DataGridView();
+            this.tb_ventas_codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tb_ventas_product = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tb_ventas_desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tb_ventas_brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tb_ventas_quant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tb_ventas_precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPageMayor = new System.Windows.Forms.TabPage();
+            this.tbl_mayor = new System.Windows.Forms.DataGridView();
             this.btn_quit = new System.Windows.Forms.Button();
             this.txt_id = new System.Windows.Forms.TextBox();
             this.btn_border_id = new System.Windows.Forms.Button();
@@ -71,22 +82,27 @@
             this.txt_cantidad = new System.Windows.Forms.TextBox();
             this.lbl_cant_pos = new System.Windows.Forms.Label();
             this.btn_agregar = new System.Windows.Forms.Button();
-            this.tbl_product_ventas = new System.Windows.Forms.DataGridView();
-            this.tb_ventas_codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tb_ventas_product = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tb_ventas_desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tb_ventas_brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tb_ventas_quant = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tb_ventas_precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tbl1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tb_mayor_codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tb_mayor_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tb_mayor_descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tb_mayor_marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tb_mayor_cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tb_mayor_precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbl_ventas_cobro)).BeginInit();
+            this.tabVentas.SuspendLayout();
+            this.tabPageUnidad.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_product_ventas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbl_mayor)).BeginInit();
+            this.tabPageMayor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbl_ventas_cobro)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -169,6 +185,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.tabVentas);
             this.tabPage1.Controls.Add(this.btn_quit);
             this.tabPage1.Controls.Add(this.txt_id);
             this.tabPage1.Controls.Add(this.btn_border_id);
@@ -195,7 +212,6 @@
             this.tabPage1.Controls.Add(this.txt_cantidad);
             this.tabPage1.Controls.Add(this.lbl_cant_pos);
             this.tabPage1.Controls.Add(this.btn_agregar);
-            this.tabPage1.Controls.Add(this.tbl_product_ventas);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -203,6 +219,131 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Ventas";
             this.tabPage1.Paint += new System.Windows.Forms.PaintEventHandler(this.tabPage1_Paint);
+            // 
+            // tabVentas
+            // 
+            this.tabVentas.Controls.Add(this.tabPageUnidad);
+            this.tabVentas.Controls.Add(this.tabPageMayor);
+            this.tabVentas.Location = new System.Drawing.Point(40, 75);
+            this.tabVentas.Name = "tabVentas";
+            this.tabVentas.Padding = new System.Drawing.Point(3, 3);
+            this.tabVentas.SelectedIndex = 0;
+            this.tabVentas.Size = new System.Drawing.Size(501, 181);
+            this.tabVentas.TabIndex = 107;
+            // 
+            // tabPageUnidad
+            // 
+            this.tabPageUnidad.Controls.Add(this.tbl_product_ventas);
+            this.tabPageUnidad.Location = new System.Drawing.Point(4, 24);
+            this.tabPageUnidad.Name = "tabPageUnidad";
+            this.tabPageUnidad.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageUnidad.Size = new System.Drawing.Size(493, 153);
+            this.tabPageUnidad.TabIndex = 0;
+            this.tabPageUnidad.Text = "Unitario";
+            this.tabPageUnidad.UseVisualStyleBackColor = true;
+            // 
+            // tbl_product_ventas
+            // 
+            this.tbl_product_ventas.AllowUserToAddRows = false;
+            this.tbl_product_ventas.AllowUserToDeleteRows = false;
+            this.tbl_product_ventas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SunkenHorizontal;
+            this.tbl_product_ventas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tbl_product_ventas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.tb_ventas_codigo,
+            this.tb_ventas_product,
+            this.tb_ventas_desc,
+            this.tb_ventas_brand,
+            this.tb_ventas_quant,
+            this.tb_ventas_precio});
+            this.tbl_product_ventas.Location = new System.Drawing.Point(0, 0);
+            this.tbl_product_ventas.Name = "tbl_product_ventas";
+            this.tbl_product_ventas.ReadOnly = true;
+            this.tbl_product_ventas.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.tbl_product_ventas.RowHeadersVisible = false;
+            this.tbl_product_ventas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbl_product_ventas.Size = new System.Drawing.Size(493, 150);
+            this.tbl_product_ventas.TabIndex = 99;
+            this.tbl_product_ventas.Text = "dataGridView3";
+            // 
+            // tb_ventas_codigo
+            // 
+            this.tb_ventas_codigo.HeaderText = "Codigo";
+            this.tb_ventas_codigo.Name = "tb_ventas_codigo";
+            this.tb_ventas_codigo.ReadOnly = true;
+            this.tb_ventas_codigo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.tb_ventas_codigo.Visible = false;
+            // 
+            // tb_ventas_product
+            // 
+            this.tb_ventas_product.HeaderText = "Producto";
+            this.tb_ventas_product.Name = "tb_ventas_product";
+            this.tb_ventas_product.ReadOnly = true;
+            this.tb_ventas_product.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tb_ventas_product.Width = 120;
+            // 
+            // tb_ventas_desc
+            // 
+            this.tb_ventas_desc.HeaderText = "Descripcion";
+            this.tb_ventas_desc.Name = "tb_ventas_desc";
+            this.tb_ventas_desc.ReadOnly = true;
+            this.tb_ventas_desc.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tb_ventas_desc.Width = 125;
+            // 
+            // tb_ventas_brand
+            // 
+            this.tb_ventas_brand.HeaderText = "Marca";
+            this.tb_ventas_brand.Name = "tb_ventas_brand";
+            this.tb_ventas_brand.ReadOnly = true;
+            this.tb_ventas_brand.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tb_ventas_brand.Width = 120;
+            // 
+            // tb_ventas_quant
+            // 
+            this.tb_ventas_quant.HeaderText = "Cantidad";
+            this.tb_ventas_quant.Name = "tb_ventas_quant";
+            this.tb_ventas_quant.ReadOnly = true;
+            this.tb_ventas_quant.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tb_ventas_quant.Width = 70;
+            // 
+            // tb_ventas_precio
+            // 
+            this.tb_ventas_precio.HeaderText = "Precio";
+            this.tb_ventas_precio.Name = "tb_ventas_precio";
+            this.tb_ventas_precio.ReadOnly = true;
+            this.tb_ventas_precio.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tb_ventas_precio.Width = 80;
+            // 
+            // tabPageMayor
+            // 
+            // 
+            // tbl_mayor
+            // 
+            this.tbl_mayor.AllowUserToAddRows = false;
+            this.tbl_mayor.AllowUserToDeleteRows = false;
+            this.tbl_mayor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tbl_mayor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.tb_mayor_codigo,
+            this.tb_mayor_producto,
+            this.tb_mayor_descripcion,
+            this.tb_mayor_marca,
+            this.tb_mayor_cantidad,
+            this.tb_mayor_precio});
+            this.tbl_mayor.Location = new System.Drawing.Point(0, 1);
+            this.tbl_mayor.Name = "tbl_mayor";
+            this.tbl_mayor.ReadOnly = true;
+            this.tbl_mayor.RowHeadersVisible = false;
+            this.tbl_mayor.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbl_mayor.Size = new System.Drawing.Size(490, 150);
+            this.tbl_mayor.TabIndex = 0;
+            this.tbl_mayor.Text = "dataGridView1";
+            this.tabPageMayor.Controls.Add(this.tbl_mayor);
+            this.tabPageMayor.Location = new System.Drawing.Point(4, 24);
+            this.tabPageMayor.Name = "tabPageMayor";
+            this.tabPageMayor.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMayor.Size = new System.Drawing.Size(493, 153);
+            this.tabPageMayor.TabIndex = 1;
+            this.tabPageMayor.Text = "Mayoreo";
+            this.tabPageMayor.UseVisualStyleBackColor = true;
             // 
             // btn_quit
             // 
@@ -444,6 +585,7 @@
             this.tb_ventas_cobro_codigo.Name = "tb_ventas_cobro_codigo";
             this.tb_ventas_cobro_codigo.ReadOnly = true;
             this.tb_ventas_cobro_codigo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tb_ventas_cobro_codigo.Visible = false;
             this.tb_ventas_cobro_codigo.Width = 75;
             // 
             // tb_ventas_cobro_producto
@@ -523,77 +665,6 @@
             this.btn_agregar.UseVisualStyleBackColor = true;
             this.btn_agregar.Click += new System.EventHandler(this.btn_agregar_Click);
             // 
-            // tbl_product_ventas
-            // 
-            this.tbl_product_ventas.AllowUserToAddRows = false;
-            this.tbl_product_ventas.AllowUserToDeleteRows = false;
-            this.tbl_product_ventas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SunkenHorizontal;
-            this.tbl_product_ventas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tbl_product_ventas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.tb_ventas_codigo,
-            this.tb_ventas_product,
-            this.tb_ventas_desc,
-            this.tb_ventas_brand,
-            this.tb_ventas_quant,
-            this.tb_ventas_precio});
-            this.tbl_product_ventas.Location = new System.Drawing.Point(40, 96);
-            this.tbl_product_ventas.Name = "tbl_product_ventas";
-            this.tbl_product_ventas.ReadOnly = true;
-            this.tbl_product_ventas.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.tbl_product_ventas.RowHeadersVisible = false;
-            this.tbl_product_ventas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbl_product_ventas.Size = new System.Drawing.Size(493, 150);
-            this.tbl_product_ventas.TabIndex = 99;
-            this.tbl_product_ventas.Text = "dataGridView3";
-            // 
-            // tb_ventas_codigo
-            // 
-            this.tb_ventas_codigo.HeaderText = "Codigo";
-            this.tb_ventas_codigo.Name = "tb_ventas_codigo";
-            this.tb_ventas_codigo.ReadOnly = true;
-            this.tb_ventas_codigo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // tb_ventas_product
-            // 
-            this.tb_ventas_product.HeaderText = "Producto";
-            this.tb_ventas_product.Name = "tb_ventas_product";
-            this.tb_ventas_product.ReadOnly = true;
-            this.tb_ventas_product.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tb_ventas_product.Width = 120;
-            // 
-            // tb_ventas_desc
-            // 
-            this.tb_ventas_desc.HeaderText = "Descripcion";
-            this.tb_ventas_desc.Name = "tb_ventas_desc";
-            this.tb_ventas_desc.ReadOnly = true;
-            this.tb_ventas_desc.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tb_ventas_desc.Visible = false;
-            this.tb_ventas_desc.Width = 125;
-            // 
-            // tb_ventas_brand
-            // 
-            this.tb_ventas_brand.HeaderText = "Marca";
-            this.tb_ventas_brand.Name = "tb_ventas_brand";
-            this.tb_ventas_brand.ReadOnly = true;
-            this.tb_ventas_brand.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tb_ventas_brand.Width = 120;
-            // 
-            // tb_ventas_quant
-            // 
-            this.tb_ventas_quant.HeaderText = "Cantidad";
-            this.tb_ventas_quant.Name = "tb_ventas_quant";
-            this.tb_ventas_quant.ReadOnly = true;
-            this.tb_ventas_quant.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tb_ventas_quant.Width = 70;
-            // 
-            // tb_ventas_precio
-            // 
-            this.tb_ventas_precio.HeaderText = "Precio";
-            this.tb_ventas_precio.Name = "tb_ventas_precio";
-            this.tb_ventas_precio.ReadOnly = true;
-            this.tb_ventas_precio.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tb_ventas_precio.Width = 80;
-            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.tbl1);
@@ -623,6 +694,60 @@
             this.tbl1.TabIndex = 4;
             this.tbl1.Text = "dataGridView3";
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 5);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(490, 150);
+            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.Text = "dataGridView1";
+            // 
+            // tb_mayor_codigo
+            // 
+            this.tb_mayor_codigo.HeaderText = "Codigo";
+            this.tb_mayor_codigo.Name = "tb_mayor_codigo";
+            this.tb_mayor_codigo.ReadOnly = true;
+            this.tb_mayor_codigo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.tb_mayor_codigo.Visible = false;
+            // 
+            // tb_mayor_producto
+            // 
+            this.tb_mayor_producto.HeaderText = "Producto";
+            this.tb_mayor_producto.Name = "tb_mayor_producto";
+            this.tb_mayor_producto.ReadOnly = true;
+            this.tb_mayor_producto.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // tb_mayor_descripcion
+            // 
+            this.tb_mayor_descripcion.HeaderText = "Descipcion";
+            this.tb_mayor_descripcion.Name = "tb_mayor_descripcion";
+            this.tb_mayor_descripcion.ReadOnly = true;
+            this.tb_mayor_descripcion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // tb_mayor_marca
+            // 
+            this.tb_mayor_marca.HeaderText = "Marca";
+            this.tb_mayor_marca.Name = "tb_mayor_marca";
+            this.tb_mayor_marca.ReadOnly = true;
+            this.tb_mayor_marca.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // tb_mayor_cantidad
+            // 
+            this.tb_mayor_cantidad.HeaderText = "Cantidad";
+            this.tb_mayor_cantidad.Name = "tb_mayor_cantidad";
+            this.tb_mayor_cantidad.ReadOnly = true;
+            this.tb_mayor_cantidad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // tb_mayor_precio
+            // 
+            this.tb_mayor_precio.HeaderText = "Precio";
+            this.tb_mayor_precio.Name = "tb_mayor_precio";
+            this.tb_mayor_precio.ReadOnly = true;
+            this.tb_mayor_precio.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -641,11 +766,16 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbl_ventas_cobro)).EndInit();
+            this.tabVentas.ResumeLayout(false);
+            this.tabPageUnidad.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tbl_product_ventas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbl_mayor)).EndInit();
+            this.tabPageMayor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tbl_ventas_cobro)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -692,19 +822,30 @@
         private System.Windows.Forms.Label lbl_desc;
         private System.Windows.Forms.Label lbl_des_pos;
         private System.Windows.Forms.Button btn_border_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_codigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_product;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_desc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_brand;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_quant;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_precio;
+        private System.Windows.Forms.Button btn_quit;
+        private System.Windows.Forms.TabControl tabVentas;
+        private System.Windows.Forms.TabPage tabPageUnidad;
+        private System.Windows.Forms.TabPage tabPageMayor;
+        private System.Windows.Forms.DataGridView tbl_mayor;
+        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_desc;
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_brand;
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_cobro_precio;
-        private System.Windows.Forms.Button btn_quit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_product;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_desc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_brand;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_quant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_precio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_mayor_codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_mayor_producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_mayor_descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_mayor_marca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_mayor_cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tb_mayor_precio;
     }
 }
 

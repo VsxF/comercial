@@ -19,32 +19,16 @@ namespace comercial
         Controller controller; //Instancia la clase controller
         Rectangle panel; // Panel fondo lbls
         Color panelcol; //Color del panel
-        Panel ventas;
         int w; //with form
         int h; //height form
 
         public Form1()
         {
-            InitializeComponent();
-
             panelcol = Color.FromArgb(46, 134, 193);
             panel = new Rectangle();
             controller = new Controller();
-
-            //ventas = new Ventas(this.Width, this.Height);
             
-            //foreach( Control ctrl in this.Controls)
-            //{
-            //    if (tabPage1.Contains(ctrl))
-            //    {
-            //        string a = ctrl.Name;
-            //    }
-            //}
-
-            //ventas.Parent = tabPage1;
-
-
-            
+            InitializeComponent();
 
             Design();
             RelativePositions();
@@ -306,16 +290,27 @@ namespace comercial
             lbl_precio.Location = new Point(y_col2, getPerc(33.2, 'y'));
 
 
-            //tabla1 - Productos/Ventas
-            int tbwith = getPerc(57.87, 'x');
-            tbl_product_ventas.Bounds = new Rectangle(getPerc(5.3, 'x'), getPerc(14.06, 'y'), tbwith, getPerc(21.7, 'y'));
-            tbl_product_ventas.Columns[0].Width = (int)(tbwith * 0.2041);
-            tbl_product_ventas.Columns[1].Width = (int)(tbwith * 0.2449);
+            //tabControl - Ventas
+            tabVentas.Bounds = new Rectangle(getPerc(5.3, 'x'), getPerc(14.06, 'y'), getPerc(57.87, 'x'), getPerc(21.7, 'y'));
+            
+            //tabla1 - Productos/Ventas/Unidad
+            int tbwith = tabPageUnidad.Width;
+            tbl_product_ventas.SetBounds(0, 0, tbwith, tabPageUnidad.Height-5);
+            tbl_product_ventas.Columns[1].Width = (int)(tbwith * 0.2041);
+            tbl_product_ventas.Columns[2].Width = (int)(tbwith * 0.2449);
             tbl_product_ventas.Columns[3].Width = (int)(tbwith * 0.2449);
             tbl_product_ventas.Columns[4].Width = (int)(tbwith * 0.1429);
             tbl_product_ventas.Columns[5].Width = (int)(tbwith * 0.1632);
 
-            //tabla2 - Cobros -- y objetos
+            //tabla2 - Productos/Ventas/Mayor
+            tbl_mayor.SetBounds(0, 0, tabPageUnidad.Width, tabPageUnidad.Height);
+            tbl_mayor.Columns[1].Width = (int)(tbwith * 0.2041);
+            tbl_mayor.Columns[2].Width = (int)(tbwith * 0.2449);
+            tbl_mayor.Columns[3].Width = (int)(tbwith * 0.2449);
+            tbl_mayor.Columns[4].Width = (int)(tbwith * 0.1429);
+            tbl_mayor.Columns[5].Width = (int)(tbwith * 0.1632);
+
+            //tabla3 - Cobros -- y objetos
             int tb2with = w - getPerc(12, 'x');
             tbl_ventas_cobro.Bounds = new Rectangle(getPerc(4.3, 'x'), getPerc(48, 'y'), tb2with, getPerc(21.7, 'y'));
             tbl_ventas_cobro.Columns[0].Width = (int)(tb2with * 0.1056);
@@ -393,8 +388,8 @@ namespace comercial
             //Tablas
             tbl_product_ventas.CellBorderStyle = DataGridViewCellBorderStyle.None;
             tbl_ventas_cobro.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            tb_ventas_desc.Visible = false;
-
+            tbl_mayor.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            
             //Extra styles
 
             Button bid = btn_border_id;
@@ -495,9 +490,6 @@ namespace comercial
             g.FillPath(inn, path);
             g.DrawPath(pen, path);
         }
-
-
-        
 
         private void tabPage1_Paint(object sender, PaintEventArgs e)
         {
