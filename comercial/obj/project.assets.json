@@ -52,20 +52,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\xF\\.nuget\\packages\\": {}
+    "C:\\Users\\oleyda\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\xF\\Documents\\Proyectos\\comercial\\comercial\\comercial.csproj",
+      "projectUniqueName": "C:\\Users\\oleyda\\Desktop\\Comercial 1.0\\comercial\\comercial\\comercial.csproj",
       "projectName": "comercial",
-      "projectPath": "C:\\Users\\xF\\Documents\\Proyectos\\comercial\\comercial\\comercial.csproj",
-      "packagesPath": "C:\\Users\\xF\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\xF\\Documents\\Proyectos\\comercial\\comercial\\obj\\",
+      "projectPath": "C:\\Users\\oleyda\\Desktop\\Comercial 1.0\\comercial\\comercial\\comercial.csproj",
+      "packagesPath": "C:\\Users\\oleyda\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\oleyda\\Desktop\\Comercial 1.0\\comercial\\comercial\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\xF\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\oleyda\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"

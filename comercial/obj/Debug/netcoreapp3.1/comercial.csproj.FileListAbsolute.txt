@@ -32,3 +32,20 @@ C:\Users\xF\Documents\Proyectos\comercial\comercial\bin\Debug\netcoreapp3.1\Newt
 C:\Users\xF\Documents\Proyectos\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csproj.CopyComplete
 C:\Users\xF\Documents\Proyectos\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.genruntimeconfig.cache
 C:\Users\xF\Documents\Proyectos\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.Form1.resources
+C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.exe
+C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.deps.json
+C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.runtimeconfig.json
+C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.runtimeconfig.dev.json
+C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.dll
+C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.pdb
+C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csprojAssemblyReference.cache
+C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.Form1.resources
+C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csproj.GenerateResource.cache
+C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.AssemblyInfoInputs.cache
+C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.AssemblyInfo.cs
+C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csproj.CoreCompileInputs.cache
+C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csproj.CopyComplete
+C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.dll
+C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.pdb
+C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.genruntimeconfig.cache

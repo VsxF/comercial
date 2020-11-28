@@ -507,12 +507,160 @@ namespace comercial
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            tbl1.Rows.Clear();
+            int aux1 = 0;
+            foreach (string[] item in controller.getSearch(txtbuscar.Text))
+            {
+                tbl1.Rows.Add(item);
+                aux1++;
+            }
+            tbl1.RowCount = controller.RowCheck(aux1);
+            setSelectedProduct();
         }
 
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnagregar_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow fila = new DataGridViewRow();
+            fila.CreateCells(tbl1);
+            fila.Cells[0].Value = txtcodigo.Text;
+            fila.Cells[1].Value = txtproducto.Text;
+            fila.Cells[2].Value = txtdescripcion.Text;
+            fila.Cells[3].Value = txtmarca.Text;
+            fila.Cells[4].Value = txtcantidad.Text;
+            fila.Cells[5].Value = txtprecio.Text;
+
+            tbl1.Rows.Add(fila);
+
+            txtcodigo.Text = "";
+            txtproducto.Text = "";
+            txtdescripcion.Text = "";
+            txtmarca.Text = "";
+            txtcantidad.Text = "";
+            txtprecio.Text = "";
+
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtcodigo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
+        }
+
+        private void txtcodigo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtproducto.Focus();
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                txtproducto.Focus();
+            }
+           
+        }
+
+        private void txtproducto_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtproducto_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtdescripcion.Focus();
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                txtdescripcion.Focus();
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                txtcodigo.Focus();
+            }
+        }
+
+        private void txtdescripcion_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtmarca.Focus();
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                txtmarca.Focus();
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                txtproducto.Focus();
+            }
+        }
+
+        private void txtmarca_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtcantidad.Focus();
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                txtcantidad.Focus();
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                txtdescripcion.Focus();
+            }
+        }
+
+        private void txtcantidad_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtprecio.Focus();
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                txtprecio.Focus();
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                txtmarca.Focus();
+            }
+        }
+
+        private void txtprecio_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnagregar.Focus();
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                btnagregar.Focus();
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                txtcantidad.Focus();
+            }
+        }
+
+        private void btneliminar_Click(object sender, EventArgs e)
+        {
+            tbl1.Rows.Remove(tbl1.CurrentRow);
         }
     }
 }
