@@ -258,7 +258,7 @@ namespace comercial
         public string id { get; set; }
         public string name { get; set; }
         public string desc { get; set; }
-         public string brand { get; set; }
+        public string brand { get; set; }
         public int quant { get; set; }
         public float price { get; set; }
     }

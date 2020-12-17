@@ -66,3 +66,5 @@ C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\obj\Debug\
 C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.dll
 C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.pdb
 C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.genruntimeconfig.cache
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll

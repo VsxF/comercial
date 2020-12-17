@@ -25,6 +25,8 @@ namespace comercial
 
         public Form1()
         {
+            api api = new api();
+            api.appio().GetAwaiter().GetResult();
             InitializeComponent();
 
             panelcol = Color.FromArgb(46, 134, 193);
@@ -461,7 +463,7 @@ namespace comercial
 
         private void btn_quit_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         //Dibuja panel a los lbl
