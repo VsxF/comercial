@@ -59,7 +59,7 @@ namespace comercial
             IList<string[]> pds = new List<string[]>();
             foreach (Product item in products)
             {
-                if (item.name.Contains(id))
+                if (item.name.ToLower().Contains(id.ToLower()))
                 {
                     pds.Add(new string[] { item.id, item.name, item.desc, item.brand, item.quant.ToString(), item.price.ToString() });
                 }

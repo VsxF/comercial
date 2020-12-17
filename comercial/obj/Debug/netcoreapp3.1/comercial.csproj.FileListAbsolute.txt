@@ -49,3 +49,20 @@ C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\obj\Debug\netcoreapp3.
 C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.dll
 C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.pdb
 C:\Users\oleyda\Desktop\Comercial 1.0\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.genruntimeconfig.cache
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.exe
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.deps.json
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.runtimeconfig.json
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.runtimeconfig.dev.json
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.dll
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.pdb
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csprojAssemblyReference.cache
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.Form1.resources
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csproj.GenerateResource.cache
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.AssemblyInfoInputs.cache
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.AssemblyInfo.cs
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csproj.CoreCompileInputs.cache
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csproj.CopyComplete
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.dll
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.pdb
+C:\Users\raenu\Documents\Proyectos\ccccccomercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.genruntimeconfig.cache

@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "mI+f9qDN5WusWJuLOhTQwX7u9jz4kweBE9/2vFC5+sa7fsOQq9yZ9PWZR9nL3TvJdnqSBCG0KpnPVtXeT38/yQ==",
+  "dgSpecHash": "0Mo+3VuOfs4FVWTt4zhWee69hO/FGgBq6b8K9BCnXazDBg3vnk/6gO+AcS39K/I5PDVJVScxgPmmr/aDQlXt8Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\oleyda\\Desktop\\Comercial 1.0\\comercial\\comercial\\comercial.csproj",
+  "projectFilePath": "C:\\Users\\raenu\\Documents\\Proyectos\\ccccccomercial\\comercial\\comercial\\comercial.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\oleyda\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+    "C:\\Users\\raenu\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],
   "logs": []
 }
