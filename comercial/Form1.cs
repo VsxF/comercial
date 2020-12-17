@@ -25,16 +25,21 @@ namespace comercial
 
         public Form1()
         {
-            api api = new api();
+            controller = new Controller();
+
+            api api = new api(controller);
             api.appio().GetAwaiter().GetResult();
+            controller.setApio(api);
+            api.getProducts();
+           
             InitializeComponent();
 
             panelcol = Color.FromArgb(46, 134, 193);
             panel = new Rectangle();
-            controller = new Controller();
+
 
             //ventas = new Ventas(this.Width, this.Height);
-            
+
             //foreach( Control ctrl in this.Controls)
             //{
             //    if (tabPage1.Contains(ctrl))
@@ -46,7 +51,7 @@ namespace comercial
             //ventas.Parent = tabPage1;
 
 
-            
+
 
             Design();
             RelativePositions();
@@ -54,23 +59,23 @@ namespace comercial
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
             txt_id.TabIndex = 1;
             txt_id.TabStop = true;
-            FullProductsData();
             Design();
+            Thread t = new Thread(new ThreadStart(Wait_FullProductsData));
+            t.Start();
         }
 
         private void txt_id_TextChanged(object sender, EventArgs e)
         {
-                tbl_product_ventas.Rows.Clear();
-                int aux = 0;
-                foreach (string[] item in controller.getSearch(txt_id.Text))
-                {
-                    tbl_product_ventas.Rows.Add(item);
-                    aux++;
-                }
-                tbl_product_ventas.RowCount = controller.RowCheck(aux);
+            tbl_product_ventas.Rows.Clear();
+            int aux = 0;
+            foreach (string[] item in controller.getSearch(txt_id.Text))
+            {
+                tbl_product_ventas.Rows.Add(item);
+                aux++;
+            }
+            tbl_product_ventas.RowCount = controller.RowCheck(aux);
             setSelectedProduct();
         }
 
@@ -79,7 +84,7 @@ namespace comercial
             if (e.KeyChar == (char)8 && txt_id.TextLength == 1)
             {
                 FullProductsData();
-            } 
+            }
             else if (e.KeyChar == (char)13)
             {
                 txt_cantidad.Select();
@@ -112,7 +117,7 @@ namespace comercial
         }
 
         //Muestra toda la informacion de la tabla productos
-        private void FullProductsData()
+        public void FullProductsData()
         {
             IList<string[]> aux = controller.getRows();
 
@@ -125,6 +130,27 @@ namespace comercial
             }
             tbl_product_ventas.RowCount = controller.RowCheck(aux.Count);
             setSelectedProduct();
+            int a = 0;
+
+        }
+
+        //Espera que la api tenga la informacion, para mostrarla
+        public void Wait_FullProductsData()
+        {
+            Thread.Sleep(1000);
+
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                if (controller.state)
+                {
+                    controller.state = false;
+                    FullProductsData();
+                }
+                else
+                {
+                    Wait_FullProductsData(); 
+                }
+            });
         }
 
         //Muestra el producto seleccionado
@@ -178,7 +204,7 @@ namespace comercial
             else
             {
                 res += tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Substring(19,
-                    tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Length-19);
+                    tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Length - 19);
             }
 
             return res;
@@ -194,7 +220,7 @@ namespace comercial
 
             if (repit != 0)
             {
-                cant += int.Parse(tbl_ventas_cobro.Rows[repit-1].Cells[4].Value.ToString());
+                cant += int.Parse(tbl_ventas_cobro.Rows[repit - 1].Cells[4].Value.ToString());
                 price = cant * float.Parse(tbl_product_ventas.Rows[0].Cells[5].Value.ToString());
             }
 
@@ -236,7 +262,7 @@ namespace comercial
                 lbl_agregado.Visible = false;
             });
         }
-        
+
         //Hilo para quitar el aviso vendido
         private void successSell()
         {
@@ -257,7 +283,7 @@ namespace comercial
         {
             ResizeVentas();
         }
-        
+
         //posicion y tamnhio responsive
         private void ResizeVentas()
         {
@@ -280,12 +306,12 @@ namespace comercial
             btn_agregar.Location = new Point(getPerc(32, 'x'), raw1);
             txt_cantidad.Location = new Point(getPerc(41, 'x'), raw1);
             lbl_cant_pos.Location = new Point(getPerc(40.5, 'x'), getPerc(4.9, 'y'));
-            if (w  > 1100)
+            if (w > 1100)
             {
                 txt_cantidad.Location = new Point(getPerc(39, 'x'), raw1);
                 lbl_cant_pos.Location = new Point(getPerc(38.5, 'x'), getPerc(5.3, 'y'));
             }
-            lbl_agregado.Location = new Point(getPerc(49, 'x'), raw1-10);
+            lbl_agregado.Location = new Point(getPerc(49, 'x'), raw1 - 10);
             txt_id.Width = txtwith;
 
             lbl_info_pos.Location = new Point(getPerc(80, 'x') - lbl_info_pos.Width / 2, raw1);
@@ -333,19 +359,19 @@ namespace comercial
             lbl_prods_pos.Location = new Point(getPerc(14, 'x'), getPerc(43, 'y'));
             lbl_total_pos.Location = new Point(xtb - getPerc(10, 'x'), ytb + getPerc(1, 'y'));
             lbl_total.Location = new Point(xtb - getPerc(5, 'x'), ytb + getPerc(1, 'y'));
-            btn_end.Location = new Point(xtb - getPerc(12, 'x')-btn_agregar.Width/2, ytb + getPerc(6, 'y'));
+            btn_end.Location = new Point(xtb - getPerc(12, 'x') - btn_agregar.Width / 2, ytb + getPerc(6, 'y'));
             lbl_exito.Location = new Point(xtb - getPerc(7.5, 'x') - btn_agregar.Width - lbl_exito.Width,
-                                           ytb + getPerc(6, 'y') + lbl_exito.Height/2);
+                                           ytb + getPerc(6, 'y') + lbl_exito.Height / 2);
             btn_quit.Location = new Point(getPerc(4.3, 'x') + getPerc(7.5, 'x') - btn_quit.Width / 2, ytb + getPerc(6, 'y'));
 
             //Panel
-            if(w > 1250)
+            if (w > 1250)
             {
                 panel.X = lbl_des_pos.Location.X - getPerc(4, 'x');
                 panel.Y = lbl_info_pos.Location.Y - getPerc(2, 'y');
                 panel.Width = getPerc(28.23, 'x');
                 panel.Height = getPerc(35.94, 'y');
-            } 
+            }
             else if (w > 925)
             {
                 panel.X = (y_col2 - y_col1) / 2 + y_col1 - 120;
@@ -360,7 +386,7 @@ namespace comercial
                 panel.Width = 260;
                 panel.Height = getPerc(35.94, 'y');
             }
-}
+        }
 
         //Disenhio
         private void Design()
@@ -390,8 +416,8 @@ namespace comercial
             props(new Label(), 0, Color.Transparent);
             props(new Label(), 1, back);
             props(new Label(), 2, 0);
-            
-            
+
+
             //Tablas
             tbl_product_ventas.CellBorderStyle = DataGridViewCellBorderStyle.None;
             tbl_ventas_cobro.CellBorderStyle = DataGridViewCellBorderStyle.None;
@@ -423,7 +449,7 @@ namespace comercial
             else if (wh.Equals('y'))
             {
                 return Convert.ToInt32(h * percentage * 0.01);
-            } 
+            }
             else
             {
                 return -99;
@@ -435,16 +461,16 @@ namespace comercial
         {
             return x - obj_with;
         }
-        
+
         //Pintar el fondo de los lables, del color de fondo
-        private void props(Control control, int method , object value)
+        private void props(Control control, int method, object value)
         {
             Color back = Color.FromArgb(243, 240, 205);
             foreach (Control ctr in tabPage1.Controls)
             {
                 if (ctr.GetType() == control.GetType())
                 {
-                    switch ( method )
+                    switch (method)
                     {
                         case 0: //Color de fondo lbls
                             ctr.BackColor = (Color)value;
@@ -455,7 +481,7 @@ namespace comercial
                         case 2: //Estilo de letra default0
                             ctr.Font = new System.Drawing.Font(ctr.Font, FontStyle.Bold);
                             break;
-                           
+
                     }
                 }
             }
@@ -463,7 +489,7 @@ namespace comercial
 
         private void btn_quit_Click(object sender, EventArgs e)
         {
-            
+            //controller.write();
         }
 
         //Dibuja panel a los lbl
@@ -487,7 +513,7 @@ namespace comercial
             path.AddArc(x1, y2 - 10, 10, 10, 90, 90); //teta 4
             path.AddLine(x1, y1 + 5, x1, y2 - 5);// Vertical 1
 
-            
+
 
             //LinearGradientBrush lnBush = new LinearGradientBrush( new Point(x1, y1), new Point(x1,y2), Color.Blue, Color.Green);
 
@@ -499,7 +525,7 @@ namespace comercial
         }
 
 
-        
+
 
         private void tabPage1_Paint(object sender, PaintEventArgs e)
         {
@@ -527,7 +553,7 @@ namespace comercial
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnagregar_Click(object sender, EventArgs e)
@@ -559,7 +585,7 @@ namespace comercial
 
         private void txtcodigo_KeyPress(object sender, KeyPressEventArgs e)
         {
-           
+
         }
 
         private void txtcodigo_KeyDown(object sender, KeyEventArgs e)
@@ -572,7 +598,7 @@ namespace comercial
             {
                 txtproducto.Focus();
             }
-           
+
         }
 
         private void txtproducto_TextChanged(object sender, EventArgs e)

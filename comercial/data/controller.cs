@@ -16,21 +16,41 @@ namespace comercial
 {
     public class Controller
     {
+
+        IList<Product> products; //vector donde estaran todos los productos
+        IList<Product> cobros; // vector donde se guardaran parcialmente los productos de la venta
+        public bool state;
+        api apio;
         
-        IList<Product> products = new List<Product>(); //vector donde estaran todos los productos
-        IList<Product> cobros = new List<Product>(); // vector donde se guardaran parcialmente los productos de la venta
+        public Controller()
+        {
+            products = new List<Product>(); 
+            cobros = new List<Product>();
+            state = false;
+        }
+        
+        //Trae la clase apio (clase en ejecucion)
+        public void setApio(api apio)
+        {
+            this.apio = apio;
+        }
 
         //Leer archivo y vectorizar datos
-        public Controller()
+        //Sincronizar con api
+        public void setData(IList<JToken> apiProds)
         {
             string jj = File.ReadAllText("../../../data/data.json");
             IList<JToken> pdts = JObject.Parse(jj)["products"].Children().ToList();
+
+            pdts = pdts != apiProds ?  apiProds : pdts;
+            
             Product productss;
             foreach (JToken product in pdts)
             {
                 productss = product.ToObject<Product>();
                 products.Add(productss);
             }
+            state = true;
         }
 
         //Obtener una lista de todos los productos
@@ -138,11 +158,13 @@ namespace comercial
         }
 
         //Escribe en el archivo json el contenido del vector "products"
-        private bool write()
+        public bool write()
         {
+            products.Add(new Product("2", "name2", "desc2", "brand2", 2, 2));
             string json = JsonConvert.SerializeObject(products, Formatting.Indented);
             json = "{ \"products\":" + json + "}";
             File.WriteAllText("../../../data/data.json", json);
+            apio.setProducts(products);
             return true;
         }
 

@@ -22,5 +22,21 @@
     "brand": "marca1",
     "quant": 5,
     "price": 3.0
+  },
+  {
+    "id": "1",
+    "name": "name",
+    "desc": "desc",
+    "brand": "brand",
+    "quant": 5,
+    "price": 3.0
+  },
+  {
+    "id": "2",
+    "name": "name2",
+    "desc": "desc2",
+    "brand": "brand2",
+    "quant": 2,
+    "price": 2.0
   }
 ]}

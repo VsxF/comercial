@@ -18,16 +18,19 @@ namespace comercial
         static HttpClient apio = new HttpClient();
         private static string collectionid;
         private static int mistakes;
+        Controller controller;
 
         //Se contaran los errores, porque la api solo permite 10000 requests
-        public api ()
+        //public api (Controller controller)
+            public api(Controller controller)
         {
+            this.controller = controller;
             mistakes = 0;
             collectionid = @"/b/5fdb1ab72fd0b8081255a19c";
         }
 
         //Api headers settings
-        public static async Task appio()
+        public async Task appio()
         {
             apio.BaseAddress = new Uri(@"https://api.jsonbin.io");
             apio.DefaultRequestHeaders.Accept.Clear();
@@ -36,38 +39,42 @@ namespace comercial
         }
 
         //Obtener toda la informacion de la api
-        public static async Task<IList<JToken>> getProducts()
+        public async Task<IList<JToken>> getProducts()
         {
             IList<JToken> products = null;
+            HttpResponseMessage res = await apio.GetAsync(collectionid + @"/latest");
 
-            HttpResponseMessage res = await apio.GetAsync(collectionid);
             if (res.IsSuccessStatusCode)
             {
                string result = res.Content.ReadAsStringAsync().Result;
                products = JObject.Parse(result)["products"].Children().ToList();
+               controller.setData(products);
             }
             else
             {
                 MessageBox.Show("Error #301\nContacte con el programador mas cercano", "API Mistake", MessageBoxButtons.OK);
             }
+
             return products;
         }
 
         //Actualizar toda la informacion de la api
-        public static async Task<HttpStatusCode> setProducts(IList<Product> productss)
+        public async Task<HttpStatusCode> setProducts(IList<Product> productss)
         {
             string json = JsonConvert.SerializeObject(productss, Formatting.Indented);
             json = "{ \"products\":" + json + "}";
 
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
+            //var result = await client.PostAsync(url, content);
+            //lo mismo pero con await
             HttpResponseMessage res = await apio.PutAsync(collectionid, content);
             return HttpStatusCode.OK;
         }
 
         //Comprueba, si hay mas de 10 errores en una sesion
         //Si hay, comprueba si es error de la api, o humano
-        async static private void mistakesTest()
+        async private void mistakesTest()
         {
             if (mistakes > 5)
             {
