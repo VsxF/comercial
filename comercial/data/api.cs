@@ -59,11 +59,6 @@ namespace comercial
             string json = JsonConvert.SerializeObject(productss, Formatting.Indented);
             json = "{ \"products\":" + json + "}";
 
-            //IList<IList<Product>> aux;
-            //IList<object> products = new IList<object>();
-            //products.Add(productss);
-            //aux.Add(products);
-
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             HttpResponseMessage res = await apio.PutAsync(collectionid, content);
