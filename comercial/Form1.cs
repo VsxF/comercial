@@ -302,7 +302,6 @@ namespace comercial
             int txtwith = getPerc(22.5, 'x');
             int raw1 = getPerc(7.5, 'y');
             txt_id.Location = new Point(getPerc(9, 'x'), raw1);
-            btn_border_id.Location = new Point(getPerc(9, 'x'), raw1);
             btn_agregar.Location = new Point(getPerc(32, 'x'), raw1);
             txt_cantidad.Location = new Point(getPerc(41, 'x'), raw1);
             lbl_cant_pos.Location = new Point(getPerc(40.5, 'x'), getPerc(4.9, 'y'));
@@ -334,20 +333,26 @@ namespace comercial
             lbl_precio.Location = new Point(y_col2, getPerc(33.2, 'y'));
 
 
-            //tabla1 - Productos/Ventas
+            //TabControl - tabla1 - MAYOR Y MENOR - Productos/Ventas
             int tbwith = getPerc(57.87, 'x');
-            tbl_product_ventas.Bounds = new Rectangle(getPerc(5.3, 'x'), getPerc(14.06, 'y'), tbwith, getPerc(21.7, 'y'));
-            tbl_product_ventas.Columns[0].Width = (int)(tbwith * 0.2041);
-            tbl_product_ventas.Columns[1].Width = (int)(tbwith * 0.2449);
+            tabControl2.Bounds = new Rectangle(getPerc(5, 'x'), getPerc(14.06, 'y'), tbwith, getPerc(25.5, 'y'));
+            tbl_product_ventas.Bounds = new Rectangle(-1, -1, tbwith, getPerc(21.7, 'y'));
+            tbl_product_ventas_m.Bounds = new Rectangle(-1, -1, tbwith, getPerc(21.7, 'y'));
+            //tbl_product_ventas.Columns[0].Width = (int)(tbwith * 0.2041);
+            tbl_product_ventas.Columns[1].Width = (int)(tbwith * 0.449);
             tbl_product_ventas.Columns[3].Width = (int)(tbwith * 0.2449);
             tbl_product_ventas.Columns[4].Width = (int)(tbwith * 0.1429);
             tbl_product_ventas.Columns[5].Width = (int)(tbwith * 0.1632);
+            tbl_product_ventas_m.Columns[1].Width = (int)(tbwith * 0.449);
+            tbl_product_ventas_m.Columns[3].Width = (int)(tbwith * 0.2449);
+            tbl_product_ventas_m.Columns[4].Width = (int)(tbwith * 0.1429);
+            tbl_product_ventas_m.Columns[5].Width = (int)(tbwith * 0.1632);
 
             //tabla2 - Cobros -- y objetos
             int tb2with = w - getPerc(12, 'x');
             tbl_ventas_cobro.Bounds = new Rectangle(getPerc(4.3, 'x'), getPerc(48, 'y'), tb2with, getPerc(21.7, 'y'));
-            tbl_ventas_cobro.Columns[0].Width = (int)(tb2with * 0.1056);
-            tbl_ventas_cobro.Columns[1].Width = (int)(tb2with * 0.2113);
+            //tbl_ventas_cobro.Columns[0].Width = (int)(tb2with * 0.1056);
+            tbl_ventas_cobro.Columns[1].Width = (int)(tb2with * 0.3169);
             tbl_ventas_cobro.Columns[2].Width = (int)(tb2with * 0.3451);
             tbl_ventas_cobro.Columns[3].Width = (int)(tb2with * 0.1411);
             tbl_ventas_cobro.Columns[4].Width = (int)(tb2with * 0.0986);
@@ -417,26 +422,19 @@ namespace comercial
             props(new Label(), 1, back);
             props(new Label(), 2, 0);
 
+            //Pintar labels especificos
+            lbl_agregado.ForeColor = Color.FromArgb(35, 155, 86);
+            lbl_cant_pos.ForeColor = Color.Black;
+            lbl_prods_pos.ForeColor = Color.Black;
+            lbl_total.ForeColor = Color.Black;
+            lbl_total_pos.ForeColor = Color.Black;
+            lbl_exito.ForeColor = Color.Black;
+
 
             //Tablas
             tbl_product_ventas.CellBorderStyle = DataGridViewCellBorderStyle.None;
             tbl_ventas_cobro.CellBorderStyle = DataGridViewCellBorderStyle.None;
             tb_ventas_desc.Visible = false;
-
-            //Extra styles
-
-            Button bid = btn_border_id;
-
-            if (txt_id.Focused)
-            {
-                bid.SetBounds(bid.Location.X - 2, bid.Location.Y - 2, bid.Width + 4, bid.Height + 4);
-
-                //txt_id.BorderStyle = BorderStyle.None;
-            }
-            else
-            {
-                txt_id.BorderStyle = BorderStyle.FixedSingle;
-            }
         }
 
         //Obtener porcentajes para Respoinsive
@@ -513,19 +511,11 @@ namespace comercial
             path.AddArc(x1, y2 - 10, 10, 10, 90, 90); //teta 4
             path.AddLine(x1, y1 + 5, x1, y2 - 5);// Vertical 1
 
-
-
-            //LinearGradientBrush lnBush = new LinearGradientBrush( new Point(x1, y1), new Point(x1,y2), Color.Blue, Color.Green);
-
             //Se dibuja como un grafo que empieza en el angulo izq sup, haci la derecha
 
-            //g.FillPath(new SolidBrush(panelcol), path);
             g.FillPath(inn, path);
             g.DrawPath(pen, path);
         }
-
-
-
 
         private void tabPage1_Paint(object sender, PaintEventArgs e)
         {
