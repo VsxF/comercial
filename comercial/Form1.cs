@@ -19,7 +19,6 @@ namespace comercial
         Controller controller; //Instancia la clase controller
         Rectangle panel; // Panel fondo lbls
         Color panelcol; //Color del panel
-        Panel ventas;
         int w; //with form
         int h; //height form
 
@@ -430,6 +429,19 @@ namespace comercial
             lbl_total_pos.ForeColor = Color.Black;
             lbl_exito.ForeColor = Color.Black;
 
+            //Bton colors
+            btn_quit.BackColor = Color.FromArgb(49, 168, 174);
+            btn_agregar.BackColor = Color.FromArgb(49, 168, 174);
+            btn_end.BackColor = Color.FromArgb(49, 168, 174);
+            btn_quit.FlatStyle = FlatStyle.Flat;
+            btn_agregar.FlatStyle = FlatStyle.Flat;
+            btn_end.FlatStyle = FlatStyle.Flat;
+            btn_quit.FlatAppearance.BorderColor = panelcol;
+            btn_agregar.FlatAppearance.BorderColor = panelcol;
+            btn_end.FlatAppearance.BorderColor = panelcol;
+            btn_quit.FlatAppearance.BorderSize = 2;
+            btn_agregar.FlatAppearance.BorderSize = 0;
+            btn_end.FlatAppearance.BorderSize = 2;
 
             //Tablas
             tbl_product_ventas.CellBorderStyle = DataGridViewCellBorderStyle.None;
