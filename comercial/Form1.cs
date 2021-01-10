@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
-using System.Linq.Expressions;
 using System.Drawing.Drawing2D;
+
 
 namespace comercial
 {
@@ -21,6 +17,8 @@ namespace comercial
         Color panelcol; //Color del panel
         int w; //with form
         int h; //height form
+        int trys; //Api requests
+
 
         public Form1()
         {
@@ -30,11 +28,12 @@ namespace comercial
             api.appio().GetAwaiter().GetResult();
             controller.setApio(api);
             api.getProducts();
-           
+
             InitializeComponent();
 
             panelcol = Color.FromArgb(46, 134, 193);
             panel = new Rectangle();
+            trys = 0;
 
 
             //ventas = new Ventas(this.Width, this.Height);
@@ -61,6 +60,8 @@ namespace comercial
             txt_id.TabIndex = 1;
             txt_id.TabStop = true;
             Design();
+            controller.setData(null);
+            FullProductsData();
             Thread t = new Thread(new ThreadStart(Wait_FullProductsData));
             t.Start();
         }
@@ -118,7 +119,7 @@ namespace comercial
         //Muestra toda la informacion de la tabla productos
         public void FullProductsData()
         {
-            IList<string[]> aux = controller.getRows();
+            IList<string[]> aux = controller.getRows(chk_mayor.Checked);
 
             tbl_product_ventas.Rows.Clear();
 
@@ -136,18 +137,31 @@ namespace comercial
         //Espera que la api tenga la informacion, para mostrarla
         public void Wait_FullProductsData()
         {
+            Console.WriteLine("x.x");
             Thread.Sleep(1000);
-
+            trys++;
             this.Invoke((MethodInvoker)delegate ()
             {
                 if (controller.state)
                 {
                     controller.state = false;
+                    lbl_sync.Text = "Sync On";
+                    lbl_sync.ForeColor = Color.Green;
                     FullProductsData();
-                }
+                    }
                 else
                 {
-                    Wait_FullProductsData(); 
+                    if (trys > 10)
+                    {
+                        Wait_FullProductsData();
+                        
+                    }
+                    else
+                    {
+                        lbl_sync.Text = "Sync Off";
+                        lbl_sync.ForeColor = Color.Purple;
+                    }
+
                 }
             });
         }
@@ -220,7 +234,16 @@ namespace comercial
             if (repit != 0)
             {
                 cant += int.Parse(tbl_ventas_cobro.Rows[repit - 1].Cells[4].Value.ToString());
-                price = cant * float.Parse(tbl_product_ventas.Rows[0].Cells[5].Value.ToString());
+                if (chk_mayor.Checked)
+                {
+                    var v = xt
+                    var result = XtraInputBox.Show("Enter a new value", "Change Settings", "Default");
+                } 
+                else
+                {
+                    price = cant * float.Parse(tbl_product_ventas.Rows[0].Cells[5].Value.ToString());
+                }
+                
             }
 
             string[] product = { lbl_codigo.Text, lbl_producto.Text, lbl_desc.Text, lbl_brand.Text,
@@ -309,7 +332,8 @@ namespace comercial
                 txt_cantidad.Location = new Point(getPerc(39, 'x'), raw1);
                 lbl_cant_pos.Location = new Point(getPerc(38.5, 'x'), getPerc(5.3, 'y'));
             }
-            lbl_agregado.Location = new Point(getPerc(49, 'x'), raw1 - 10);
+            chk_mayor.Location = new Point(getPerc(45.5, 'x'), raw1 + 3);
+            lbl_agregado.Location = new Point(getPerc(52, 'x'), raw1 - 10);
             txt_id.Width = txtwith;
 
             lbl_info_pos.Location = new Point(getPerc(80, 'x') - lbl_info_pos.Width / 2, raw1);
@@ -334,18 +358,13 @@ namespace comercial
 
             //TabControl - tabla1 - MAYOR Y MENOR - Productos/Ventas
             int tbwith = getPerc(57.87, 'x');
-            tabControl2.Bounds = new Rectangle(getPerc(5, 'x'), getPerc(14.06, 'y'), tbwith, getPerc(25.5, 'y'));
-            tbl_product_ventas.Bounds = new Rectangle(-1, -1, tbwith, getPerc(21.7, 'y'));
-            tbl_product_ventas_m.Bounds = new Rectangle(-1, -1, tbwith, getPerc(21.7, 'y'));
+            tbl_product_ventas.Bounds = new Rectangle(getPerc(5, 'x'), getPerc(14.06, 'y'), tbwith, getPerc(25.5, 'y'));
+            //tbl_product_ventas.Bounds = new Rectangle(-1, -1, tbwith, getPerc(21.7, 'y'));
             //tbl_product_ventas.Columns[0].Width = (int)(tbwith * 0.2041);
             tbl_product_ventas.Columns[1].Width = (int)(tbwith * 0.449);
             tbl_product_ventas.Columns[3].Width = (int)(tbwith * 0.2449);
             tbl_product_ventas.Columns[4].Width = (int)(tbwith * 0.1429);
             tbl_product_ventas.Columns[5].Width = (int)(tbwith * 0.1632);
-            tbl_product_ventas_m.Columns[1].Width = (int)(tbwith * 0.449);
-            tbl_product_ventas_m.Columns[3].Width = (int)(tbwith * 0.2449);
-            tbl_product_ventas_m.Columns[4].Width = (int)(tbwith * 0.1429);
-            tbl_product_ventas_m.Columns[5].Width = (int)(tbwith * 0.1632);
 
             //tabla2 - Cobros -- y objetos
             int tb2with = w - getPerc(12, 'x');
@@ -428,6 +447,7 @@ namespace comercial
             lbl_total.ForeColor = Color.Black;
             lbl_total_pos.ForeColor = Color.Black;
             lbl_exito.ForeColor = Color.Black;
+            lbl_sync.ForeColor = Color.Red;
 
             //Bton colors
             btn_quit.BackColor = Color.FromArgb(49, 168, 174);
@@ -691,6 +711,11 @@ namespace comercial
         private void btneliminar_Click(object sender, EventArgs e)
         {
             tbl1.Rows.Remove(tbl1.CurrentRow);
+        }
+
+        private void chk_mayor_CheckedChanged(object sender, EventArgs e)
+        {
+            FullProductsData();
         }
     }
 }

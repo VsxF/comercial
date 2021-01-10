@@ -42,15 +42,21 @@ namespace comercial
             string jj = File.ReadAllText("../../../data/data.json");
             IList<JToken> pdts = JObject.Parse(jj)["products"].Children().ToList();
 
-            pdts = pdts != apiProds ?  apiProds : pdts;
+            
+            if ( apiProds != null && pdts != apiProds)
+            {
+                pdts = apiProds;
+            }
             
             Product productss;
+            products.Clear();
             foreach (JToken product in pdts)
             {
                 productss = product.ToObject<Product>();
                 products.Add(productss);
             }
-            state = true;
+
+            state = apiProds != null ? true : false;
         }
 
         //Obtener una lista de todos los productos
@@ -89,9 +95,9 @@ namespace comercial
         }
 
         //Agrega un producto
-        public bool setProduct(string id, string name, string desc, string brand, int quant, float price)
+        public bool setProduct(string id, string name, string desc, string brand, int quant, float price, int caja)
         {
-            Product nw = new Product(id, name, desc, brand, quant, price);
+            Product nw = new Product(id, name, desc, brand, quant, price, caja);
             foreach (Product product in products)
             {
                 if (product.id == id)
@@ -160,7 +166,7 @@ namespace comercial
         //Escribe en el archivo json el contenido del vector "products"
         public bool write()
         {
-            products.Add(new Product("2", "name2", "desc2", "brand2", 2, 2));
+            //products.Add(new Product("2", "name2", "desc2", "brand2", 2, 2));
             string json = JsonConvert.SerializeObject(products, Formatting.Indented);
             json = "{ \"products\":" + json + "}";
             File.WriteAllText("../../../data/data.json", json);
@@ -174,7 +180,7 @@ namespace comercial
             int ex = exist(id);
             if (ex == 0 )
             {
-                cobros.Add(new Product(id, name, desc, brand, int.Parse(quant), float.Parse(price)));
+                cobros.Add(new Product(id, name, desc, brand, int.Parse(quant), float.Parse(price), 0));
             }
             else
             {
@@ -237,14 +243,27 @@ namespace comercial
         }
          
         //Devuelve un vector con todos los productos, cada uno en un vector string
-        public IList<string[]> getRows()
+        public IList<string[]> getRows(bool cajas)
         {
             IList<string[]> rows = new List<string[]>();
 
-            foreach (Product item in products)
+            if (cajas)
             {
-                rows.Add(new string[] { item.id, item.name, item.desc, item.brand, item.quant.ToString(), item.price.ToString() });
+                foreach (Product item in products)
+                {
+                    int q = item.quant / item.caja;
+                    float p = item.price * item.caja;
+                    rows.Add(new string[] { item.id, item.name, item.desc, item.brand, q.ToString(), p.ToString() });
+                }
+            } 
+            else
+            {
+                foreach (Product item in products)
+                {
+                    rows.Add(new string[] { item.id, item.name, item.desc, item.brand, item.quant.ToString(), item.price.ToString() });
+                }
             }
+            
             return rows;
         }
 
@@ -266,7 +285,8 @@ namespace comercial
     //Cosas que llevara producto
     public class Product
     {
-        public Product(string id, string name, string desc, string brand, int quant, float price)
+        //Se agrego caja, como la cantidad de items por caja. Para vender por mayor
+        public Product(string id, string name, string desc, string brand, int quant, float price, int caja)
         {
             this.id = id;
             this.name = name;
@@ -274,6 +294,7 @@ namespace comercial
             this.brand = brand;
             this.quant = quant;
             this.price = price;
+            this.caja = caja;
         }
 
 
@@ -283,6 +304,7 @@ namespace comercial
         public string brand { get; set; }
         public int quant { get; set; }
         public float price { get; set; }
+        public int caja { get; set; }
     }
 
 }

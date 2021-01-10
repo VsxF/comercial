@@ -4568,25 +4568,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\oleyda\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\raenu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\oleyda\\Desktop\\Comercial 1.1\\comercial\\comercial\\comercial.csproj",
+      "projectUniqueName": "C:\\Users\\raenu\\Documents\\Proyectos\\last comercial\\comercial\\comercial\\comercial.csproj",
       "projectName": "comercial",
-      "projectPath": "C:\\Users\\oleyda\\Desktop\\Comercial 1.1\\comercial\\comercial\\comercial.csproj",
-      "packagesPath": "C:\\Users\\oleyda\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\oleyda\\Desktop\\Comercial 1.1\\comercial\\comercial\\obj\\",
+      "projectPath": "C:\\Users\\raenu\\Documents\\Proyectos\\last comercial\\comercial\\comercial\\comercial.csproj",
+      "packagesPath": "C:\\Users\\raenu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\raenu\\Documents\\Proyectos\\last comercial\\comercial\\comercial\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\oleyda\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\raenu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -4597,6 +4592,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -4608,6 +4604,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Microsoft.AspNet.WebApi.Client": {
             "target": "Package",
@@ -4636,7 +4633,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
