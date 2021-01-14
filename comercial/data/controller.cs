@@ -87,7 +87,7 @@ namespace comercial
             {
                 if (item.name.ToLower().Contains(id.ToLower()))
                 {
-                    pds.Add(new string[] { item.id, item.name, item.desc, item.brand, item.quant.ToString(), item.price.ToString() });
+                    pds.Add(new string[] { item.id, item.name, item.desc, item.brand, item.quant.ToString(), item.price.ToString(), item.caja.ToString() });
                 }
 
             }
@@ -184,8 +184,8 @@ namespace comercial
             }
             else
             {
-                cobros[ex].quant = int.Parse(quant);
-                cobros[ex].price = float.Parse(price);
+                cobros[ex - 1 ].quant = int.Parse(quant);
+                cobros[ex - 1 ].price = float.Parse(price);
             }
             
         }
@@ -253,14 +253,14 @@ namespace comercial
                 {
                     int q = item.quant / item.caja;
                     float p = item.price * item.caja;
-                    rows.Add(new string[] { item.id, item.name, item.desc, item.brand, q.ToString(), p.ToString() });
+                    rows.Add(new string[] { item.id, item.name, item.desc, item.brand, q.ToString(), p.ToString(), item.caja.ToString() });
                 }
             } 
             else
             {
                 foreach (Product item in products)
                 {
-                    rows.Add(new string[] { item.id, item.name, item.desc, item.brand, item.quant.ToString(), item.price.ToString() });
+                    rows.Add(new string[] { item.id, item.name, item.desc, item.brand, item.quant.ToString(), item.price.ToString(), item.caja.ToString() });
                 }
             }
             

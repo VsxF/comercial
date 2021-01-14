@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Drawing.Drawing2D;
 
-
 namespace comercial
 {
 
@@ -18,7 +17,7 @@ namespace comercial
         int w; //with form
         int h; //height form
         int trys; //Api requests
-
+        int cajas; //Cantidad por caja del producto actual
 
         public Form1()
         {
@@ -34,6 +33,7 @@ namespace comercial
             panelcol = Color.FromArgb(46, 134, 193);
             panel = new Rectangle();
             trys = 0;
+            cajas = 0;
 
 
             //ventas = new Ventas(this.Width, this.Height);
@@ -57,9 +57,6 @@ namespace comercial
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            txt_id.TabIndex = 1;
-            txt_id.TabStop = true;
-            Design();
             controller.setData(null);
             FullProductsData();
             Thread t = new Thread(new ThreadStart(Wait_FullProductsData));
@@ -127,11 +124,10 @@ namespace comercial
             {
                 string[] item = aux.ElementAt(i);
                 tbl_product_ventas.Rows.Add(item);
+                object a = tbl_product_ventas.Rows[0];
             }
             tbl_product_ventas.RowCount = controller.RowCheck(aux.Count);
             setSelectedProduct();
-            int a = 0;
-
         }
 
         //Espera que la api tenga la informacion, para mostrarla
@@ -148,13 +144,13 @@ namespace comercial
                     lbl_sync.Text = "Sync On";
                     lbl_sync.ForeColor = Color.Green;
                     FullProductsData();
-                    }
+                }
                 else
                 {
                     if (trys > 10)
                     {
                         Wait_FullProductsData();
-                        
+
                     }
                     else
                     {
@@ -169,7 +165,7 @@ namespace comercial
         //Muestra el producto seleccionado
         private void setSelectedProduct()
         {
-            if (tbl_product_ventas.Rows[0].Cells[0].Value != null && txt_id.Text.Length != 0)
+            if (tbl_product_ventas.Rows[0].Cells[0].Value != null)
             {
                 try
                 {
@@ -179,6 +175,7 @@ namespace comercial
                     lbl_brand.Text = cutString(3);
                     lbl_cantidad.Text = txt_cantidad.Text;
                     lbl_precio.Text = cutString(5);
+                    cajas = int.Parse(cutString(6));
                 }
                 catch (System.NullReferenceException e)
                 {
@@ -199,7 +196,7 @@ namespace comercial
         private string cutString(int cell)
         {
             string res = "";
-            int a = tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Length;
+            
             if (tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Length > 20)
             {
                 res = tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Substring(0, 19)
@@ -231,36 +228,43 @@ namespace comercial
 
             int repit = controller.exist(lbl_codigo.Text);
 
-            if (repit != 0)
+            if (repit == 0)
             {
-                cant += int.Parse(tbl_ventas_cobro.Rows[repit - 1].Cells[4].Value.ToString());
                 if (chk_mayor.Checked)
                 {
-                    var v = xt
-                    var result = XtraInputBox.Show("Enter a new value", "Change Settings", "Default");
-                } 
-                else
+                    string input = price.ToString();
+                    ShowInputDialog(ref input);
+                    price = float.Parse(input);
+                    cant = cajas * cant;
+                }
+            }
+            else
+            {
+                if (chk_mayor.Checked)
                 {
-                    price = cant * float.Parse(tbl_product_ventas.Rows[0].Cells[5].Value.ToString());
+                    string input = price.ToString();
+                    ShowInputDialog(ref input);
+                    price = float.Parse(input) * int.Parse(lbl_cantidad.Text);
+                    cant = cajas * cant;
                 }
                 
+                cant += int.Parse(tbl_ventas_cobro.Rows[repit - 1].Cells[4].Value.ToString());
+                price += float.Parse(tbl_ventas_cobro.Rows[repit - 1].Cells[5].Value.ToString());
+                
+                tbl_ventas_cobro.Rows[repit - 1].Cells[4].Value = cant;
+                tbl_ventas_cobro.Rows[repit - 1].Cells[5].Value = price;
             }
 
             string[] product = { lbl_codigo.Text, lbl_producto.Text, lbl_desc.Text, lbl_brand.Text,
                                   cant.ToString(), price.ToString() };
 
-            if (repit == 0)
-            {
-                controller.setCobros(lbl_codigo.Text, lbl_producto.Text, lbl_desc.Text, lbl_brand.Text,
+            controller.setCobros(lbl_codigo.Text, lbl_producto.Text, lbl_desc.Text, lbl_brand.Text,
                                         cant.ToString(), price.ToString());
+            if( repit == 0 )
+            {
                 tbl_ventas_cobro.Rows.Add(product);
             }
-            else
-            {
-                tbl_ventas_cobro.Rows[repit - 1].Cells[4].Value = cant;
-                tbl_ventas_cobro.Rows[repit - 1].Cells[5].Value = price;
-            }
-
+            
             txt_id.Clear();
             txt_id.Focus();
             txt_cantidad.Text = "1";
@@ -272,6 +276,51 @@ namespace comercial
             Thread t = new Thread(new ThreadStart(successAdd));
             t.Start();
 
+        }
+
+        //Input precio por mayor
+        private static DialogResult ShowInputDialog(ref string input)
+        {
+            System.Drawing.Size size = new System.Drawing.Size(400, 70);
+            Form inputBox = new Form();
+
+            inputBox.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            inputBox.ClientSize = size;
+            inputBox.Text = "Precio de la caja por MAYOR";
+
+            NumericUpDown np = new NumericUpDown();
+            np.Size = new System.Drawing.Size(size.Width - 10, 23);
+            np.Minimum = 0;
+            np.Maximum = 1000000;
+            np.Location = new System.Drawing.Point(5, 5);
+            np.Controls[0].Visible = false;
+            np.Text = input;
+            np.Select(0, np.Value.ToString().Length);
+            inputBox.Controls.Add(np);
+
+            Button okButton = new Button();
+            okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            okButton.Name = "okButton";
+            okButton.Size = new System.Drawing.Size(75, 23);
+            okButton.Text = "&OK";
+            okButton.Location = new System.Drawing.Point(size.Width - 80 - 80, 39);
+            inputBox.Controls.Add(okButton);
+
+            Button cancelButton = new Button();
+            cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new System.Drawing.Size(75, 23);
+            cancelButton.Text = "&Cancel";
+            cancelButton.Location = new System.Drawing.Point(size.Width - 80, 39);
+            inputBox.Controls.Add(cancelButton);
+
+            inputBox.AcceptButton = okButton;
+            inputBox.CancelButton = cancelButton;
+            inputBox.StartPosition = FormStartPosition.CenterParent;
+
+            DialogResult result = inputBox.ShowDialog();
+            input = np.Text;
+            return result;
         }
 
         //Hilo para quitar el aviso agregado
@@ -519,6 +568,7 @@ namespace comercial
 
         private void btn_quit_Click(object sender, EventArgs e)
         {
+            MessageBox.Show(tbl_product_ventas.Rows[0].Cells[6].Value.ToString());
             //controller.write();
         }
 
