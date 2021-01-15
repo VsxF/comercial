@@ -227,19 +227,38 @@ namespace comercial
             return total;
         }
 
-        //Borra los productos que fueron vendidos: vectores: -> (products - cobros)
+        //Setea la cantidad nueva y la devuelve
+        public int changeQuant(string id, int quant)
+        {
+            foreach(Product product in products)
+            {
+                if (product.id.Equals(id))
+                {
+                    return product.quant -= quant;
+                }
+            }
+            return 0;
+        }
+
+        //Borra los productos que fueron vendidos
         public void endBuy()
         {
-            foreach(Product sold in cobros)
+            cobros.Clear();
+        }
+
+        //Cancela la compra
+        public void cancelBuy()
+        {
+            foreach (Product sold in cobros)
             {
-                foreach(Product exist in products)
+                foreach (Product exist in products)
                 {
                     if (sold.id == exist.id)
                     {
-                        exist.quant = exist.quant - sold.quant;
+                        exist.quant = exist.quant + sold.quant;
                     }
                 }
-            } 
+            }
         }
          
         //Devuelve un vector con todos los productos, cada uno en un vector string

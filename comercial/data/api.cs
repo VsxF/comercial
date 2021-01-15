@@ -22,7 +22,7 @@ namespace comercial
 
         //Se contaran los errores, porque la api solo permite 10000 requests
         //public api (Controller controller)
-            public api(Controller controller)
+        public api(Controller controller)
         {
             this.controller = controller;
             mistakes = 0;
@@ -46,9 +46,9 @@ namespace comercial
 
             if (res.IsSuccessStatusCode)
             {
-               string result = res.Content.ReadAsStringAsync().Result;
-               products = JObject.Parse(result)["products"].Children().ToList();
-               controller.setData(products);
+                string result = res.Content.ReadAsStringAsync().Result;
+                products = JObject.Parse(result)["products"].Children().ToList();
+                controller.setData(products);
             }
             else
             {
@@ -95,4 +95,5 @@ namespace comercial
     }
 }
 
-    
+
+

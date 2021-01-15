@@ -35,7 +35,6 @@ namespace comercial
             trys = 0;
             cajas = 0;
 
-
             //ventas = new Ventas(this.Width, this.Height);
 
             //foreach( Control ctrl in this.Controls)
@@ -73,7 +72,7 @@ namespace comercial
                 aux++;
             }
             tbl_product_ventas.RowCount = controller.RowCheck(aux);
-            setSelectedProduct();
+            setSelectedProduct(0);
         }
 
         private void txt_id_KeyPress(object sender, KeyPressEventArgs e)
@@ -91,7 +90,7 @@ namespace comercial
 
         private void txt_cantidad_TextChanged(object sender, EventArgs e)
         {
-            setSelectedProduct();
+            setSelectedProduct(0);
         }
 
         private void txt_cantidad_KeyPress(object sender, KeyPressEventArgs e)
@@ -108,6 +107,7 @@ namespace comercial
             FullProductsData();
             tbl_ventas_cobro.Rows.Clear();
             lbl_exito.Visible = true;
+            lbl_total.Text = "";
             Thread t = new Thread(new ThreadStart(successSell));
 
             t.Start();
@@ -127,7 +127,7 @@ namespace comercial
                 object a = tbl_product_ventas.Rows[0];
             }
             tbl_product_ventas.RowCount = controller.RowCheck(aux.Count);
-            setSelectedProduct();
+            setSelectedProduct(0);
         }
 
         //Espera que la api tenga la informacion, para mostrarla
@@ -163,58 +163,43 @@ namespace comercial
         }
 
         //Muestra el producto seleccionado
-        private void setSelectedProduct()
+        private void setSelectedProduct(int row)
         {
             if (tbl_product_ventas.Rows[0].Cells[0].Value != null)
             {
-                try
-                {
-                    lbl_codigo.Text = cutString(0);
-                    lbl_producto.Text = cutString(1);
-                    lbl_desc.Text = cutString(2);
-                    lbl_brand.Text = cutString(3);
-                    lbl_cantidad.Text = txt_cantidad.Text;
-                    lbl_precio.Text = cutString(5);
-                    cajas = int.Parse(cutString(6));
-                }
-                catch (System.NullReferenceException e)
-                {
-                }
-            }
-            else
-            {
-                lbl_codigo.Text = "";
-                lbl_producto.Text = "";
-                lbl_desc.Text = "";
-                lbl_brand.Text = "";
-                lbl_cantidad.Text = "";
-                lbl_precio.Text = "";
+                lbl_codigo.Text = cutString(row, 0);
+                lbl_producto.Text = cutString(row, 1);
+                lbl_desc.Text = cutString(row, 2);
+                lbl_brand.Text = cutString(row, 3);
+                lbl_cantidad.Text = cutString(row, 4);
+                lbl_precio.Text = cutString(row, 5);
+                cajas = int.Parse(cutString(row, 6));
             }
         }
 
         //Si hay mas de 40 caracteres corta el string para la interfaz
-        private string cutString(int cell)
+        private string cutString(int row, int cell)
         {
             string res = "";
-            
-            if (tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Length > 20)
+
+            if (tbl_product_ventas.Rows[row].Cells[cell].Value.ToString().Length > 20)
             {
-                res = tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Substring(0, 19)
+                res = tbl_product_ventas.Rows[row].Cells[cell].Value.ToString().Substring(0, 19)
                     + "\r\n";
             }
 
-            if (tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Length <= 20)
+            if (tbl_product_ventas.Rows[row].Cells[cell].Value.ToString().Length <= 20)
             {
-                res = tbl_product_ventas.Rows[0].Cells[cell].Value.ToString();
+                res = tbl_product_ventas.Rows[row].Cells[cell].Value.ToString();
             }
-            else if (tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Length >= 40)
+            else if (tbl_product_ventas.Rows[row].Cells[cell].Value.ToString().Length >= 40)
             {
-                res += tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Substring(20, 19);
+                res += tbl_product_ventas.Rows[row].Cells[cell].Value.ToString().Substring(20, 19);
             }
             else
             {
-                res += tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Substring(19,
-                    tbl_product_ventas.Rows[0].Cells[cell].Value.ToString().Length - 19);
+                res += tbl_product_ventas.Rows[row].Cells[cell].Value.ToString().Substring(19,
+                    tbl_product_ventas.Rows[row].Cells[cell].Value.ToString().Length - 19);
             }
 
             return res;
@@ -223,11 +208,11 @@ namespace comercial
         //Agrega un producto al cobro
         private void Add()
         {
-            float price = int.Parse(lbl_cantidad.Text) * float.Parse(lbl_precio.Text);
-            int cant = int.Parse(lbl_cantidad.Text);
-
+            float price = int.Parse(txt_cantidad.Text) * float.Parse(lbl_precio.Text);
+            int cant = int.Parse(txt_cantidad.Text);
             int repit = controller.exist(lbl_codigo.Text);
-
+            int row = tbl_product_ventas.SelectedCells[0].RowIndex;
+            
             if (repit == 0)
             {
                 if (chk_mayor.Checked)
@@ -244,38 +229,53 @@ namespace comercial
                 {
                     string input = price.ToString();
                     ShowInputDialog(ref input);
-                    price = float.Parse(input) * int.Parse(lbl_cantidad.Text);
+                    price = float.Parse(input) * int.Parse(txt_cantidad.Text);
                     cant = cajas * cant;
                 }
-                
+
                 cant += int.Parse(tbl_ventas_cobro.Rows[repit - 1].Cells[4].Value.ToString());
                 price += float.Parse(tbl_ventas_cobro.Rows[repit - 1].Cells[5].Value.ToString());
-                
+
                 tbl_ventas_cobro.Rows[repit - 1].Cells[4].Value = cant;
                 tbl_ventas_cobro.Rows[repit - 1].Cells[5].Value = price;
             }
 
-            string[] product = { lbl_codigo.Text, lbl_producto.Text, lbl_desc.Text, lbl_brand.Text,
+            if (exist())
+            {
+                string[] product = { lbl_codigo.Text, lbl_producto.Text, lbl_desc.Text, lbl_brand.Text,
                                   cant.ToString(), price.ToString() };
 
-            controller.setCobros(lbl_codigo.Text, lbl_producto.Text, lbl_desc.Text, lbl_brand.Text,
-                                        cant.ToString(), price.ToString());
-            if( repit == 0 )
-            {
-                tbl_ventas_cobro.Rows.Add(product);
+                controller.setCobros(lbl_codigo.Text, lbl_producto.Text, lbl_desc.Text, lbl_brand.Text,
+                                            cant.ToString(), price.ToString());
+
+                tbl_product_ventas.Rows[row].Cells[4].Value = controller.changeQuant(lbl_codigo.Text, cant);
+
+                if (repit == 0)
+                {
+                    tbl_ventas_cobro.Rows.Add(product);
+                }
+
+                txt_id.Clear();
+                txt_id.Focus();
+                txt_cantidad.Text = "1";
+
+                lbl_agregado.Visible = true;
+
+                lbl_total.Text = controller.getTotal().ToString();
+
+                Thread t = new Thread(new ThreadStart(successAdd));
+                t.Start();
             }
-            
-            txt_id.Clear();
-            txt_id.Focus();
-            txt_cantidad.Text = "1";
+            else
+            {
+                MessageBox.Show("No hay " + lbl_producto.Text + " en existencia.", "No hay existencias", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-            lbl_agregado.Visible = true;
-
-            lbl_total.Text = controller.getTotal().ToString();
-
-            Thread t = new Thread(new ThreadStart(successAdd));
-            t.Start();
-
+        //Verifica si hay en existencia
+        private bool exist()
+        {
+            return int.Parse(lbl_cantidad.Text) - int.Parse(txt_cantidad.Text) > 0 ? true : false;
         }
 
         //Input precio por mayor
@@ -435,6 +435,7 @@ namespace comercial
             lbl_exito.Location = new Point(xtb - getPerc(7.5, 'x') - btn_agregar.Width - lbl_exito.Width,
                                            ytb + getPerc(6, 'y') + lbl_exito.Height / 2);
             btn_quit.Location = new Point(getPerc(4.3, 'x') + getPerc(7.5, 'x') - btn_quit.Width / 2, ytb + getPerc(6, 'y'));
+            btn_cancelar.Location = new Point(getPerc(15, 'x') + btn_quit.Width / 2, ytb + getPerc(6, 'y'));
 
             //Panel
             if (w > 1250)
@@ -460,7 +461,7 @@ namespace comercial
             }
         }
 
-        //Disenhio
+        //Disenhio (colores y estilos... css?)
         private void Design()
         {
 
@@ -502,15 +503,19 @@ namespace comercial
             btn_quit.BackColor = Color.FromArgb(49, 168, 174);
             btn_agregar.BackColor = Color.FromArgb(49, 168, 174);
             btn_end.BackColor = Color.FromArgb(49, 168, 174);
+            btn_cancelar.BackColor = Color.FromArgb(49, 168, 174);
             btn_quit.FlatStyle = FlatStyle.Flat;
             btn_agregar.FlatStyle = FlatStyle.Flat;
             btn_end.FlatStyle = FlatStyle.Flat;
+            btn_cancelar.FlatStyle = FlatStyle.Flat;
             btn_quit.FlatAppearance.BorderColor = panelcol;
             btn_agregar.FlatAppearance.BorderColor = panelcol;
             btn_end.FlatAppearance.BorderColor = panelcol;
+            btn_cancelar.FlatAppearance.BorderColor = panelcol;
             btn_quit.FlatAppearance.BorderSize = 2;
             btn_agregar.FlatAppearance.BorderSize = 0;
             btn_end.FlatAppearance.BorderSize = 2;
+            btn_cancelar.FlatAppearance.BorderSize = 2;
 
             //Tablas
             tbl_product_ventas.CellBorderStyle = DataGridViewCellBorderStyle.None;
@@ -568,8 +573,10 @@ namespace comercial
 
         private void btn_quit_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(tbl_product_ventas.Rows[0].Cells[6].Value.ToString());
-            //controller.write();
+            controller.cancelBuy();
+            FullProductsData();
+            tbl_ventas_cobro.Rows.Clear();
+            lbl_total.Text = "";
         }
 
         //Dibuja panel a los lbl
@@ -615,7 +622,7 @@ namespace comercial
                 aux1++;
             }
             tbl1.RowCount = controller.RowCheck(aux1);
-            setSelectedProduct();
+            setSelectedProduct(0);
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -766,6 +773,11 @@ namespace comercial
         private void chk_mayor_CheckedChanged(object sender, EventArgs e)
         {
             FullProductsData();
+        }
+
+        private void tbl_product_ventas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            setSelectedProduct(int.Parse(tbl_product_ventas.SelectedCells[0].RowIndex.ToString()));
         }
     }
 }
