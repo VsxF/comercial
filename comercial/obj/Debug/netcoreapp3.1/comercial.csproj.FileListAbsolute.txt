@@ -106,3 +106,4 @@ C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\obj\Debug\
 C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.dll
 C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.pdb
 C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.genruntimeconfig.cache
+C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.Properties.Resources.resources

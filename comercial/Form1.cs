@@ -11,6 +11,7 @@ namespace comercial
 
     public partial class Form1 : Form
     {
+        api api; //Api
         Controller controller; //Instancia la clase controller
         Rectangle panel; // Panel fondo lbls
         Color panelcol; //Color del panel
@@ -23,7 +24,7 @@ namespace comercial
         {
             controller = new Controller();
 
-            api api = new api(controller);
+            api = new api(controller);
             api.appio().GetAwaiter().GetResult();
             controller.setApio(api);
             api.getProducts();
@@ -104,13 +105,13 @@ namespace comercial
         private void btn_end_Click(object sender, EventArgs e)
         {
             controller.endBuy();
-            FullProductsData();
             tbl_ventas_cobro.Rows.Clear();
             lbl_exito.Visible = true;
             lbl_total.Text = "";
             Thread t = new Thread(new ThreadStart(successSell));
-
+            //Thread s = new Thread(new ThreadStart(Wait_FullProductsData));
             t.Start();
+            //s.Start();
         }
 
         //Muestra toda la informacion de la tabla productos
@@ -130,10 +131,9 @@ namespace comercial
             setSelectedProduct(0);
         }
 
-        //Espera que la api tenga la informacion, para mostrarla
+        //Espera que la api tenga la informacion, para mostrarla y coloca el estado del Sync
         public void Wait_FullProductsData()
         {
-            Console.WriteLine("x.x");
             Thread.Sleep(1000);
             trys++;
             this.Invoke((MethodInvoker)delegate ()
@@ -141,25 +141,41 @@ namespace comercial
                 if (controller.state)
                 {
                     controller.state = false;
-                    lbl_sync.Text = "Sync On";
-                    lbl_sync.ForeColor = Color.Green;
+                    setSyncState(true);
                     FullProductsData();
                 }
                 else
                 {
-                    if (trys > 10)
+                    if (trys < 10)
                     {
                         Wait_FullProductsData();
-
                     }
                     else
                     {
-                        lbl_sync.Text = "Sync Off";
-                        lbl_sync.ForeColor = Color.Purple;
+                        trys = 0;
+                        setSyncState(false);
                     }
 
                 }
             });
+        }
+
+        //Setea el estado del Sync en la interfaz
+        private void setSyncState(bool state)
+        {
+            if (state)
+            {
+                ptb.Image = Image.FromFile("../../../media/onState.png");
+                lbl_sync.ForeColor = Color.Green;
+                lbl_sync.Text = "Sync On";
+            }
+            else
+            {
+                ptb.Image = Image.FromFile("../../../media/offState.png");
+                lbl_sync.ForeColor = Color.Red;
+                lbl_sync.Text = "Sync Off";
+            }
+
         }
 
         //Muestra el producto seleccionado
@@ -212,7 +228,7 @@ namespace comercial
             int cant = int.Parse(txt_cantidad.Text);
             int repit = controller.exist(lbl_codigo.Text);
             int row = tbl_product_ventas.SelectedCells[0].RowIndex;
-            
+
             if (repit == 0)
             {
                 if (chk_mayor.Checked)
@@ -384,6 +400,8 @@ namespace comercial
             chk_mayor.Location = new Point(getPerc(45.5, 'x'), raw1 + 3);
             lbl_agregado.Location = new Point(getPerc(52, 'x'), raw1 - 10);
             txt_id.Width = txtwith;
+            ptb.Location = new Point(getPerc(80, 'x'), raw1 - 40);
+            lbl_sync.Location = new Point(getPerc(80, 'x') + 20, raw1 - 35);
 
             lbl_info_pos.Location = new Point(getPerc(80, 'x') - lbl_info_pos.Width / 2, raw1);
             //Label colum1

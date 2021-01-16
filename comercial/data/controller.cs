@@ -21,14 +21,14 @@ namespace comercial
         IList<Product> cobros; // vector donde se guardaran parcialmente los productos de la venta
         public bool state;
         api apio;
-        
+
         public Controller()
         {
-            products = new List<Product>(); 
+            products = new List<Product>();
             cobros = new List<Product>();
             state = false;
         }
-        
+
         //Trae la clase apio (clase en ejecucion)
         public void setApio(api apio)
         {
@@ -42,12 +42,12 @@ namespace comercial
             string jj = File.ReadAllText("../../../data/data.json");
             IList<JToken> pdts = JObject.Parse(jj)["products"].Children().ToList();
 
-            
-            if ( apiProds != null && pdts != apiProds)
+
+            if (apiProds != null && pdts != apiProds)
             {
                 pdts = apiProds;
             }
-            
+
             Product productss;
             products.Clear();
             foreach (JToken product in pdts)
@@ -170,6 +170,7 @@ namespace comercial
             string json = JsonConvert.SerializeObject(products, Formatting.Indented);
             json = "{ \"products\":" + json + "}";
             File.WriteAllText("../../../data/data.json", json);
+            //state = 
             apio.setProducts(products);
             return true;
         }
@@ -178,16 +179,16 @@ namespace comercial
         public void setCobros(string id, string name, string desc, string brand, string quant, string price)
         {
             int ex = exist(id);
-            if (ex == 0 )
+            if (ex == 0)
             {
                 cobros.Add(new Product(id, name, desc, brand, int.Parse(quant), float.Parse(price), 0));
             }
             else
             {
-                cobros[ex - 1 ].quant = int.Parse(quant);
-                cobros[ex - 1 ].price = float.Parse(price);
+                cobros[ex - 1].quant = int.Parse(quant);
+                cobros[ex - 1].price = float.Parse(price);
             }
-            
+
         }
 
         //Obtener el vector de cobros
@@ -215,10 +216,10 @@ namespace comercial
         public float getTotal()
         {
             float total = 0;
-            
-            for (int i=0; i < cobros.Count; i++)
+
+            for (int i = 0; i < cobros.Count; i++)
             {
-                if(cobros.Count != 0)
+                if (cobros.Count != 0)
                 {
                     total += cobros[i].price;
                 }
@@ -230,7 +231,7 @@ namespace comercial
         //Setea la cantidad nueva y la devuelve
         public int changeQuant(string id, int quant)
         {
-            foreach(Product product in products)
+            foreach (Product product in products)
             {
                 if (product.id.Equals(id))
                 {
@@ -241,9 +242,10 @@ namespace comercial
         }
 
         //Borra los productos que fueron vendidos
-        public void endBuy()
+        public bool endBuy()
         {
             cobros.Clear();
+            return write();
         }
 
         //Cancela la compra
@@ -260,7 +262,7 @@ namespace comercial
                 }
             }
         }
-         
+
         //Devuelve un vector con todos los productos, cada uno en un vector string
         public IList<string[]> getRows(bool cajas)
         {
@@ -274,7 +276,7 @@ namespace comercial
                     float p = item.price * item.caja;
                     rows.Add(new string[] { item.id, item.name, item.desc, item.brand, q.ToString(), p.ToString(), item.caja.ToString() });
                 }
-            } 
+            }
             else
             {
                 foreach (Product item in products)
@@ -282,7 +284,7 @@ namespace comercial
                     rows.Add(new string[] { item.id, item.name, item.desc, item.brand, item.quant.ToString(), item.price.ToString(), item.caja.ToString() });
                 }
             }
-            
+
             return rows;
         }
 
@@ -300,7 +302,7 @@ namespace comercial
         }
 
     }
- 
+
     //Cosas que llevara producto
     public class Product
     {

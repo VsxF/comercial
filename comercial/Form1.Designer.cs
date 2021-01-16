@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.txtbuscar = new System.Windows.Forms.TextBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.btnagregar = new System.Windows.Forms.Button();
             this.btneliminar = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.ptb = new System.Windows.Forms.PictureBox();
+            this.btn_cancelar = new System.Windows.Forms.Button();
             this.lbl_sync = new System.Windows.Forms.Label();
             this.chk_mayor = new System.Windows.Forms.CheckBox();
             this.tbl_product_ventas = new System.Windows.Forms.DataGridView();
@@ -96,10 +99,10 @@
             this.Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_cancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_product_ventas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_ventas_cobro)).BeginInit();
             this.tabPage2.SuspendLayout();
@@ -157,6 +160,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.ptb);
             this.tabPage1.Controls.Add(this.btn_cancelar);
             this.tabPage1.Controls.Add(this.lbl_sync);
             this.tabPage1.Controls.Add(this.chk_mayor);
@@ -193,6 +197,25 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Ventas";
             this.tabPage1.Paint += new System.Windows.Forms.PaintEventHandler(this.tabPage1_Paint);
+            // 
+            // ptb
+            // 
+            this.ptb.Image = ((System.Drawing.Image)(resources.GetObject("ptb.Image")));
+            this.ptb.Location = new System.Drawing.Point(700, 4);
+            this.ptb.Name = "ptb";
+            this.ptb.Size = new System.Drawing.Size(20, 20);
+            this.ptb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptb.TabIndex = 109;
+            this.ptb.TabStop = false;
+            // 
+            // btn_cancelar
+            // 
+            this.btn_cancelar.Location = new System.Drawing.Point(187, 527);
+            this.btn_cancelar.Name = "btn_cancelar";
+            this.btn_cancelar.Size = new System.Drawing.Size(75, 56);
+            this.btn_cancelar.TabIndex = 108;
+            this.btn_cancelar.Text = "Cancelar\r\ncompra";
+            this.btn_cancelar.UseVisualStyleBackColor = true;
             // 
             // lbl_sync
             // 
@@ -801,15 +824,6 @@
             this.Precio.ReadOnly = true;
             this.Precio.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // btn_cancelar
-            // 
-            this.btn_cancelar.Location = new System.Drawing.Point(187, 527);
-            this.btn_cancelar.Name = "btn_cancelar";
-            this.btn_cancelar.Size = new System.Drawing.Size(75, 56);
-            this.btn_cancelar.TabIndex = 108;
-            this.btn_cancelar.Text = "Cancelar\r\ncompra";
-            this.btn_cancelar.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -828,6 +842,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_product_ventas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_ventas_cobro)).EndInit();
             this.tabPage2.ResumeLayout(false);
@@ -909,6 +924,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_caja;
         private System.Windows.Forms.Button btn_cancelar;
+        private System.Windows.Forms.PictureBox ptb;
     }
 }
 

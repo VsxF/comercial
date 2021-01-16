@@ -21,7 +21,6 @@ namespace comercial
         Controller controller;
 
         //Se contaran los errores, porque la api solo permite 10000 requests
-        //public api (Controller controller)
         public api(Controller controller)
         {
             this.controller = controller;
@@ -52,6 +51,7 @@ namespace comercial
             }
             else
             {
+                //Se llego al maximo de request en el servidor > Check >>jsonbin.io
                 MessageBox.Show("Error #301\nContacte con el programador mas cercano", "API Mistake", MessageBoxButtons.OK);
             }
 
@@ -59,7 +59,7 @@ namespace comercial
         }
 
         //Actualizar toda la informacion de la api
-        public async Task<HttpStatusCode> setProducts(IList<Product> productss)
+        public async Task<bool> setProducts(IList<Product> productss)
         {
             string json = JsonConvert.SerializeObject(productss, Formatting.Indented);
             json = "{ \"products\":" + json + "}";
@@ -69,7 +69,7 @@ namespace comercial
             //var result = await client.PostAsync(url, content);
             //lo mismo pero con await
             HttpResponseMessage res = await apio.PutAsync(collectionid, content);
-            return HttpStatusCode.OK;
+            return res.IsSuccessStatusCode ? true : false;
         }
 
         //Comprueba, si hay mas de 10 errores en una sesion
@@ -92,6 +92,9 @@ namespace comercial
 
             }
         }
+
+        //Comprueba si hay internet
+
     }
 }
 

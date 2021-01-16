@@ -4,9 +4,9 @@
     "name": "Aceite",
     "desc": "10 litros",
     "brand": "generica",
-    "quant": 79,
+    "quant": 48,
     "price": 8.0,
-    "caja": 1
+    "caja": 3
   },
   {
     "id": "11",
@@ -19,7 +19,7 @@
   },
   {
     "id": "1112",
-    "name": "tres",
+    "name": "treszzz",
     "desc": "5 litros",
     "brand": "marca1",
     "quant": 5,

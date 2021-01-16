@@ -57,9 +57,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="tb_ventas_caja.UserAddedColumn" type="System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
-    <value>True</value>
-  </metadata>
+  <assembly alias="System.Drawing.Common" name="System.Drawing.Common, Version=4.0.2.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
+  <data name="ptb.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAPWSURBVGhD7VnJThRRFO04LVg6rBzWJE1VdTMFAwsSCGwYwtBo9EMwfgC6V4LGP5CoC8WNC3dG
+        oefAByisBFw3bspzqi/kVdUr6a6h6U76JCfp0PXuOe/1q/vuu6S66KKL6Hiby10uGsb9gmk+3THNd3nD
+        2Mub5h/wr5Cfd/kdnwFH7FTqkgy/OGz39d3NW9ZzmDsA7Sa5j4k++26adyRc61DMZm/tWNZrmDjxmApD
+        xtjIDwzclPDJAqv2CILHioG4eIQt9lBk4gdW6CpE3nhEz1jIZOzi2Jhdnpqyy3NzdnVpya7mcnXiM//G
+        7/gMn9XFIAuG8YpaIhsPELAHL95nreDgoF2anq4bXVlpjHiWYxDXF0+4RU2Rjwauhta8ZdmlyUm9wUaJ
+        iZQRQ/eLQPPLXjp9TWyEB4L5tw1WrjI/rzcVgpXZWbuQzbo16twQG+GA/fjYG7QwPFzf3xojUVhZXHRi
+        +/Qs64HYaQ4/entvIMChKyBWPgnzp3Qm0d/vmgB4DN3mU6zk+bNA3KcVZheNcJykBt8vVRtcF1uNgacj
+        BrkOqcgvbBMsTUyo5smTfDp9T+ydDykPzgIwVeqEEuPysn8roewQe/8HiywM2FcHO3leJ5QgeeipHsAD
+        Fo1iMxisKtWB3PtNHVJxkb+C53zAezksNoPBclcdxKNfK9ACFkdHXRPA1n4iNoOBvfZeHcSfUhe8FdRs
+        o02xGQw8tKsOcgozTfBWkCe06gWsis1g4CFXqZzkwXUuoa16AQ/FZjDwkCv/X8gLfEpoq17AmtgMBh7q
+        +Al0/Bbq8Je4jdJoKUwabauDDNqqFyzuqtgMBiYw4hrEUgLHuk4gUUKT2qqX7UxmSGwGQ4q5X+rANinm
+        fjbczWPp6hrMm1gr0ym0Cv6OxZrYOx+6Cw27B1qxBMjLk6oN1sqWdVvsNQYM2lCDOFdKpDWdYJx0Uqfn
+        SomL/Qux1Ti+pdPXMdh1qectqbKwoBWOhbjU5/2X+qNQl3qCvUpPMKf1we6B1kAEcmEKQ0MuLYeGkRM7
+        4eD0Kr1Bs1m7MjOjNRKGTmPLv/K8gb0UG+HBeyj25AdvcO5Tdg8inRHINk4Hwt9G4cp/+jo+fkVsRAP2
+        YA+CbvlEQK6cU240MxE8yzGaVHnKj9QU+XiAgGyvuzKTi8hSvMOyfnGyFatYnh0kPvNv/M6553pOWJXc
+        NrGtvA7sVULI3XKMh78jv7CNQvqm62BNMRCWNeZ5pm0J3zrwdJSyw1U7NUiOWWv6hE0CLLLYdGLfBqY2
+        wSrImx3LEZKfK+AmJrzKqrIt/s3aRRcdj1TqH9jL60nGYEqWAAAAAElFTkSuQmCC
+</value>
+  </data>
   <metadata name="tb_ventas_caja.UserAddedColumn" type="System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
     <value>True</value>
   </metadata>
