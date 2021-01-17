@@ -19,11 +19,12 @@ namespace comercial
         int h; //height form
         int trys; //Api requests
         int cajas; //Cantidad por caja del producto actual
+        Thread thread2;
 
         public Form1()
         {
             controller = new Controller();
-
+            thread2 = null;
             api = new api(controller);
             api.appio().GetAwaiter().GetResult();
             controller.setApio(api);
@@ -59,8 +60,8 @@ namespace comercial
         {
             controller.setData(null);
             FullProductsData();
-            Thread t = new Thread(new ThreadStart(Wait_FullProductsData));
-            t.Start();
+            thread2 = new Thread(new ThreadStart(Wait_FullProductsData));
+            thread2.Start();
         }
 
         private void txt_id_TextChanged(object sender, EventArgs e)
@@ -109,9 +110,9 @@ namespace comercial
             lbl_exito.Visible = true;
             lbl_total.Text = "";
             Thread t = new Thread(new ThreadStart(successSell));
-            //Thread s = new Thread(new ThreadStart(Wait_FullProductsData));
+            Thread s = new Thread(new ThreadStart(Wait_FullProductsData));
             t.Start();
-            //s.Start();
+            s.Start();
         }
 
         //Muestra toda la informacion de la tabla productos
@@ -136,46 +137,61 @@ namespace comercial
         {
             Thread.Sleep(1000);
             trys++;
-            this.Invoke((MethodInvoker)delegate ()
-            {
-                if (controller.state)
-                {
-                    controller.state = false;
-                    setSyncState(true);
-                    FullProductsData();
-                }
-                else
-                {
-                    if (trys < 10)
-                    {
-                        Wait_FullProductsData();
-                    }
-                    else
-                    {
-                        trys = 0;
-                        setSyncState(false);
-                    }
 
+            if (controller.state == 1)
+            {
+                ptb.Invoke(new Action(() =>
+                {
+                    setSyncState();
+                    FullProductsData();
+                })); 
+                controller.state = 2;
+            }
+            else if (controller.state == 2 && trys < 10)
+            {
+                if (trys == 1)
+                {
+                    ptb.Invoke(new Action(() =>
+                    {
+                        setSyncState();
+                    }));
                 }
-            });
+                Wait_FullProductsData();
+            }
+            else if (trys > 9)
+            {
+                controller.state = 0;
+                trys = 0;
+                ptb.Invoke(new Action(() =>
+                {
+                    setSyncState();
+                }));
+            }
+            trys = 0;
         }
 
         //Setea el estado del Sync en la interfaz
-        private void setSyncState(bool state)
+        private void setSyncState()
         {
-            if (state)
+            if (controller.state == 1)
             {
                 ptb.Image = Image.FromFile("../../../media/onState.png");
                 lbl_sync.ForeColor = Color.Green;
                 lbl_sync.Text = "Sync On";
             }
-            else
+            else if (controller.state == 0)
             {
                 ptb.Image = Image.FromFile("../../../media/offState.png");
                 lbl_sync.ForeColor = Color.Red;
                 lbl_sync.Text = "Sync Off";
-            }
 
+            }
+            else if (controller.state == 2)
+            {
+                ptb.Image = Image.FromFile("../../../media/loadingState.png");
+                lbl_sync.ForeColor = panelcol;
+                lbl_sync.Text = "loading ...";
+            }
         }
 
         //Muestra el producto seleccionado
@@ -495,6 +511,7 @@ namespace comercial
             //this.WindowState = FormWindowState.Maximized;
 
             tabPage1.BackColor = back;
+            tabPage3.BackColor = back;
             lbl_info_pos.ForeColor = back;
 
             w = this.Width;
@@ -796,6 +813,21 @@ namespace comercial
         private void tbl_product_ventas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             setSelectedProduct(int.Parse(tbl_product_ventas.SelectedCells[0].RowIndex.ToString()));
+        }
+
+        private void lbl_sync_Click(object sender, EventArgs e)
+        {
+            thread2 = new Thread(new ThreadStart(Wait_FullProductsData));
+            thread2.Start();
+            //controller.tryNetword();
+            //Wait_FullProductsData();
+        }
+
+        private void btn_cancelar_Click(object sender, EventArgs e)
+        {
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(controller.getProducts(), Newtonsoft.Json.Formatting.Indented);
+            json = "{ \"products\":" + json + "}";
+            json = System.Text.RegularExpressions.Regex.Replace(json, @"\.0,", ",");
         }
     }
 }

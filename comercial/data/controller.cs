@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Newtonsoft;
 using Newtonsoft.Json;
@@ -19,14 +20,14 @@ namespace comercial
 
         IList<Product> products; //vector donde estaran todos los productos
         IList<Product> cobros; // vector donde se guardaran parcialmente los productos de la venta
-        public bool state;
+        public int state; // estado del sync: <0> Denied; <1> success; <2> loading
         api apio;
 
         public Controller()
         {
             products = new List<Product>();
             cobros = new List<Product>();
-            state = false;
+            state = 2;
         }
 
         //Trae la clase apio (clase en ejecucion)
@@ -37,27 +38,51 @@ namespace comercial
 
         //Leer archivo y vectorizar datos
         //Sincronizar con api
-        public void setData(IList<JToken> apiProds)
+        public void setData(string auxApiProds)
         {
             string jj = File.ReadAllText("../../../data/data.json");
             IList<JToken> pdts = JObject.Parse(jj)["products"].Children().ToList();
+            bool setOfflineData = false;
+            
+            string msm = "El inventario local, es distinto al de la nube.\nDesea que se actualicen los datos de la nube?\n" +
+                "> Al presionar \"NO\" se actualizaran los datos locales\n> Al presionar \"CANCEL\", nada se modificara y se mostraran los datos locales";
 
 
-            if (apiProds != null && pdts != apiProds)
+            if (auxApiProds != null && !Regex.Replace(jj, @"\s+", "").Equals(Regex.Replace(auxApiProds, @"\s+", "")))
             {
-                pdts = apiProds;
-            }
+                IList<JToken> apiProds = JObject.Parse(auxApiProds)["products"].Children().ToList();
+                DialogResult response = MessageBox.Show(msm, "Data Base", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
+                if (response == DialogResult.Yes)
+                {
+                    write();
+                }
+                else if (response == DialogResult.No)
+                {
+                    pdts = apiProds;
+                    setOfflineData = true;
+                }
+                else
+                {
+                    MessageBox.Show("Puede consultar todos los datos en la pestaña \"Datos\"", "INFO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                
+            }
             Product productss;
             products.Clear();
+
             foreach (JToken product in pdts)
             {
                 productss = product.ToObject<Product>();
+                float a = productss.price;
                 products.Add(productss);
             }
-
-            state = apiProds != null ? true : false;
-        }
+            state = auxApiProds != null ? 1 : 2;
+            if (setOfflineData)
+            {
+                write();
+            }
+}
 
         //Obtener una lista de todos los productos
         public IList<Product> getProducts()
@@ -169,9 +194,9 @@ namespace comercial
             //products.Add(new Product("2", "name2", "desc2", "brand2", 2, 2));
             string json = JsonConvert.SerializeObject(products, Formatting.Indented);
             json = "{ \"products\":" + json + "}";
+            json = Regex.Replace(json, @"\.0,", ",");
             File.WriteAllText("../../../data/data.json", json);
-            //state = 
-            apio.setProducts(products);
+            apio.setProducts(json);
             return true;
         }
 
@@ -244,6 +269,7 @@ namespace comercial
         //Borra los productos que fueron vendidos
         public bool endBuy()
         {
+            state = 2;
             cobros.Clear();
             return write();
         }
@@ -299,6 +325,11 @@ namespace comercial
             {
                 return items;
             }
+        }
+
+        public void tryNetword()
+        {
+            apio.getProducts();
         }
 
     }

@@ -4,8 +4,8 @@
     "name": "Aceite",
     "desc": "10 litros",
     "brand": "generica",
-    "quant": 48,
-    "price": 8.0,
+    "quant": 99,
+    "price": 8,
     "caja": 3
   },
   {
@@ -14,7 +14,7 @@
     "desc": "2 litros",
     "brand": "marca0",
     "quant": 2,
-    "price": 233.0,
+    "price": 233.2,
     "caja": 1
   },
   {
@@ -23,7 +23,7 @@
     "desc": "5 litros",
     "brand": "marca1",
     "quant": 5,
-    "price": 3.0,
+    "price": 3.02,
     "caja": 1
   },
   {
@@ -31,8 +31,8 @@
     "name": "name",
     "desc": "desc",
     "brand": "brand",
-    "quant": 5,
-    "price": 3.0,
+    "quant": 80,
+    "price": 3,
     "caja": 4
   },
   {
@@ -41,7 +41,7 @@
     "desc": "desc2",
     "brand": "brand2",
     "quant": 2,
-    "price": 2.0,
+    "price": 2,
     "caja": 2
   }
 ]}

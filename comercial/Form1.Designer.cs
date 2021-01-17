@@ -99,6 +99,12 @@
             this.Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btn_consultar_ventas = new System.Windows.Forms.Button();
+            this.lbl_consulta = new System.Windows.Forms.Label();
+            this.btn_subir = new System.Windows.Forms.Button();
+            this.btn_nube = new System.Windows.Forms.Button();
+            this.btn_locales = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -107,6 +113,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbl_ventas_cobro)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbl1)).BeginInit();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtbuscar
@@ -150,6 +157,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(0, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -216,6 +224,7 @@
             this.btn_cancelar.TabIndex = 108;
             this.btn_cancelar.Text = "Cancelar\r\ncompra";
             this.btn_cancelar.UseVisualStyleBackColor = true;
+            this.btn_cancelar.Click += new System.EventHandler(this.btn_cancelar_Click);
             // 
             // lbl_sync
             // 
@@ -225,6 +234,7 @@
             this.lbl_sync.Size = new System.Drawing.Size(52, 15);
             this.lbl_sync.TabIndex = 7;
             this.lbl_sync.Text = "Sync Off";
+            this.lbl_sync.Click += new System.EventHandler(this.lbl_sync_Click);
             // 
             // chk_mayor
             // 
@@ -824,6 +834,66 @@
             this.Precio.ReadOnly = true;
             this.Precio.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.btn_consultar_ventas);
+            this.tabPage3.Controls.Add(this.lbl_consulta);
+            this.tabPage3.Controls.Add(this.btn_subir);
+            this.tabPage3.Controls.Add(this.btn_nube);
+            this.tabPage3.Controls.Add(this.btn_locales);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(820, 621);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Datos";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btn_consultar_ventas
+            // 
+            this.btn_consultar_ventas.Location = new System.Drawing.Point(346, 394);
+            this.btn_consultar_ventas.Name = "btn_consultar_ventas";
+            this.btn_consultar_ventas.Size = new System.Drawing.Size(148, 23);
+            this.btn_consultar_ventas.TabIndex = 4;
+            this.btn_consultar_ventas.Text = "Registro de Ventas";
+            this.btn_consultar_ventas.UseVisualStyleBackColor = true;
+            // 
+            // lbl_consulta
+            // 
+            this.lbl_consulta.AutoSize = true;
+            this.lbl_consulta.Location = new System.Drawing.Point(346, 39);
+            this.lbl_consulta.Name = "lbl_consulta";
+            this.lbl_consulta.Size = new System.Drawing.Size(102, 15);
+            this.lbl_consulta.TabIndex = 3;
+            this.lbl_consulta.Text = "Consulta de datos";
+            // 
+            // btn_subir
+            // 
+            this.btn_subir.Location = new System.Drawing.Point(502, 213);
+            this.btn_subir.Name = "btn_subir";
+            this.btn_subir.Size = new System.Drawing.Size(141, 23);
+            this.btn_subir.TabIndex = 2;
+            this.btn_subir.Text = "Subir inventario";
+            this.btn_subir.UseVisualStyleBackColor = true;
+            // 
+            // btn_nube
+            // 
+            this.btn_nube.Location = new System.Drawing.Point(281, 213);
+            this.btn_nube.Name = "btn_nube";
+            this.btn_nube.Size = new System.Drawing.Size(75, 23);
+            this.btn_nube.TabIndex = 1;
+            this.btn_nube.Text = "de la Nube";
+            this.btn_nube.UseVisualStyleBackColor = true;
+            // 
+            // btn_locales
+            // 
+            this.btn_locales.Location = new System.Drawing.Point(159, 214);
+            this.btn_locales.Name = "btn_locales";
+            this.btn_locales.Size = new System.Drawing.Size(75, 23);
+            this.btn_locales.TabIndex = 0;
+            this.btn_locales.Text = "Local";
+            this.btn_locales.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -848,6 +918,8 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbl1)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -925,6 +997,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_ventas_caja;
         private System.Windows.Forms.Button btn_cancelar;
         private System.Windows.Forms.PictureBox ptb;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button btn_consultar_ventas;
+        private System.Windows.Forms.Label lbl_consulta;
+        private System.Windows.Forms.Button btn_subir;
+        private System.Windows.Forms.Button btn_nube;
+        private System.Windows.Forms.Button btn_locales;
     }
 }
 

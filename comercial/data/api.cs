@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -41,35 +42,23 @@ namespace comercial
         public async Task<IList<JToken>> getProducts()
         {
             IList<JToken> products = null;
+
+            controller.state = 2;
             HttpResponseMessage res = await apio.GetAsync(collectionid + @"/latest");
 
-            if (res.IsSuccessStatusCode)
-            {
-                string result = res.Content.ReadAsStringAsync().Result;
-                products = JObject.Parse(result)["products"].Children().ToList();
-                controller.setData(products);
-            }
-            else
-            {
-                //Se llego al maximo de request en el servidor > Check >>jsonbin.io
-                MessageBox.Show("Error #301\nContacte con el programador mas cercano", "API Mistake", MessageBoxButtons.OK);
-            }
-
+            string result = res.Content.ReadAsStringAsync().Result;
+            products = JObject.Parse(result)["products"].Children().ToList();
+            controller.setData(result);
             return products;
         }
 
         //Actualizar toda la informacion de la api
-        public async Task<bool> setProducts(IList<Product> productss)
+        public async Task<bool> setProducts(string json)
         {
-            string json = JsonConvert.SerializeObject(productss, Formatting.Indented);
-            json = "{ \"products\":" + json + "}";
-
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            //var result = await client.PostAsync(url, content);
-            //lo mismo pero con await
             HttpResponseMessage res = await apio.PutAsync(collectionid, content);
-            return res.IsSuccessStatusCode ? true : false;
+            controller.state = 1;
+            return true;
         }
 
         //Comprueba, si hay mas de 10 errores en una sesion
