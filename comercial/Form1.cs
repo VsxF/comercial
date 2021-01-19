@@ -5,6 +5,10 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Threading;
 using System.Drawing.Drawing2D;
+using System.IO;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using NPOI.HSSF.Util;
 
 namespace comercial
 {
@@ -144,7 +148,7 @@ namespace comercial
                 {
                     setSyncState();
                     FullProductsData();
-                })); 
+                }));
                 controller.state = 2;
             }
             else if (controller.state == 2 && trys < 10)
@@ -240,7 +244,7 @@ namespace comercial
         //Agrega un producto al cobro
         private void Add()
         {
-            float price = int.Parse(txt_cantidad.Text) * float.Parse(lbl_precio.Text);
+            decimal price = int.Parse(txt_cantidad.Text) * decimal.Parse(lbl_precio.Text);
             int cant = int.Parse(txt_cantidad.Text);
             int repit = controller.exist(lbl_codigo.Text);
             int row = tbl_product_ventas.SelectedCells[0].RowIndex;
@@ -251,7 +255,7 @@ namespace comercial
                 {
                     string input = price.ToString();
                     ShowInputDialog(ref input);
-                    price = float.Parse(input);
+                    price = decimal.Parse(input);
                     cant = cajas * cant;
                 }
             }
@@ -261,12 +265,12 @@ namespace comercial
                 {
                     string input = price.ToString();
                     ShowInputDialog(ref input);
-                    price = float.Parse(input) * int.Parse(txt_cantidad.Text);
+                    price = decimal.Parse(input) * int.Parse(txt_cantidad.Text);
                     cant = cajas * cant;
                 }
 
                 cant += int.Parse(tbl_ventas_cobro.Rows[repit - 1].Cells[4].Value.ToString());
-                price += float.Parse(tbl_ventas_cobro.Rows[repit - 1].Cells[5].Value.ToString());
+                price += decimal.Parse(tbl_ventas_cobro.Rows[repit - 1].Cells[5].Value.ToString());
 
                 tbl_ventas_cobro.Rows[repit - 1].Cells[4].Value = cant;
                 tbl_ventas_cobro.Rows[repit - 1].Cells[5].Value = price;
@@ -369,12 +373,19 @@ namespace comercial
         //Hilo para quitar el aviso vendido
         private void successSell()
         {
-            Thread.Sleep(3000);
-
-            this.Invoke((MethodInvoker)delegate ()
+            try
             {
-                lbl_exito.Visible = false;
-            });
+                Thread.Sleep(3000);
+
+                this.Invoke((MethodInvoker)delegate ()
+                {
+                    lbl_exito.Visible = false;
+                });
+            }
+            catch (Exception e)
+            {
+
+            }  
         }
 
         private void btn_agregar_Click(object sender, EventArgs e)
@@ -493,6 +504,18 @@ namespace comercial
                 panel.Width = 260;
                 panel.Height = getPerc(35.94, 'y');
             }
+
+
+            // ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            //tabPage3 - Datos
+            lbl_consulta.Location = new Point(getPerc(50, 'x') - lbl_consulta.Size.Width / 2, getPerc(10, 'y'));
+            btn_locales.Location = new Point(getPerc(10, 'x'), getPerc(38, 'y'));
+            btn_nube.Location = new Point(btn_locales.Location.X + btn_locales.Size.Width + getPerc(3, 'x'), getPerc(38, 'y'));
+            lbl_descargar.Location = new Point(btn_nube.Location.X - getPerc(1.5, 'x') - lbl_descargar.Size.Width / 2, getPerc(33, 'y'));
+            btn_subir.Location = new Point(getPerc(70, 'x'), getPerc(38, 'y'));
+            btn_consultar_ventas.Location = new Point(getPerc(50, 'x') - btn_consultar_ventas.Size.Width / 2, getPerc(63, 'y'));
+            btn_actualizar_ventas.Location = new Point(btn_consultar_ventas.Location.X, getPerc(65, 'y') + btn_consultar_ventas.Size.Height);
+
         }
 
         //Disenhio (colores y estilos... css?)
@@ -551,6 +574,27 @@ namespace comercial
             btn_agregar.FlatAppearance.BorderSize = 0;
             btn_end.FlatAppearance.BorderSize = 2;
             btn_cancelar.FlatAppearance.BorderSize = 2;
+            btn_nube.BackColor = Color.FromArgb(49, 168, 174);
+            btn_nube.FlatStyle = FlatStyle.Flat;
+            btn_nube.FlatAppearance.BorderColor = panelcol;
+            btn_nube.FlatAppearance.BorderSize = 2;
+            btn_locales.BackColor = Color.FromArgb(49, 168, 174);
+            btn_locales.FlatStyle = FlatStyle.Flat;
+            btn_locales.FlatAppearance.BorderColor = panelcol;
+            btn_locales.FlatAppearance.BorderSize = 2;
+            btn_consultar_ventas.BackColor = Color.FromArgb(49, 168, 174);
+            btn_consultar_ventas.FlatStyle = FlatStyle.Flat;
+            btn_consultar_ventas.FlatAppearance.BorderColor = panelcol;
+            btn_consultar_ventas.FlatAppearance.BorderSize = 2;
+            btn_actualizar_ventas.BackColor = Color.FromArgb(49, 168, 174);
+            btn_actualizar_ventas.FlatStyle = FlatStyle.Flat;
+            btn_actualizar_ventas.FlatAppearance.BorderColor = panelcol;
+            btn_actualizar_ventas.FlatAppearance.BorderSize = 2;
+            btn_subir.BackColor = Color.FromArgb(49, 168, 174);
+            btn_subir.FlatStyle = FlatStyle.Flat;
+            btn_subir.FlatAppearance.BorderColor = panelcol;
+            btn_subir.FlatAppearance.BorderSize = 2;
+
 
             //Tablas
             tbl_product_ventas.CellBorderStyle = DataGridViewCellBorderStyle.None;
@@ -829,5 +873,183 @@ namespace comercial
             json = "{ \"products\":" + json + "}";
             json = System.Text.RegularExpressions.Regex.Replace(json, @"\.0,", ",");
         }
+
+        private void btn_locales_Click(object sender, EventArgs e)
+        {
+            dataConvertions dt = new dataConvertions(controller);
+            dt.json2excel(true);
+
+        }
+
+        private void btn_subir_Click(object sender, EventArgs e)
+        {
+            dataConvertions dt = new dataConvertions(controller);
+            dt.openFile("xlsx", "Excel", true);
+        }
+
+        private void btn_nube_Click(object sender, EventArgs e)
+        {
+            dataConvertions dt = new dataConvertions(controller);
+            dt.json2excel(false); ;
+        }
+    }
+
+    public class dataConvertions
+    {
+        Controller controller;
+
+        public dataConvertions(Controller controller)
+        {
+            this.controller = controller;
+        }
+
+        public async void json2excel(bool local)
+        {
+            IWorkbook workbook = new XSSFWorkbook();
+            ISheet sheet = workbook.CreateSheet("Productos");
+            IRow rowHead = sheet.CreateRow(0);
+
+            var style1 = workbook.CreateCellStyle();
+            style1.FillForegroundColor = HSSFColor.SkyBlue.Index;
+            style1.FillPattern = FillPattern.SolidForeground;
+
+            rowHead.CreateCell(0).SetCellValue("Código");
+            rowHead.CreateCell(1).SetCellValue("Producto");
+            rowHead.CreateCell(2).SetCellValue("Descripción");
+            rowHead.CreateCell(3).SetCellValue("Marca");
+            rowHead.CreateCell(4).SetCellValue("Cantidad");
+            rowHead.CreateCell(5).SetCellValue("Precio");
+            rowHead.CreateCell(6).SetCellValue("Cantidad por caja");
+
+            for (int j = 0; j < 7; j++)
+            {
+                rowHead.Cells[j].CellStyle = style1;
+                sheet.SetColumnWidth(j, 5300);
+            }
+
+            int i = 0;
+            IList<Product> products;
+            if(local)
+            {
+                products = controller.getProducts();
+            }
+            else
+            {
+                products = await controller.getCloudProducts();
+            }
+
+            foreach (Product p in products)
+            {
+                i++;
+                IRow row = sheet.CreateRow(i);
+
+                row.CreateCell(0).SetCellValue(p.id);
+                row.CreateCell(1).SetCellValue(p.name);
+                row.CreateCell(2).SetCellValue(p.desc);
+                row.CreateCell(3).SetCellValue(p.brand);
+                row.CreateCell(4).SetCellValue(p.quant);
+                row.Cells[4].SetCellType(CellType.Numeric);
+                row.CreateCell(5).SetCellValue((double)p.price);
+                row.Cells[5].SetCellType(CellType.Numeric);
+                row.CreateCell(6).SetCellValue(p.caja);
+                row.Cells[6].SetCellType(CellType.Numeric);
+            }
+
+
+            saveDialo(workbook);
+        }
+
+        private void saveDialo(IWorkbook wb)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            save.RestoreDirectory = true;
+            save.DefaultExt = "xlsx";
+            save.Filter = "Excel|*.xlsx";
+            save.FileName = "Inventario Comercial Oliva.xlsx";
+
+            if (save.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    using (FileStream st = File.OpenWrite(save.FileName))
+                    {
+                        wb.Write(st);
+                        st.Close();
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Un archivo con el mismo nombre esta abierto.", "Cerrar archivo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+            }
+
+        }
+
+        public void openFile(string extension, string fileType, bool inventario)
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            file.RestoreDirectory = true;
+            file.DefaultExt = extension;
+            file.Filter = fileType + "|*." + extension;
+            file.ShowDialog();
+            if (file.FileName != "")
+            {
+                try
+                {
+                    using (FileStream fs = File.OpenRead(file.FileName))
+                    {
+                        IWorkbook workbook = new XSSFWorkbook(fs);
+                        ISheet sheet = workbook.GetSheetAt(0);
+
+                        if (sheet != null)
+                        {
+                            int rowIndex = sheet.LastRowNum;
+                            bool correctFormat = false;
+                            IRow row = sheet.GetRow(0);
+
+                            if (row != null)
+                            {
+                                correctFormat = row.GetCell(0).StringCellValue == "Código"
+                                    && row.GetCell(1).StringCellValue == "Producto"
+                                    && row.GetCell(2).StringCellValue == "Descripción"
+                                && row.GetCell(3).StringCellValue == "Marca"
+                                && row.GetCell(4).StringCellValue == "Cantidad"
+                                && row.GetCell(5).StringCellValue == "Precio"
+                                && row.GetCell(6).StringCellValue == "Cantidad por caja" ? true : false;
+                            }
+
+                            if (correctFormat)
+                            {
+                                IList<Product> fileProducts = new List<Product>();
+                                for (int r = 1; r <= rowIndex; r++)
+                                {
+                                    row = sheet.GetRow(r);
+                                    if (row != null)
+                                    {
+                                        fileProducts.Add(new Product(row.GetCell(0).ToString(), row.GetCell(1).ToString(), row.GetCell(2).ToString(), row.GetCell(3).ToString(),
+                                            int.Parse(row.GetCell(4).ToString()), decimal.Parse(row.GetCell(5).ToString()), int.Parse(row.GetCell(6).ToString())));
+                                    }
+                                }
+                                controller.setProducts(fileProducts);
+                                controller.write();
+                                MessageBox.Show("Se a actualizado con exito en la nube y localmente.\n(Las versiones anteriores se guardan en la nube\ncontacte con un programador si desea recuperalos)", "Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("El formato en que debe estar el inventairo es incorrecto.", "Formato incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+
+                        }
+
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("El archivo que trata de abrir esta abierto.\nDeber cerrarlo.", "Cerra archivo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
     }
 }

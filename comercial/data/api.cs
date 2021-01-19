@@ -52,6 +52,18 @@ namespace comercial
             return products;
         }
 
+        //Obtener toda la informacion de la api, especificamente (no se guardan los datos localmente)
+        public async Task<IList<JToken>> getCloudProducts()
+        {
+            IList<JToken> products = null;
+
+            HttpResponseMessage res = await apio.GetAsync(collectionid + @"/latest");
+
+            string result = res.Content.ReadAsStringAsync().Result;
+            products = JObject.Parse(result)["products"].Children().ToList();
+            return products;
+        }
+
         //Actualizar toda la informacion de la api
         public async Task<bool> setProducts(string json)
         {

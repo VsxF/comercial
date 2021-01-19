@@ -107,3 +107,9 @@ C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\obj\Debug\
 C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.pdb
 C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.genruntimeconfig.cache
 C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.Properties.Resources.resources
+C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\bin\Debug\netcoreapp3.1\NPOI.OOXML.dll
+C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\bin\Debug\netcoreapp3.1\NPOI.OpenXml4Net.dll
+C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\bin\Debug\netcoreapp3.1\NPOI.OpenXmlFormats.dll
+C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\bin\Debug\netcoreapp3.1\NPOI.dll
+C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\bin\Debug\netcoreapp3.1\ICSharpCode.SharpZipLib.dll

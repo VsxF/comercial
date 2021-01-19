@@ -100,6 +100,8 @@
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btn_actualizar_ventas = new System.Windows.Forms.Button();
+            this.lbl_descargar = new System.Windows.Forms.Label();
             this.btn_consultar_ventas = new System.Windows.Forms.Button();
             this.lbl_consulta = new System.Windows.Forms.Label();
             this.btn_subir = new System.Windows.Forms.Button();
@@ -836,6 +838,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.btn_actualizar_ventas);
+            this.tabPage3.Controls.Add(this.lbl_descargar);
             this.tabPage3.Controls.Add(this.btn_consultar_ventas);
             this.tabPage3.Controls.Add(this.lbl_consulta);
             this.tabPage3.Controls.Add(this.btn_subir);
@@ -849,11 +853,30 @@
             this.tabPage3.Text = "Datos";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // btn_actualizar_ventas
+            // 
+            this.btn_actualizar_ventas.Location = new System.Drawing.Point(346, 516);
+            this.btn_actualizar_ventas.Name = "btn_actualizar_ventas";
+            this.btn_actualizar_ventas.Size = new System.Drawing.Size(148, 56);
+            this.btn_actualizar_ventas.TabIndex = 6;
+            this.btn_actualizar_ventas.Text = "Actualizar Ventas";
+            this.btn_actualizar_ventas.UseVisualStyleBackColor = true;
+            // 
+            // lbl_descargar
+            // 
+            this.lbl_descargar.AutoSize = true;
+            this.lbl_descargar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbl_descargar.Location = new System.Drawing.Point(197, 179);
+            this.lbl_descargar.Name = "lbl_descargar";
+            this.lbl_descargar.Size = new System.Drawing.Size(154, 21);
+            this.lbl_descargar.TabIndex = 5;
+            this.lbl_descargar.Text = "Descargar inventario";
+            // 
             // btn_consultar_ventas
             // 
-            this.btn_consultar_ventas.Location = new System.Drawing.Point(346, 394);
+            this.btn_consultar_ventas.Location = new System.Drawing.Point(346, 436);
             this.btn_consultar_ventas.Name = "btn_consultar_ventas";
-            this.btn_consultar_ventas.Size = new System.Drawing.Size(148, 23);
+            this.btn_consultar_ventas.Size = new System.Drawing.Size(148, 56);
             this.btn_consultar_ventas.TabIndex = 4;
             this.btn_consultar_ventas.Text = "Registro de Ventas";
             this.btn_consultar_ventas.UseVisualStyleBackColor = true;
@@ -861,9 +884,10 @@
             // lbl_consulta
             // 
             this.lbl_consulta.AutoSize = true;
+            this.lbl_consulta.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_consulta.Location = new System.Drawing.Point(346, 39);
             this.lbl_consulta.Name = "lbl_consulta";
-            this.lbl_consulta.Size = new System.Drawing.Size(102, 15);
+            this.lbl_consulta.Size = new System.Drawing.Size(199, 30);
             this.lbl_consulta.TabIndex = 3;
             this.lbl_consulta.Text = "Consulta de datos";
             // 
@@ -871,28 +895,31 @@
             // 
             this.btn_subir.Location = new System.Drawing.Point(502, 213);
             this.btn_subir.Name = "btn_subir";
-            this.btn_subir.Size = new System.Drawing.Size(141, 23);
+            this.btn_subir.Size = new System.Drawing.Size(141, 51);
             this.btn_subir.TabIndex = 2;
             this.btn_subir.Text = "Subir inventario";
             this.btn_subir.UseVisualStyleBackColor = true;
+            this.btn_subir.Click += new System.EventHandler(this.btn_subir_Click);
             // 
             // btn_nube
             // 
-            this.btn_nube.Location = new System.Drawing.Point(281, 213);
+            this.btn_nube.Location = new System.Drawing.Point(299, 214);
             this.btn_nube.Name = "btn_nube";
-            this.btn_nube.Size = new System.Drawing.Size(75, 23);
+            this.btn_nube.Size = new System.Drawing.Size(132, 51);
             this.btn_nube.TabIndex = 1;
             this.btn_nube.Text = "de la Nube";
             this.btn_nube.UseVisualStyleBackColor = true;
+            this.btn_nube.Click += new System.EventHandler(this.btn_nube_Click);
             // 
             // btn_locales
             // 
-            this.btn_locales.Location = new System.Drawing.Point(159, 214);
+            this.btn_locales.Location = new System.Drawing.Point(70, 214);
             this.btn_locales.Name = "btn_locales";
-            this.btn_locales.Size = new System.Drawing.Size(75, 23);
+            this.btn_locales.Size = new System.Drawing.Size(132, 50);
             this.btn_locales.TabIndex = 0;
             this.btn_locales.Text = "Local";
             this.btn_locales.UseVisualStyleBackColor = true;
+            this.btn_locales.Click += new System.EventHandler(this.btn_locales_Click);
             // 
             // Form1
             // 
@@ -1003,6 +1030,8 @@
         private System.Windows.Forms.Button btn_subir;
         private System.Windows.Forms.Button btn_nube;
         private System.Windows.Forms.Button btn_locales;
+        private System.Windows.Forms.Button btn_actualizar_ventas;
+        private System.Windows.Forms.Label lbl_descargar;
     }
 }
 

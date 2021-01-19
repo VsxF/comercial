@@ -8,6 +8,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft;
 using Newtonsoft.Json;
@@ -22,12 +23,14 @@ namespace comercial
         IList<Product> cobros; // vector donde se guardaran parcialmente los productos de la venta
         public int state; // estado del sync: <0> Denied; <1> success; <2> loading
         api apio;
+        private bool stayOffline;
 
         public Controller()
         {
             products = new List<Product>();
             cobros = new List<Product>();
             state = 2;
+            stayOffline = false;
         }
 
         //Trae la clase apio (clase en ejecucion)
@@ -43,7 +46,7 @@ namespace comercial
             string jj = File.ReadAllText("../../../data/data.json");
             IList<JToken> pdts = JObject.Parse(jj)["products"].Children().ToList();
             bool setOfflineData = false;
-            
+
             string msm = "El inventario local, es distinto al de la nube.\nDesea que se actualicen los datos de la nube?\n" +
                 "> Al presionar \"NO\" se actualizaran los datos locales\n> Al presionar \"CANCEL\", nada se modificara y se mostraran los datos locales";
 
@@ -56,17 +59,23 @@ namespace comercial
                 if (response == DialogResult.Yes)
                 {
                     write();
+                    stayOffline = false;
+                    state = 1;
                 }
                 else if (response == DialogResult.No)
                 {
                     pdts = apiProds;
                     setOfflineData = true;
+                    stayOffline = false;
+                    state = 1;
                 }
                 else
                 {
+                    stayOffline = true;
+                    state = 0;
                     MessageBox.Show("Puede consultar todos los datos en la pestaña \"Datos\"", "INFO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                
+
             }
             Product productss;
             products.Clear();
@@ -74,15 +83,13 @@ namespace comercial
             foreach (JToken product in pdts)
             {
                 productss = product.ToObject<Product>();
-                float a = productss.price;
                 products.Add(productss);
             }
-            state = auxApiProds != null ? 1 : 2;
             if (setOfflineData)
             {
                 write();
             }
-}
+        }
 
         //Obtener una lista de todos los productos
         public IList<Product> getProducts()
@@ -120,7 +127,7 @@ namespace comercial
         }
 
         //Agrega un producto
-        public bool setProduct(string id, string name, string desc, string brand, int quant, float price, int caja)
+        public bool setProduct(string id, string name, string desc, string brand, int quant, decimal price, int caja)
         {
             Product nw = new Product(id, name, desc, brand, quant, price, caja);
             foreach (Product product in products)
@@ -143,7 +150,7 @@ namespace comercial
         }
 
         //Actualiza un producto
-        public bool updateProduct(string id, string name, string desc, string brand, int quant, float price)
+        public bool updateProduct(string id, string name, string desc, string brand, int quant, decimal price)
         {
             foreach (Product product in products)
             {
@@ -191,12 +198,20 @@ namespace comercial
         //Escribe en el archivo json el contenido del vector "products"
         public bool write()
         {
-            //products.Add(new Product("2", "name2", "desc2", "brand2", 2, 2));
+            //convierte el vector a json
             string json = JsonConvert.SerializeObject(products, Formatting.Indented);
+            //Le da el formato usado al json
             json = "{ \"products\":" + json + "}";
+            //Elimina el ".0" que agrega el decimal al final de los enteros
             json = Regex.Replace(json, @"\.0,", ",");
+            //Guarda el vector en el Archivo json
             File.WriteAllText("../../../data/data.json", json);
-            apio.setProducts(json);
+            //Cheka si se esta usando solo la informacion offline
+            if (!stayOffline)
+            {
+                //Guarda el vector en la nube
+                apio.setProducts(json);
+            }
             return true;
         }
 
@@ -206,12 +221,12 @@ namespace comercial
             int ex = exist(id);
             if (ex == 0)
             {
-                cobros.Add(new Product(id, name, desc, brand, int.Parse(quant), float.Parse(price), 0));
+                cobros.Add(new Product(id, name, desc, brand, int.Parse(quant), decimal.Parse(price), 0));
             }
             else
             {
                 cobros[ex - 1].quant = int.Parse(quant);
-                cobros[ex - 1].price = float.Parse(price);
+                cobros[ex - 1].price = decimal.Parse(price);
             }
 
         }
@@ -238,9 +253,9 @@ namespace comercial
         }
 
         //Devuelve el precio total de los cobros
-        public float getTotal()
+        public decimal getTotal()
         {
-            float total = 0;
+            decimal total = 0;
 
             for (int i = 0; i < cobros.Count; i++)
             {
@@ -299,7 +314,7 @@ namespace comercial
                 foreach (Product item in products)
                 {
                     int q = item.quant / item.caja;
-                    float p = item.price * item.caja;
+                    decimal p = item.price * item.caja;
                     rows.Add(new string[] { item.id, item.name, item.desc, item.brand, q.ToString(), p.ToString(), item.caja.ToString() });
                 }
             }
@@ -327,6 +342,27 @@ namespace comercial
             }
         }
 
+        //Escribe un nuevo vector, en el vector productos
+        public void setProducts(IList<Product> newProdcuts)
+        {
+            this.products = newProdcuts;
+        }
+
+        //Obtener informacion SOLO de la nube, no se guarda en los datos locas
+        public async Task<IList<Product>> getCloudProducts()
+        {
+            Product productss;
+            IList<Product> pds = new List<Product>();
+            
+            foreach (JToken product in await apio.getCloudProducts())
+            {
+                productss = product.ToObject<Product>();
+                pds.Add(productss);
+            }
+
+            return pds;
+        }
+
         public void tryNetword()
         {
             apio.getProducts();
@@ -338,7 +374,7 @@ namespace comercial
     public class Product
     {
         //Se agrego caja, como la cantidad de items por caja. Para vender por mayor
-        public Product(string id, string name, string desc, string brand, int quant, float price, int caja)
+        public Product(string id, string name, string desc, string brand, int quant, decimal price, int caja)
         {
             this.id = id;
             this.name = name;
@@ -355,7 +391,7 @@ namespace comercial
         public string desc { get; set; }
         public string brand { get; set; }
         public int quant { get; set; }
-        public float price { get; set; }
+        public decimal price { get; set; }
         public int caja { get; set; }
     }
 
