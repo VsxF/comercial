@@ -5028,11 +5028,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\raenu\\Documents\\Proyectos\\last comercial\\comercial\\comercial\\comercial.csproj",
+      "projectUniqueName": "X:\\Documents\\comercial\\comercial\\comercial.csproj",
       "projectName": "comercial",
-      "projectPath": "C:\\Users\\raenu\\Documents\\Proyectos\\last comercial\\comercial\\comercial\\comercial.csproj",
+      "projectPath": "X:\\Documents\\comercial\\comercial\\comercial.csproj",
       "packagesPath": "C:\\Users\\raenu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\raenu\\Documents\\Proyectos\\last comercial\\comercial\\comercial\\obj\\",
+      "outputPath": "X:\\Documents\\comercial\\comercial\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\raenu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5092,7 +5092,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }

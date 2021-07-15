@@ -4,7 +4,7 @@
     "name": "Aceite",
     "desc": "10 litros",
     "brand": "generica",
-    "quant": 96,
+    "quant": 94,
     "price": 8,
     "caja": 3
   },
@@ -13,7 +13,7 @@
     "name": "otra cosa",
     "desc": "2 litros",
     "brand": "marca0",
-    "quant": 2,
+    "quant": 1,
     "price": 233.2,
     "caja": 1
   },
@@ -22,7 +22,7 @@
     "name": "treszzz",
     "desc": "5 litros",
     "brand": "marca1",
-    "quant": 5,
+    "quant": 3,
     "price": 3.02,
     "caja": 1
   },

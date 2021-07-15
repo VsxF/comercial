@@ -64,8 +64,8 @@ namespace comercial
         {
             controller.setData(null);
             FullProductsData();
-            thread2 = new Thread(new ThreadStart(Wait_FullProductsData));
-            thread2.Start();
+            //thread2 = new Thread(new ThreadStart(Wait_FullProductsData));
+            //thread2.Start();
         }
 
         private void txt_id_TextChanged(object sender, EventArgs e)
@@ -114,9 +114,9 @@ namespace comercial
             lbl_exito.Visible = true;
             lbl_total.Text = "";
             Thread t = new Thread(new ThreadStart(successSell));
-            Thread s = new Thread(new ThreadStart(Wait_FullProductsData));
+            //Thread s = new Thread(new ThreadStart(Wait_FullProductsData));
             t.Start();
-            s.Start();
+            //s.Start();
         }
 
         //Muestra toda la informacion de la tabla productos
@@ -137,66 +137,66 @@ namespace comercial
         }
 
         //Espera que la api tenga la informacion, para mostrarla y coloca el estado del Sync
-        public void Wait_FullProductsData()
-        {
-            Thread.Sleep(1000);
-            trys++;
+        //public void Wait_FullProductsData()
+        //{
+        //    Thread.Sleep(1000);
+        //    trys++;
 
-            if (controller.state == 1)
-            {
-                ptb.Invoke(new Action(() =>
-                {
-                    setSyncState();
-                    FullProductsData();
-                }));
-                controller.state = 2;
-            }
-            else if (controller.state == 2 && trys < 10)
-            {
-                if (trys == 1)
-                {
-                    ptb.Invoke(new Action(() =>
-                    {
-                        setSyncState();
-                    }));
-                }
-                Wait_FullProductsData();
-            }
-            else if (trys > 9)
-            {
-                controller.state = 0;
-                trys = 0;
-                ptb.Invoke(new Action(() =>
-                {
-                    setSyncState();
-                }));
-            }
-            trys = 0;
-        }
+        //    if (controller.state == 1)
+        //    {
+        //        ptb.Invoke(new Action(() =>
+        //        {
+        //            setSyncState();
+        //            FullProductsData();
+        //        }));
+        //        controller.state = 2;
+        //    }
+        //    else if (controller.state == 2 && trys < 10)
+        //    {
+        //        if (trys == 1)
+        //        {
+        //            ptb.Invoke(new Action(() =>
+        //            {
+        //                setSyncState();
+        //            }));
+        //        }
+        //        Wait_FullProductsData();
+        //    }
+        //    else if (trys > 9)
+        //    {
+        //        controller.state = 0;
+        //        trys = 0;
+        //        ptb.Invoke(new Action(() =>
+        //        {
+        //            setSyncState();
+        //        }));
+        //    }
+        //    trys = 0;
+        //}
 
         //Setea el estado del Sync en la interfaz
-        private void setSyncState()
-        {
-            if (controller.state == 1)
-            {
-                ptb.Image = Image.FromFile("../../../media/onState.png");
-                lbl_sync.ForeColor = Color.Green;
-                lbl_sync.Text = "Sync On";
-            }
-            else if (controller.state == 0)
-            {
-                ptb.Image = Image.FromFile("../../../media/offState.png");
-                lbl_sync.ForeColor = Color.Red;
-                lbl_sync.Text = "Sync Off";
+        //private void setSyncState()
+        //{
+        //    if (controller.state == 1)
+        //    {
+        //        ptb.Image = Image.FromFile("../../../media/onState.png");
+        //        lbl_sync.ForeColor = Color.Green;
+        //        lbl_sync.Text = "Sync On";
+        //    }
+        //    else if (controller.state == 0)
+        //    {
+        //        ptb.Image = Image.FromFile("../../../media/offState.png");
+        //        lbl_sync.ForeColor = Color.Red;
+        //        lbl_sync.Text = "Sync Off";
 
-            }
-            else if (controller.state == 2)
-            {
-                ptb.Image = Image.FromFile("../../../media/loadingState.png");
-                lbl_sync.ForeColor = panelcol;
-                lbl_sync.Text = "loading ...";
-            }
-        }
+        //    }
+        //    else if (controller.state == 2)
+        //    {
+        //        ptb.Image = Image.FromFile("../../../media/loadingState.png");
+        //        lbl_sync.ForeColor = panelcol;
+        //        lbl_sync.Text = "loading ...";
+        //    }
+        //}
 
         //Muestra el producto seleccionado
         private void setSelectedProduct(int row)
@@ -241,15 +241,33 @@ namespace comercial
             return res;
         }
 
+        private int getRepit()
+        {
+            foreach (DataGridViewRow row in tbl_ventas_cobro.Rows)
+            {
+                
+                if (row.Cells[0].Value.Equals(lbl_codigo.Text))
+                {
+                    //string val = row.Cells[0].Value.ToString();
+                    int r = row.Index;
+                    return row.Index;
+                    //break;
+                }
+            }
+
+            return -1;
+        }
+
         //Agrega un producto al cobro
         private void Add()
         {
             decimal price = int.Parse(txt_cantidad.Text) * decimal.Parse(lbl_precio.Text);
             int cant = int.Parse(txt_cantidad.Text);
-            int repit = controller.exist(lbl_codigo.Text);
+            //int repit = controller.exist(lbl_codigo.Text);
             int row = tbl_product_ventas.SelectedCells[0].RowIndex;
+            int repit = getRepit();
 
-            if (repit == 0)
+            if (repit == -1)
             {
                 if (chk_mayor.Checked)
                 {
@@ -269,11 +287,11 @@ namespace comercial
                     cant = cajas * cant;
                 }
 
-                cant += int.Parse(tbl_ventas_cobro.Rows[repit - 1].Cells[4].Value.ToString());
-                price += decimal.Parse(tbl_ventas_cobro.Rows[repit - 1].Cells[5].Value.ToString());
+                cant += int.Parse(tbl_ventas_cobro.Rows[repit].Cells[4].Value.ToString());
+                price += decimal.Parse(tbl_ventas_cobro.Rows[repit].Cells[5].Value.ToString());
 
-                tbl_ventas_cobro.Rows[repit - 1].Cells[4].Value = cant;
-                tbl_ventas_cobro.Rows[repit - 1].Cells[5].Value = price;
+                tbl_ventas_cobro.Rows[repit].Cells[4].Value = cant;
+                tbl_ventas_cobro.Rows[repit].Cells[5].Value = price;
             }
 
             if (exist())
@@ -286,7 +304,7 @@ namespace comercial
 
                 tbl_product_ventas.Rows[row].Cells[4].Value = controller.changeQuant(lbl_codigo.Text, cant);
 
-                if (repit == 0)
+                if (repit == -1)
                 {
                     tbl_ventas_cobro.Rows.Add(product);
                 }
@@ -306,6 +324,7 @@ namespace comercial
             {
                 MessageBox.Show("No hay " + lbl_producto.Text + " en existencia.", "No hay existencias", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            FullProductsData();
         }
 
         //Verifica si hay en existencia
@@ -861,8 +880,8 @@ namespace comercial
 
         private void lbl_sync_Click(object sender, EventArgs e)
         {
-            thread2 = new Thread(new ThreadStart(Wait_FullProductsData));
-            thread2.Start();
+            //thread2 = new Thread(new ThreadStart(Wait_FullProductsData));
+            //thread2.Start();
             //controller.tryNetword();
             //Wait_FullProductsData();
         }

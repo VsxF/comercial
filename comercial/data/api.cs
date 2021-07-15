@@ -18,6 +18,9 @@ namespace comercial
 
         static HttpClient apio = new HttpClient();
         private static string collectionid;
+        private static string coll_inventory;
+        private static string coll_last;
+        private static string coll_history;
         private static int mistakes;
         Controller controller;
 
@@ -26,15 +29,20 @@ namespace comercial
         {
             this.controller = controller;
             mistakes = 0;
-            collectionid = @"/b/5fdb1ab72fd0b8081255a19c";
+            collectionid = @"/b/60f00ec30cd33f7437c8d964";
+            coll_last = @"/b/60eeb027a917050205c7136e";
+            coll_history = @"/b/60eeb01d0cd33f7437c80bbc";
+            //collectionid = @"/b/5fdb1ab72fd0b8081255a19c";
         }
 
         //Api headers settings
         public async Task appio()
         {
-            apio.BaseAddress = new Uri(@"https://api.jsonbin.io");
+            //apio.BaseAddress = new Uri(@"https://api.jsonbin.io/v3");
+            apio.BaseAddress = new Uri(@"https://api.jsonbin.io/v3");
             apio.DefaultRequestHeaders.Accept.Clear();
-            apio.DefaultRequestHeaders.Add("secret-key", "$2b$10$0ADVjnMoaJSimdeZ86nMPeEF1dy3IXJy0SLyOg9Jb1g1J9UBtn.UO");
+            //apio.DefaultRequestHeaders.Add("secret-key", "$2b$10$0ADVjnMoaJSimdeZ86nMPeEF1dy3IXJy0SLyOg9Jb1g1J9UBtn.UO");
+            apio.DefaultRequestHeaders.Add("secret-key", "$2b$10$xh56gg2.I3By5jwkhRtD8e2EYNUOsl3gJHktI2ShGZPHzx0Cv08MC");
             //apio.DefaultRequestHeaders.Add("Content-Type", "application/json");
         }
 
@@ -45,9 +53,9 @@ namespace comercial
 
             controller.state = 2;
             HttpResponseMessage res = await apio.GetAsync(collectionid + @"/latest");
-
             string result = res.Content.ReadAsStringAsync().Result;
-            products = JObject.Parse(result)["products"].Children().ToList();
+            
+            products = JObject.Parse(result)["products"].Children().ToList(); 
             controller.setData(result);
             return products;
         }
@@ -58,6 +66,7 @@ namespace comercial
             IList<JToken> products = null;
 
             HttpResponseMessage res = await apio.GetAsync(collectionid + @"/latest");
+            
 
             string result = res.Content.ReadAsStringAsync().Result;
             products = JObject.Parse(result)["products"].Children().ToList();
@@ -71,6 +80,19 @@ namespace comercial
             HttpResponseMessage res = await apio.PutAsync(collectionid, content);
             controller.state = 1;
             return true;
+        }
+
+        //Obtiene la cantidad de cambios
+        public async Task<int> getBinVersion()
+        {
+            //HttpResponseMessage res = await apio.GetAsync(collectionid + @"/versions/count ");
+            HttpClient appi = new HttpClient();
+            appi.DefaultRequestHeaders.Accept.Clear();
+            appi.DefaultRequestHeaders.Add("secret-key", "$2b$10$xh56gg2.I3By5jwkhRtD8e2EYNUOsl3gJHktI2ShGZPHzx0Cv08MC");
+            HttpResponseMessage res = await apio.GetAsync(@"https://api.jsonbin.io/v3/b/60f00ec30cd33f7437c8d964/versions/count");
+            string aux = res.Content.ReadAsStringAsync().Result;
+
+            return 0;
         }
 
         //Comprueba, si hay mas de 10 errores en una sesion

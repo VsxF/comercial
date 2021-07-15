@@ -47,36 +47,37 @@ namespace comercial
             IList<JToken> pdts = JObject.Parse(jj)["products"].Children().ToList();
             bool setOfflineData = false;
 
-            string msm = "El inventario local, es distinto al de la nube.\nDesea que se actualicen los datos de la nube?\n" +
-                "> Al presionar \"NO\" se actualizaran los datos locales\n> Al presionar \"CANCEL\", nada se modificara y se mostraran los datos locales";
+            //comparar inventarios offline y online 
 
+            //string msm = "El inventario local, es distinto al de la nube.\nDesea que se actualicen los datos de la nube?\n" +
+            //    "> Al presionar \"NO\" se actualizaran los datos locales\n> Al presionar \"CANCEL\", nada se modificara y se mostraran los datos locales";
 
-            if (auxApiProds != null && !Regex.Replace(jj, @"\s+", "").Equals(Regex.Replace(auxApiProds, @"\s+", "")))
-            {
-                IList<JToken> apiProds = JObject.Parse(auxApiProds)["products"].Children().ToList();
-                DialogResult response = MessageBox.Show(msm, "Data Base", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            //if (auxApiProds != null && !Regex.Replace(jj, @"\s+", "").Equals(Regex.Replace(auxApiProds, @"\s+", "")))
+            //{
+            //    IList<JToken> apiProds = JObject.Parse(auxApiProds)["products"].Children().ToList();
+            //    DialogResult response = MessageBox.Show(msm, "Data Base", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
-                if (response == DialogResult.Yes)
-                {
-                    write();
-                    stayOffline = false;
-                    state = 1;
-                }
-                else if (response == DialogResult.No)
-                {
-                    pdts = apiProds;
-                    setOfflineData = true;
-                    stayOffline = false;
-                    state = 1;
-                }
-                else
-                {
-                    stayOffline = true;
-                    state = 0;
-                    MessageBox.Show("Puede consultar todos los datos en la pestaña \"Datos\"", "INFO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+            //    if (response == DialogResult.Yes)
+            //    {
+            //        write();
+            //        stayOffline = false;
+            //        state = 1;
+            //    }
+            //    else if (response == DialogResult.No)
+            //    {
+            //        pdts = apiProds;
+            //        setOfflineData = true;
+            //        stayOffline = false;
+            //        state = 1;
+            //    }
+            //    else
+            //    {
+            //        stayOffline = true;
+            //        state = 0;
+            //        MessageBox.Show("Puede consultar todos los datos en la pestaña \"Datos\"", "INFO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    }
 
-            }
+            //}
             Product productss;
             products.Clear();
 

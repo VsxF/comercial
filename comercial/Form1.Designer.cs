@@ -217,6 +217,7 @@
             this.ptb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ptb.TabIndex = 109;
             this.ptb.TabStop = false;
+            this.ptb.Visible = false;
             // 
             // btn_cancelar
             // 
@@ -236,6 +237,7 @@
             this.lbl_sync.Size = new System.Drawing.Size(52, 15);
             this.lbl_sync.TabIndex = 7;
             this.lbl_sync.Text = "Sync Off";
+            this.lbl_sync.Visible = false;
             this.lbl_sync.Click += new System.EventHandler(this.lbl_sync_Click);
             // 
             // chk_mayor
@@ -861,6 +863,7 @@
             this.btn_actualizar_ventas.TabIndex = 6;
             this.btn_actualizar_ventas.Text = "Actualizar Ventas";
             this.btn_actualizar_ventas.UseVisualStyleBackColor = true;
+            this.btn_actualizar_ventas.Visible = false;
             // 
             // lbl_descargar
             // 
@@ -880,6 +883,7 @@
             this.btn_consultar_ventas.TabIndex = 4;
             this.btn_consultar_ventas.Text = "Registro de Ventas";
             this.btn_consultar_ventas.UseVisualStyleBackColor = true;
+            this.btn_consultar_ventas.Visible = false;
             // 
             // lbl_consulta
             // 

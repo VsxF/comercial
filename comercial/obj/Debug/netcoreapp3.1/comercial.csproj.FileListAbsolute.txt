@@ -113,3 +113,29 @@ C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\bin\Debug\
 C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\bin\Debug\netcoreapp3.1\NPOI.dll
 C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
 C:\Users\raenu\Documents\Proyectos\last comercial\comercial\comercial\bin\Debug\netcoreapp3.1\ICSharpCode.SharpZipLib.dll
+X:\Documents\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.exe
+X:\Documents\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.deps.json
+X:\Documents\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.runtimeconfig.json
+X:\Documents\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.runtimeconfig.dev.json
+X:\Documents\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.dll
+X:\Documents\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.pdb
+X:\Documents\comercial\comercial\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+X:\Documents\comercial\comercial\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+X:\Documents\comercial\comercial\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+X:\Documents\comercial\comercial\bin\Debug\netcoreapp3.1\NPOI.OOXML.dll
+X:\Documents\comercial\comercial\bin\Debug\netcoreapp3.1\NPOI.OpenXml4Net.dll
+X:\Documents\comercial\comercial\bin\Debug\netcoreapp3.1\NPOI.OpenXmlFormats.dll
+X:\Documents\comercial\comercial\bin\Debug\netcoreapp3.1\NPOI.dll
+X:\Documents\comercial\comercial\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+X:\Documents\comercial\comercial\bin\Debug\netcoreapp3.1\ICSharpCode.SharpZipLib.dll
+X:\Documents\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csprojAssemblyReference.cache
+X:\Documents\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.Form1.resources
+X:\Documents\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.Properties.Resources.resources
+X:\Documents\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csproj.GenerateResource.cache
+X:\Documents\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.AssemblyInfoInputs.cache
+X:\Documents\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.AssemblyInfo.cs
+X:\Documents\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csproj.CoreCompileInputs.cache
+X:\Documents\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csproj.CopyComplete
+X:\Documents\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.dll
+X:\Documents\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.pdb
+X:\Documents\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.genruntimeconfig.cache

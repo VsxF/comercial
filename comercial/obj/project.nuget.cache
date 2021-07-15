@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RToLuGOOP7h9vlKxuaNOROKxhFAHaphaVlxR9NKd8JjZU24TEo3k9ClNhe1p0QQrKbHHotgMqvKwd6fLk9+ULQ==",
+  "dgSpecHash": "kc2dN5NgM4gQXSpberFhhHh+4vsxesN3H2YXR9lnggFHHWKRtjlGlO0AvzyVucZ/QsX8utzRLYwv1+QO6Dn+0w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\raenu\\Documents\\Proyectos\\last comercial\\comercial\\comercial\\comercial.csproj",
+  "projectFilePath": "X:\\Documents\\comercial\\comercial\\comercial.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\raenu\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.7\\microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
     "C:\\Users\\raenu\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
