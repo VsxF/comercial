@@ -932,6 +932,7 @@ namespace comercial
         {
             dataConvertions dt = new dataConvertions(controller);
             dt.openFile("xlsx", "Excel", true);
+            FullProductsData();
         }
 
         private void btn_nube_Click(object sender, EventArgs e)

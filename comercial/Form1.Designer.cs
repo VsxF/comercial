@@ -210,7 +210,7 @@
             // 
             // ptb
             // 
-            this.ptb.Image = ((System.Drawing.Image)(resources.GetObject("ptb.Image")));
+            //this.ptb.Image = ((System.Drawing.Image)(resources.GetObject("ptb.Image")));
             this.ptb.Location = new System.Drawing.Point(700, 4);
             this.ptb.Name = "ptb";
             this.ptb.Size = new System.Drawing.Size(20, 20);
