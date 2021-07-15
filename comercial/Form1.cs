@@ -96,7 +96,7 @@ namespace comercial
 
         private void txt_cantidad_TextChanged(object sender, EventArgs e)
         {
-            setSelectedProduct(0);
+            //setSelectedProduct(0);
         }
 
         private void txt_cantidad_KeyPress(object sender, KeyPressEventArgs e)
@@ -109,14 +109,17 @@ namespace comercial
 
         private void btn_end_Click(object sender, EventArgs e)
         {
-            controller.endBuy();
-            tbl_ventas_cobro.Rows.Clear();
-            lbl_exito.Visible = true;
-            lbl_total.Text = "";
-            Thread t = new Thread(new ThreadStart(successSell));
-            //Thread s = new Thread(new ThreadStart(Wait_FullProductsData));
-            t.Start();
-            //s.Start();
+            if (tbl_product_ventas.Rows[0].Cells[0].Value != null)
+            {
+                controller.endBuy();
+                tbl_ventas_cobro.Rows.Clear();
+                lbl_exito.Visible = true;
+                lbl_total.Text = "";
+                Thread t = new Thread(new ThreadStart(successSell));
+                //Thread s = new Thread(new ThreadStart(Wait_FullProductsData));
+                t.Start();
+                //s.Start();
+            }
         }
 
         //Muestra toda la informacion de la tabla productos
@@ -210,6 +213,16 @@ namespace comercial
                 lbl_cantidad.Text = cutString(row, 4);
                 lbl_precio.Text = cutString(row, 5);
                 cajas = int.Parse(cutString(row, 6));
+            } 
+            else
+            {
+                lbl_codigo.Text = "";
+                lbl_producto.Text = "";
+                lbl_desc.Text = "";
+                lbl_brand.Text = "";
+                lbl_cantidad.Text = "";
+                lbl_precio.Text = "";
+                cajas = 0; ;
             }
         }
 
@@ -261,76 +274,82 @@ namespace comercial
         //Agrega un producto al cobro
         private void Add()
         {
-            decimal price = int.Parse(txt_cantidad.Text) * decimal.Parse(lbl_precio.Text);
-            int cant = int.Parse(txt_cantidad.Text);
-            //int repit = controller.exist(lbl_codigo.Text);
-            int row = tbl_product_ventas.SelectedCells[0].RowIndex;
-            int repit = getRepit();
-
-            if (repit == -1)
+            if (lbl_codigo.Text != "")
             {
-                if (chk_mayor.Checked)
-                {
-                    string input = price.ToString();
-                    ShowInputDialog(ref input);
-                    price = decimal.Parse(input);
-                    cant = cajas * cant;
-                }
-            }
-            else
-            {
-                if (chk_mayor.Checked)
-                {
-                    string input = price.ToString();
-                    ShowInputDialog(ref input);
-                    price = decimal.Parse(input) * int.Parse(txt_cantidad.Text);
-                    cant = cajas * cant;
-                }
-
-                cant += int.Parse(tbl_ventas_cobro.Rows[repit].Cells[4].Value.ToString());
-                price += decimal.Parse(tbl_ventas_cobro.Rows[repit].Cells[5].Value.ToString());
-
-                tbl_ventas_cobro.Rows[repit].Cells[4].Value = cant;
-                tbl_ventas_cobro.Rows[repit].Cells[5].Value = price;
-            }
-
-            if (exist())
-            {
-                string[] product = { lbl_codigo.Text, lbl_producto.Text, lbl_desc.Text, lbl_brand.Text,
-                                  cant.ToString(), price.ToString() };
-
-                controller.setCobros(lbl_codigo.Text, lbl_producto.Text, lbl_desc.Text, lbl_brand.Text,
-                                            cant.ToString(), price.ToString());
-
-                tbl_product_ventas.Rows[row].Cells[4].Value = controller.changeQuant(lbl_codigo.Text, cant);
+                decimal price = int.Parse(txt_cantidad.Text) * decimal.Parse(lbl_precio.Text);
+                int cant = int.Parse(txt_cantidad.Text);
+                //int repit = controller.exist(lbl_codigo.Text);
+                int row = tbl_product_ventas.SelectedCells[0].RowIndex;
+                int repit = getRepit();
 
                 if (repit == -1)
                 {
-                    tbl_ventas_cobro.Rows.Add(product);
+                    if (chk_mayor.Checked)
+                    {
+                        string input = price.ToString();
+                        ShowInputDialog(ref input);
+                        price = decimal.Parse(input);
+                        cant = cajas * cant;
+                    }
+                }
+                else
+                {
+                    if (chk_mayor.Checked)
+                    {
+                        string input = price.ToString();
+                        ShowInputDialog(ref input);
+                        price = decimal.Parse(input) * int.Parse(txt_cantidad.Text);
+                        cant = cajas * cant;
+                    }
                 }
 
-                txt_id.Clear();
-                txt_id.Focus();
-                txt_cantidad.Text = "1";
+                if (exist())
+                {
+                    if (repit != -1)
+                    {
+                        price += decimal.Parse(tbl_ventas_cobro.Rows[repit].Cells[5].Value.ToString());
 
-                lbl_agregado.Visible = true;
+                        tbl_ventas_cobro.Rows[repit].Cells[4].Value = cant + int.Parse(tbl_ventas_cobro.Rows[repit].Cells[4].Value.ToString());
+                        tbl_ventas_cobro.Rows[repit].Cells[5].Value = price;
+                    }
 
-                lbl_total.Text = controller.getTotal().ToString();
+                    string[] product = { lbl_codigo.Text, lbl_producto.Text, lbl_desc.Text, lbl_brand.Text,
+                                  cant.ToString(), price.ToString() };
 
-                Thread t = new Thread(new ThreadStart(successAdd));
-                t.Start();
+                    controller.setCobros(lbl_codigo.Text, lbl_producto.Text, lbl_desc.Text, lbl_brand.Text,
+                                                cant.ToString(), price.ToString());
+
+                    tbl_product_ventas.Rows[row].Cells[4].Value = 
+                        controller.changeQuant(lbl_codigo.Text, cant);
+                    //-repit == -1 ? int.Parse(tbl_ventas_cobro.Rows[repit].Cells[4].Value.ToString()) : 0
+                    if (repit == -1)
+                    {
+                        tbl_ventas_cobro.Rows.Add(product);
+                    }
+
+                    txt_id.Clear();
+                    txt_id.Focus();
+                    txt_cantidad.Text = "1";
+
+                    lbl_agregado.Visible = true;
+
+                    lbl_total.Text = controller.getTotal().ToString();
+
+                    Thread t = new Thread(new ThreadStart(successAdd));
+                    t.Start();
+                }
+                else
+                {
+                    MessageBox.Show("No hay " + lbl_producto.Text + " en existencia.", "No hay existencias", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                FullProductsData();
             }
-            else
-            {
-                MessageBox.Show("No hay " + lbl_producto.Text + " en existencia.", "No hay existencias", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            FullProductsData();
         }
 
         //Verifica si hay en existencia
         private bool exist()
         {
-            return int.Parse(lbl_cantidad.Text) - int.Parse(txt_cantidad.Text) > 0 ? true : false;
+            return int.Parse(lbl_cantidad.Text) - int.Parse(txt_cantidad.Text) > -1 ? true : false;
         }
 
         //Input precio por mayor
@@ -540,7 +559,8 @@ namespace comercial
         //Disenhio (colores y estilos... css?)
         private void Design()
         {
-
+            tbl_product_ventas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            tbl_ventas_cobro.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             //Form -- General
             Color back = Color.FromArgb(243, 240, 205);
             this.ActiveControl = txt_id;
@@ -671,10 +691,17 @@ namespace comercial
 
         private void btn_quit_Click(object sender, EventArgs e)
         {
-            controller.cancelBuy();
-            FullProductsData();
-            tbl_ventas_cobro.Rows.Clear();
-            lbl_total.Text = "";
+            if (tbl_ventas_cobro.SelectedRows.Count > 0)
+            {
+                int row = int.Parse(tbl_ventas_cobro.SelectedCells[0].RowIndex.ToString());
+                string cod = tbl_ventas_cobro.Rows[row].Cells[0].Value.ToString();
+                int quant = int.Parse(tbl_ventas_cobro.Rows[row].Cells[4].Value.ToString());
+
+                controller.cancelProduct(cod, quant);
+                tbl_ventas_cobro.Rows.RemoveAt(row);
+                lbl_total.Text = controller.getTotal().ToString();
+                FullProductsData();
+            }   
         }
 
         //Dibuja panel a los lbl
@@ -888,9 +915,10 @@ namespace comercial
 
         private void btn_cancelar_Click(object sender, EventArgs e)
         {
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(controller.getProducts(), Newtonsoft.Json.Formatting.Indented);
-            json = "{ \"products\":" + json + "}";
-            json = System.Text.RegularExpressions.Regex.Replace(json, @"\.0,", ",");
+            controller.cancelBuy();
+            FullProductsData();
+            tbl_ventas_cobro.Rows.Clear();
+            lbl_total.Text = "";
         }
 
         private void btn_locales_Click(object sender, EventArgs e)

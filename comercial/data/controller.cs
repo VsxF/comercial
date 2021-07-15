@@ -208,11 +208,11 @@ namespace comercial
             //Guarda el vector en el Archivo json
             File.WriteAllText("../../../data/data.json", json);
             //Cheka si se esta usando solo la informacion offline
-            if (!stayOffline)
-            {
-                //Guarda el vector en la nube
-                apio.setProducts(json);
-            }
+            //if (!stayOffline)
+            //{
+            //    //Guarda el vector en la nube
+            //    apio.setProducts(json);
+            //}
             return true;
         }
 
@@ -286,7 +286,7 @@ namespace comercial
         public bool endBuy()
         {
             state = 2;
-            cobros.Clear();
+            cobros = new List<Product>();
             return write();
         }
 
@@ -301,6 +301,29 @@ namespace comercial
                     {
                         exist.quant = exist.quant + sold.quant;
                     }
+                }
+            }
+            cobros = new List<Product>();
+        }
+
+        //Quitar producto de los cobros
+        public void cancelProduct(string id, int quant)
+        {
+                foreach (Product exist in products)
+                {
+                    if (id.Equals(exist.id))
+                    {
+                        exist.quant = exist.quant + quant;
+                        break;
+                    }
+                }
+            
+            for (int i = 0; i < cobros.Count; i++)
+            {
+                if (cobros[i].id.Equals(id))
+                {
+                    cobros.RemoveAt(i);
+                    break;
                 }
             }
         }
