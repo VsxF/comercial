@@ -1075,8 +1075,24 @@ namespace comercial
                                     row = sheet.GetRow(r);
                                     if (row != null)
                                     {
-                                        fileProducts.Add(new Product(row.GetCell(0).ToString(), row.GetCell(1).ToString(), row.GetCell(2).ToString(), row.GetCell(3).ToString(),
-                                            int.Parse(row.GetCell(4).ToString()), decimal.Parse(row.GetCell(5).ToString()), int.Parse(row.GetCell(6).ToString())));
+                                        string r1 = row2str(row, 0);
+                                        string r2 = row2str(row, 1);
+                                        string r3 = row2str(row, 2);
+                                        string r4 = row2str(row, 3);
+                                        string r5 = row2str(row, 4);
+                                        string r6 = row2str(row, 5);
+                                        string r7 = row2str(row, 6);
+                                        
+                                        try
+                                        {
+                                            fileProducts.Add(new Product(row2str(row, 0), row2str(row, 1), row2str(row, 2), row2str(row, 3),
+                                                int.Parse(row2str(row, 4)), decimal.Parse(row2str(row, 5)), int.Parse(row2str(row, 6))));
+                                        }
+                                        catch (Exception e)
+                                        {
+                                            MessageBox.Show("El producto con código " + row2str(row, 0) + " tiene un formato incorrecto (este producto no se agrego).", "Formato incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        }
+                                        
                                     }
                                 }
                                 controller.setProducts(fileProducts);
@@ -1097,6 +1113,14 @@ namespace comercial
                     MessageBox.Show("El archivo que trata de abrir esta abierto.\nDeber cerrarlo.", "Cerra archivo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+
+            
+        }
+
+        private string row2str(IRow row, int i)
+        {
+            string cell = row.GetCell(i).ToString();
+            return cell != "" ? cell : i == 4 || i ==5 || i ==6 ? "0" : "-";
         }
 
     }
