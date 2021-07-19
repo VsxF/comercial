@@ -5023,20 +5023,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\raenu\\.nuget\\packages\\": {}
+    "C:\\Users\\oleyda\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "X:\\Documents\\comercial\\comercial\\comercial.csproj",
+      "projectUniqueName": "C:\\Users\\oleyda\\Desktop\\comercialo 1.5\\comercial\\comercial\\comercial.csproj",
       "projectName": "comercial",
-      "projectPath": "X:\\Documents\\comercial\\comercial\\comercial.csproj",
-      "packagesPath": "C:\\Users\\raenu\\.nuget\\packages\\",
-      "outputPath": "X:\\Documents\\comercial\\comercial\\obj\\",
+      "projectPath": "C:\\Users\\oleyda\\Desktop\\comercialo 1.5\\comercial\\comercial\\comercial.csproj",
+      "packagesPath": "C:\\Users\\oleyda\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\oleyda\\Desktop\\comercialo 1.5\\comercial\\comercial\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\raenu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\oleyda\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -5092,7 +5097,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -139,3 +139,29 @@ X:\Documents\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csproj.CopyCo
 X:\Documents\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.dll
 X:\Documents\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.pdb
 X:\Documents\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.genruntimeconfig.cache
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.exe
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.deps.json
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.runtimeconfig.json
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.runtimeconfig.dev.json
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.dll
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\bin\Debug\netcoreapp3.1\comercial.pdb
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\bin\Debug\netcoreapp3.1\NPOI.OOXML.dll
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\bin\Debug\netcoreapp3.1\NPOI.OpenXml4Net.dll
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\bin\Debug\netcoreapp3.1\NPOI.OpenXmlFormats.dll
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\bin\Debug\netcoreapp3.1\NPOI.dll
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\bin\Debug\netcoreapp3.1\ICSharpCode.SharpZipLib.dll
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csprojAssemblyReference.cache
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.Form1.resources
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.Properties.Resources.resources
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csproj.GenerateResource.cache
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.AssemblyInfoInputs.cache
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.AssemblyInfo.cs
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csproj.CoreCompileInputs.cache
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.csproj.CopyComplete
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.dll
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.pdb
+C:\Users\oleyda\Desktop\comercialo 1.5\comercial\comercial\obj\Debug\netcoreapp3.1\comercial.genruntimeconfig.cache

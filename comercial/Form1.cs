@@ -15,6 +15,8 @@ namespace comercial
 
     public partial class Form1 : Form
     {
+        int poc;
+
         api api; //Api
         Controller controller; //Instancia la clase controller
         Rectangle panel; // Panel fondo lbls
@@ -64,6 +66,8 @@ namespace comercial
         {
             controller.setData(null);
             FullProductsData();
+
+
             //thread2 = new Thread(new ThreadStart(Wait_FullProductsData));
             //thread2.Start();
         }
@@ -133,9 +137,12 @@ namespace comercial
             {
                 string[] item = aux.ElementAt(i);
                 tbl_product_ventas.Rows.Add(item);
+                tbl1.Rows.Add(item);
                 object a = tbl_product_ventas.Rows[0];
+                object b = tbl1.Rows[0];
             }
             tbl_product_ventas.RowCount = controller.RowCheck(aux.Count);
+            tbl1.RowCount = controller.RowCheck(aux.Count);
             setSelectedProduct(0);
         }
 
@@ -454,6 +461,36 @@ namespace comercial
             int txtwith = getPerc(22.5, 'x');
             int raw1 = getPerc(7.5, 'y');
             txt_id.Location = new Point(getPerc(9, 'x'), raw1);
+
+
+
+
+            int y_col3 = getPerc(78, 'x');
+            int y_col4 = getPerc(70, 'x');
+            //buscar tab busqueda
+            txtbuscar.Location = new Point(getPerc(9, 'x'), raw1);
+            //textbox tab busqueda
+            txtcodigo.Location = new Point(AlignFromRight(y_col3, lbl_cod_pos.Width), getPerc(12.2, 'y'));
+            txtproducto.Location = new Point(AlignFromRight(y_col3, lbl_cod_pos.Width), getPerc(16.4, 'y'));
+            txtdescripcion.Location = new Point(AlignFromRight(y_col3, lbl_cod_pos.Width), getPerc(20.6, 'y'));
+            txtmarca.Location = new Point(AlignFromRight(y_col3, lbl_cod_pos.Width), getPerc(24.8, 'y'));
+            txtcantidad.Location = new Point(AlignFromRight(y_col3, lbl_cod_pos.Width), getPerc(29, 'y'));
+            txtunidadcaja.Location = new Point(AlignFromRight(y_col3, lbl_cod_pos.Width), getPerc(37.4, 'y'));
+            txtprecio.Location = new Point(AlignFromRight(y_col3, lbl_cod_pos.Width), getPerc(33.2, 'y'));
+
+            //label tab busqueda
+
+            label1.Location = new Point(AlignFromRight(y_col4, lbl_cod_pos.Width), getPerc(13.3, 'y'));
+            label2.Location = new Point(AlignFromRight(y_col4, lbl_cod_pos.Width), getPerc(17.5, 'y'));
+            label3.Location = new Point(AlignFromRight(y_col4, lbl_cod_pos.Width), getPerc(21.7, 'y'));
+            label4.Location = new Point(AlignFromRight(y_col4, lbl_cod_pos.Width), getPerc(25.9, 'y'));
+            label5.Location = new Point(AlignFromRight(y_col4, lbl_cod_pos.Width), getPerc(30, 'y'));
+            label6.Location = new Point(AlignFromRight(y_col4, lbl_cod_pos.Width), getPerc(34.3, 'y'));
+            Caja.Location = new Point(AlignFromRight(y_col4, lbl_cod_pos.Width), getPerc(38.5, 'y'));
+
+           
+
+
             btn_agregar.Location = new Point(getPerc(32, 'x'), raw1);
             txt_cantidad.Location = new Point(getPerc(41, 'x'), raw1);
             lbl_cant_pos.Location = new Point(getPerc(40.5, 'x'), getPerc(4.9, 'y'));
@@ -508,9 +545,23 @@ namespace comercial
             tbl_ventas_cobro.Columns[4].Width = (int)(tb2with * 0.0986);
             tbl_ventas_cobro.Columns[5].Width = (int)(tb2with * 0.0986);
 
+            //tabla3 busqueda
+            int tb3with = getPerc(57.87, 'x');
+            tbl1.Bounds = new Rectangle(getPerc(4, 'x'), getPerc(16.06, 'y'), tb3with, getPerc(45.5, 'y'));
+            tbl1.Columns[0].Width = (int)(tb3with * 0.0786);
+            tbl1.Columns[1].Width = (int)(tb3with * 0.3050);
+            tbl1.Columns[2].Width = (int)(tb3with * 0.2451);
+            tbl1.Columns[3].Width = (int)(tb3with * 0.0653);
+            tbl1.Columns[4].Width = (int)(tb3with * 0.0986);
+            tbl1.Columns[5].Width = (int)(tb3with * 0.0986);
+
             //Ultima Fila
             int xtb = tbl_ventas_cobro.Location.X + tbl_ventas_cobro.Width;
             int ytb = tbl_ventas_cobro.Location.Y + tbl_ventas_cobro.Height;
+
+            int xbb = tbl1.Location.X + tbl1.Width;
+            int ytbb = tbl1.Location.Y + tbl1.Height;
+
             lbl_prods_pos.Location = new Point(getPerc(14, 'x'), getPerc(43, 'y'));
             lbl_total_pos.Location = new Point(xtb - getPerc(10, 'x'), ytb + getPerc(1, 'y'));
             lbl_total.Location = new Point(xtb - getPerc(5, 'x'), ytb + getPerc(1, 'y'));
@@ -519,6 +570,14 @@ namespace comercial
                                            ytb + getPerc(6, 'y') + lbl_exito.Height / 2);
             btn_quit.Location = new Point(getPerc(4.3, 'x') + getPerc(7.5, 'x') - btn_quit.Width / 2, ytb + getPerc(6, 'y'));
             btn_cancelar.Location = new Point(getPerc(15, 'x') + btn_quit.Width / 2, ytb + getPerc(6, 'y'));
+
+
+            //ultima linea busqueda
+
+            btnagregar.Location = new Point(xbb + getPerc(24, 'x') - btnagregar.Width , ytbb - getPerc(14, 'y'));
+            btneliminar.Location = new Point(getPerc(19.6, 'x') + getPerc(7.5, 'x') - btn_quit.Width / 2, ytbb + getPerc(6, 'y'));
+            btnmodificar.Location = new Point(getPerc(4.3, 'x') + getPerc(7.5, 'x') - btn_quit.Width / 2, ytbb + getPerc(6, 'y'));
+            btnnuevo.Location = new Point(getPerc(12.45, 'x') + getPerc(7.5, 'x') - btn_quit.Width / 2, ytbb + getPerc(12, 'y'));
 
             //Panel
             if (w > 1250)
@@ -561,10 +620,14 @@ namespace comercial
         {
             tbl_product_ventas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             tbl_ventas_cobro.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            tbl1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             //Form -- General
             Color back = Color.FromArgb(243, 240, 205);
             this.ActiveControl = txt_id;
             this.txt_id.Focus();
+
+
             this.MaximizeBox = true;
             //w = Screen.PrimaryScreen.Bounds.Width;
             //h = Screen.PrimaryScreen.Bounds.Height;
@@ -573,6 +636,7 @@ namespace comercial
             //this.WindowState = FormWindowState.Maximized;
 
             tabPage1.BackColor = back;
+            tabPage2.BackColor = back;
             tabPage3.BackColor = back;
             lbl_info_pos.ForeColor = back;
 
@@ -634,11 +698,31 @@ namespace comercial
             btn_subir.FlatAppearance.BorderColor = panelcol;
             btn_subir.FlatAppearance.BorderSize = 2;
 
+            btnagregar.BackColor = Color.FromArgb(49, 168, 174);
+            btnagregar.FlatStyle = FlatStyle.Flat;
+            btnagregar.FlatAppearance.BorderColor = panelcol;
+            btnagregar.FlatAppearance.BorderSize = 2;
+
+            btnnuevo.BackColor = Color.FromArgb(49, 168, 174);
+            btnnuevo.FlatStyle = FlatStyle.Flat;
+            btnnuevo.FlatAppearance.BorderColor = panelcol;
+            btnnuevo.FlatAppearance.BorderSize = 2;
+
+            btnmodificar.BackColor = Color.FromArgb(49, 168, 174);
+            btnmodificar.FlatStyle = FlatStyle.Flat;
+            btnmodificar.FlatAppearance.BorderColor = panelcol;
+            btnmodificar.FlatAppearance.BorderSize = 2;
+
+            btneliminar.BackColor = Color.FromArgb(49, 168, 174);
+            btneliminar.FlatStyle = FlatStyle.Flat;
+            btneliminar.FlatAppearance.BorderColor = panelcol;
+            btneliminar.FlatAppearance.BorderSize = 2;
 
             //Tablas
             tbl_product_ventas.CellBorderStyle = DataGridViewCellBorderStyle.None;
             tbl_ventas_cobro.CellBorderStyle = DataGridViewCellBorderStyle.None;
             tb_ventas_desc.Visible = false;
+            tbl1.CellBorderStyle = DataGridViewCellBorderStyle.None;
         }
 
         //Obtener porcentajes para Respoinsive
@@ -737,6 +821,8 @@ namespace comercial
             this.Invalidate();
         }
 
+        
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             tbl1.Rows.Clear();
@@ -762,7 +848,21 @@ namespace comercial
 
         private void btnagregar_Click(object sender, EventArgs e)
         {
+            int x = 0, y = 0;
+            Int32.TryParse(txtcantidad.Text, out x);
+            Int32.TryParse(txtunidadcaja.Text, out y);
+
+            string myval = txtprecio.Text;
+            decimal d = 0;
+            var result = decimal.TryParse(myval, out d);
+            Console.WriteLine(result);
+            Console.WriteLine(d);
+
+            controller.setProduct(txtcodigo.Text, txtproducto.Text, txtdescripcion.Text, txtmarca.Text, x, d, y);
+
+
             DataGridViewRow fila = new DataGridViewRow();
+
             fila.CreateCells(tbl1);
             fila.Cells[0].Value = txtcodigo.Text;
             fila.Cells[1].Value = txtproducto.Text;
@@ -770,6 +870,7 @@ namespace comercial
             fila.Cells[3].Value = txtmarca.Text;
             fila.Cells[4].Value = txtcantidad.Text;
             fila.Cells[5].Value = txtprecio.Text;
+            fila.Cells[6].Value = txtunidadcaja.Text;
 
             tbl1.Rows.Add(fila);
 
@@ -779,6 +880,7 @@ namespace comercial
             txtmarca.Text = "";
             txtcantidad.Text = "";
             txtprecio.Text = "";
+            txtunidadcaja.Text = "";
 
         }
 
@@ -878,11 +980,11 @@ namespace comercial
         {
             if (e.KeyCode == Keys.Enter)
             {
-                btnagregar.Focus();
+                txtunidadcaja.Focus();
             }
             else if (e.KeyCode == Keys.Down)
             {
-                btnagregar.Focus();
+                txtunidadcaja.Focus();
             }
             else if (e.KeyCode == Keys.Up)
             {
@@ -892,7 +994,13 @@ namespace comercial
 
         private void btneliminar_Click(object sender, EventArgs e)
         {
-            tbl1.Rows.Remove(tbl1.CurrentRow);
+            controller.deleteProduct(txtcodigo.Text);
+
+            tbl1.Rows.RemoveAt(poc);
+
+            limpiar();
+
+            btnagregar.Enabled = true;
         }
 
         private void chk_mayor_CheckedChanged(object sender, EventArgs e)
@@ -939,6 +1047,91 @@ namespace comercial
         {
             dataConvertions dt = new dataConvertions(controller);
             dt.json2excel(false); ;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int x = 0, y = 0;
+            Int32.TryParse(txtcantidad.Text, out x);
+            Int32.TryParse(txtunidadcaja.Text, out y);
+
+            string myval = txtprecio.Text;
+            decimal d = 0;
+            var result = decimal.TryParse(myval, out d);
+            Console.WriteLine(result);
+            Console.WriteLine(d);
+
+            controller.updateProduct(txtcodigo.Text, txtproducto.Text, txtdescripcion.Text, txtmarca.Text, x, d, y);
+
+
+            tbl1[0, poc].Value = txtcodigo.Text;
+            tbl1[1, poc].Value = txtproducto.Text;
+            tbl1[2, poc].Value = txtdescripcion.Text;
+            tbl1[3, poc].Value = txtmarca.Text;
+            tbl1[4, poc].Value = txtcantidad.Text;
+            tbl1[5, poc].Value = txtprecio.Text;
+            tbl1[6, poc].Value = txtunidadcaja.Text;
+        }
+        void limpiar()
+        {
+            btneliminar.Enabled = false;
+            btnmodificar.Enabled = false;
+            btnagregar.Enabled = true;
+            txtcodigo.Text = "";
+            txtproducto.Text = "";
+            txtdescripcion.Text = "";
+            txtmarca.Text = "";
+            txtcantidad.Text = "";
+            txtprecio.Text = "";
+            txtunidadcaja.Text = "";
+        }
+        private void btnnuevo_Click(object sender, EventArgs e)
+        {
+            limpiar();
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbl1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+
+            poc = tbl1.CurrentRow.Index;
+            txtcodigo.Text = tbl1[0, poc].Value.ToString();
+            txtproducto.Text = tbl1[1, poc].Value.ToString();
+            txtdescripcion.Text = tbl1[2, poc].Value.ToString();
+            txtmarca.Text = tbl1[3, poc].Value.ToString();
+            txtcantidad.Text = tbl1[4, poc].Value.ToString();
+            txtprecio.Text = tbl1[5, poc].Value.ToString();
+            txtunidadcaja.Text = tbl1[6, poc].Value.ToString();
+
+            btnagregar.Enabled = false;
+            btneliminar.Enabled = true;
+            btnmodificar.Enabled = true;
+        }
+
+        private void txtunidadcaja_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnagregar.Focus();
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                btnagregar.Focus();
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                txtprecio.Focus();
+            }
+        }
+
+        private void txtbuscar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
         }
     }
 

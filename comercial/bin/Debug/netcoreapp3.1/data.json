@@ -4,7 +4,7 @@
     "name": "Aceite",
     "desc": "10 litros",
     "brand": "generica",
-    "quant": 86,
+    "quant": 87,
     "price": 8,
     "caja": 3
   },
@@ -2956,7 +2956,7 @@
     "name": "TAPADERAS ",
     "desc": "Hules Tapadera Lateral ",
     "brand": "AC ",
-    "quant": 0,
+    "quant": 1,
     "price": 3,
     "caja": 2
   },

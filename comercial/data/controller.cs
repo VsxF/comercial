@@ -154,7 +154,7 @@ namespace comercial
         }
 
         //Actualiza un producto
-        public bool updateProduct(string id, string name, string desc, string brand, int quant, decimal price)
+        public bool updateProduct(string id, string name, string desc, string brand, int quant, decimal price, int caja)
         {
             foreach (Product product in products)
             {
@@ -165,6 +165,7 @@ namespace comercial
                     product.brand = brand;
                     product.quant = quant;
                     product.price = price;
+                    product.caja = caja;
                     return write();
                 }
             }
